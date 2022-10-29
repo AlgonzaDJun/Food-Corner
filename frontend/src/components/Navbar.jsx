@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import navbarLogo from "../assets/navbarLogo.png";
+import {Link} from 'react-router-dom';
 
 const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
+
   return (
-    <>
-      <nav className="bg-slate-600 border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
+    <div className="">
+      <nav className="fixed w-screen bg-primary top-0 z-10 border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900 text-white">
         <div className="container flex flex-wrap justify-between items-center">
           <a href="/" class="flex items-center">
             <img
@@ -13,7 +15,7 @@ const Navbar = () => {
               class="mr-3 h-6 sm:h-9"
               alt="E-canteen Logo"
             />
-            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+            <span class="self-center text-xl text-headingColor font-semibold whitespace-nowrap dark:text-white">
               E-Canteen
             </span>
           </a>
@@ -45,53 +47,53 @@ const Navbar = () => {
             }
             id="navbar-default"
           >
-            <ul className="flex flex-col p-4 mt-4  rounded-lg md:flex-row md:space-x-5 md:bg-inherit md:border-0 md:mt-0 md:font-semibold dark:bg-gray-800">
+            <ul className="flex flex-col p-4 mt-4  rounded-lg md:flex-row md:space-x-5 md:bg-inherit md:border-0 md:mt-0 md:font-bold dark:bg-gray-800">
               <li>
-                <a
-                  href="#"
-                  class="block py-2 pr-4 pl-3 md:hover:text-slate-100 hover:bg-gray-100 md:hover:bg-transparent rounded md:bg-transparent md:p-0 dark:text-white"
+                <Link
+                  to={"/"}
+                  class="block py-2 pr-4 pl-3 md:hover:text-slate-800 hover:bg-gray-100 md:hover:bg-transparent rounded md:bg-transparent md:p-0 text-textColor text-textColor dark:text-white"
                   aria-current="page"
                 >
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
-                  class="block py-2 pr-4 pl-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-slate-100 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                <Link
+                  to={"/about"}
+                  class="block py-2 pr-4 pl-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-slate-800 md:p-0 text-textColor dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                 >
                   About
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
-                  class="block py-2 pr-4 pl-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-slate-100 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                <Link
+                  to={""}
+                  class="block py-2 pr-4 pl-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-slate-800 md:p-0 text-textColor dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                 >
                   Services
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
-                  class="block py-2 pr-4 pl-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-slate-100 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                <Link
+                  to={""}
+                  class="block py-2 pr-4 pl-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-slate-800 md:p-0 text-textColor dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                 >
                   Pricing
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
-                  class="block py-2 pr-4 pl-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-slate-100 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                <Link
+                  to={""}
+                  class="block py-2 pr-4 pl-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-slate-800 md:p-0 text-textColor dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                 >
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
         </div>
       </nav>
-    </>
+    </div>
   );
 };
 
