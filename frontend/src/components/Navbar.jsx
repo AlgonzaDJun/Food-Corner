@@ -7,8 +7,8 @@ const Navbar = () => {
 
   return (
     <div className="">
-      <nav className="fixed w-screen bg-primary top-0 z-10 border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900 text-white">
-        <div className="container flex flex-wrap justify-between items-center">
+      <nav className="fixed w-screen bg-primary top-0 z-10 border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900 text-white shadow-lg">
+        <div className="container flex flex-wrap justify-between items-center ">
           <a href="/" class="flex items-center">
             <img
               src={navbarLogo}
@@ -59,10 +59,10 @@ const Navbar = () => {
               </li>
               <li>
                 <Link
-                  to={"/about"}
+                  to={""}
                   class="block py-2 pr-4 pl-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-slate-800 md:p-0 text-textColor dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                 >
-                  About
+                  Menu
                 </Link>
               </li>
               <li>
@@ -70,7 +70,7 @@ const Navbar = () => {
                   to={""}
                   class="block py-2 pr-4 pl-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-slate-800 md:p-0 text-textColor dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                 >
-                  Services
+                  About Us
                 </Link>
               </li>
               <li>
@@ -78,7 +78,7 @@ const Navbar = () => {
                   to={""}
                   class="block py-2 pr-4 pl-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-slate-800 md:p-0 text-textColor dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                 >
-                  Pricing
+                  Cart
                 </Link>
               </li>
               <li>
@@ -86,7 +86,7 @@ const Navbar = () => {
                   to={""}
                   class="block py-2 pr-4 pl-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-slate-800 md:p-0 text-textColor dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                 >
-                  Contact
+                  Profile
                 </Link>
               </li>
             </ul>
