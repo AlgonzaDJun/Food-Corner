@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 const Row = ({ flag }) => {
   return (
     <div
-      className={`w-full my-12 bg-orange-100  ${
+      className={`w-full my-12 bg-cardOverlay  ${
         flag ? "overflow-x-scroll" : "overflow-x-hidden"
       }`}
     >
@@ -16,7 +16,7 @@ const Row = ({ flag }) => {
             whileHover={{ scale: 1.2 }}
             src={I1}
             alt=""
-            className="w-40 -mt-8"
+            className="w-40 -mt-8 drop-shadow-2xl"
           />
 
           <motion.div
