@@ -1,8 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../actions/userActions";
 
 const RegisterContainer = () => {
+  const dispatch = useDispatch();
+
   const [state, setState] = useState({
     name: "",
     email: "",
@@ -27,7 +31,9 @@ const RegisterContainer = () => {
         email: state.email,
         password: state.password,
       };
-      console.log(user)
+      console.log(user);
+      dispatch(registerUser(user));
+      alert("registration success");
     }
   };
   return (

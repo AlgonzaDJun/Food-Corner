@@ -7,9 +7,9 @@ import { getAllFoods } from "../actions/foodActions";
 
 const Row = ({ flag }) => {
   const dispatch = useDispatch();
-  const foodsstate = useSelector((state) => state.getAllFoodsReducer);
+  const foodState = useSelector((state) => state.getAllFoodsReducer);
 
-  const { foods, error, loading } = foodsstate;
+  const { foods, error, loading } = foodState;
 
   useEffect(() => {
     dispatch(getAllFoods());

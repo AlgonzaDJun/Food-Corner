@@ -4,11 +4,12 @@ import thunk from "redux-thunk";
 
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { getAllFoodsReducer } from "./reducers/foodReducers";
-import { registerUserReducer } from "./reducers/userReducers";
+import { loginUserReducer, registerUserReducer } from "./reducers/userReducers";
 
 const finalReducer = combineReducers({
   getAllFoodsReducer: getAllFoodsReducer,
   registerUserReducer: registerUserReducer,
+  loginUserReducer: loginUserReducer,
 });
 
 const initialState = {};

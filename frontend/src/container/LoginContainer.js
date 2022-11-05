@@ -1,6 +1,22 @@
 import React from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../actions/userActions";
 
 const LoginContainer = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+
+  const login = (e) => {
+    e.preventDefault();
+    const currentUser = {
+      email: email,
+      password: password,
+    };
+
+    dispatch(loginUser(currentUser));
+  };
   return (
     <div>
       <div class=" h-screen overflow-hidden flex items-center justify-center">
@@ -17,9 +33,11 @@ const LoginContainer = () => {
               </svg>
               <input
                 type="text"
-                id="username"
+                id="email"
                 class="bg-gray-200 pl-12 py-2 md:py-4 focus:outline-none w-full"
-                placeholder="Username"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div class="flex items-center text-lg mb-6 md:mb-8">
@@ -31,9 +49,14 @@ const LoginContainer = () => {
                 id="password"
                 class="bg-gray-200 pl-12 py-2 md:py-4 focus:outline-none w-full"
                 placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <button class="bg-gradient-to-b from-gray-700 to-gray-900 font-medium p-2 md:p-4 text-white uppercase w-full">
+            <button
+              class="bg-gradient-to-b from-gray-700 to-gray-900 font-medium p-2 md:p-4 text-white uppercase w-full"
+              onClick={login}
+            >
               Login
             </button>
           </form>
