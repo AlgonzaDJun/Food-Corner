@@ -13,6 +13,7 @@ const RegisterContainer = () => {
 
   const registerState = useSelector((state) => state.registerUserReducer);
   const { error, loading, success } = registerState;
+  const [samePassword, SetSamePassword] = useState(false);
 
   // useEffect(() => {
   //   if (localStorage.getItem("currentUser")) {
@@ -38,15 +39,16 @@ const RegisterContainer = () => {
   };
 
   const register = () => {
+    SetSamePassword(false);
     if (state.password != state.confirmPassword) {
-      alert("password not same");
+      SetSamePassword(true);
     } else {
       const user = {
         name: state.name,
         email: state.email,
         password: state.password,
       };
-      console.log(user);
+      // console.log(user);
       dispatch(registerUser(user));
     }
   };
@@ -57,7 +59,8 @@ const RegisterContainer = () => {
           <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
             {loading && <Loading />}
             {success && <Success text={"Berhasil Registrasi"} />}
-            {error && <Error text={"Terjadi error"} />}
+            {error && <Error text={error.response.data.error} />}
+            {samePassword && <Error text={"password tidak sama"} />}
             <h1 class="mb-8 text-3xl text-center">Sign up</h1>
             <input
               type="text"
@@ -70,7 +73,7 @@ const RegisterContainer = () => {
             />
 
             <input
-              type=""
+              type="email"
               class="block border border-grey-light w-full p-3 rounded mb-4"
               name="email"
               placeholder="Email"
@@ -107,7 +110,7 @@ const RegisterContainer = () => {
               Already have an account?
               <Link
                 class="no-underline border-b border-blue text-blue ml-4"
-                to={'/login'}
+                to={"/login"}
               >
                 Log in
               </Link>

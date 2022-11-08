@@ -10,6 +10,13 @@ router.post("/register", async (req, res) => {
     password,
   });
   try {
+    const userExist = await User.findOne({ email: email });
+    if (userExist) {
+      return res
+        .status(400)
+        .json({ error: "Email sudah dipakai" });
+    }
+
     newUser.save();
     res.send("user register successfully");
   } catch (error) {
