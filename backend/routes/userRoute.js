@@ -9,7 +9,6 @@ router.post("/register", async (req, res) => {
     email,
     password,
   });
-
   try {
     newUser.save();
     res.send("user register successfully");

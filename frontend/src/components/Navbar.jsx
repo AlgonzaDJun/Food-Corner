@@ -1,9 +1,19 @@
 import React, { useState } from "react";
 import navbarLogo from "../assets/navbarLogo.png";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { motion } from "framer-motion";
+import { MdLogout } from "react-icons/md";
+import { logoutUser } from "../actions/userActions";
 
 const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
+  const [openLoginMenu, setOpenLoginMenu] = useState(false);
+
+  const dispatch = useDispatch();
+  const userState = useSelector((state) => state.loginUserReducer);
+
+  const { currentUser } = userState;
 
   return (
     <div className="">
@@ -74,12 +84,41 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link
-                  to={""}
-                  class="block py-2 pr-4 pl-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-slate-800 md:p-0 text-textColor dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >
-                  Profile
-                </Link>
+                {currentUser ? (
+                  <>
+                    <p
+                      className="cursor-pointer block py-2 pr-4 pl-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-slate-800 md:p-0 text-textColor dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-clip truncate"
+                      onClick={() => setOpenLoginMenu(!openLoginMenu)}
+                    >
+                      {currentUser.name}
+                    </p>
+                    {openLoginMenu && (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.6 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.6 }}
+                        className="w-40 bg-gray-50 shadow-xl rounded-lg flex flex-col relative top-70 md:top-12 md:right-96 md:right-3 md:absolute"
+                      >
+                        <p className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-300 transition-all duration-100 ease-in-out text-textColor text-base">
+                          Pesanan <MdLogout />
+                        </p>
+                        <p
+                          className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-300 transition-all duration-100 ease-in-out text-textColor text-base"
+                          onClick={() => dispatch(logoutUser())}
+                        >
+                          Log Out <MdLogout />
+                        </p>
+                      </motion.div>
+                    )}
+                  </>
+                ) : (
+                  <Link
+                    to={"/login"}
+                    class="block py-2 pr-4 pl-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-slate-800 md:p-0 text-textColor dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  >
+                    Login
+                  </Link>
+                )}
               </li>
             </ul>
           </div>

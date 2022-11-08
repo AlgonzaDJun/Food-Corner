@@ -12,7 +12,13 @@ const finalReducer = combineReducers({
   loginUserReducer: loginUserReducer,
 });
 
-const initialState = {};
+const currentUser = localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')) : null
+
+const initialState = {
+  loginUserReducer : {
+    currentUser : currentUser
+  }
+};
 
 const composeEnhancers = composeWithDevTools({});
 

@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="w-full h-auto flex flex-col bg-primary">
       <Navbar />
-      <main className="mt-[60px] md:mt-[77px] px-4 md:px-16 py-4 w-full">
+      <main className="mt-[60px] md:mt-[60px] px-4 md:px-16 py-4 w-full">
         <Routes>
           <Route path="/" element={<MainContainer />} />
           <Route path="/login" element={<LoginContainer />} />

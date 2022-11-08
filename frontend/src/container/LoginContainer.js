@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../actions/userActions";
+import { Link, useNavigate } from "react-router-dom";
+import Loading from "../components/Loading";
+import Error from "../components/Error";
 
 const LoginContainer = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const loginState = useSelector(state => state.loginUserReducer)
+  const {loading, error } = loginState;
+
+  useEffect(() => {
+    if (localStorage.getItem("currentUser")) {
+      navigate("/");
+    }
+  }, []);
 
   const login = (e) => {
     e.preventDefault();
@@ -14,19 +27,21 @@ const LoginContainer = () => {
       email: email,
       password: password,
     };
-
     dispatch(loginUser(currentUser));
   };
   return (
     <div>
       <div class=" h-screen overflow-hidden flex items-center justify-center">
-        <div class="bg-white lg:w-5/12 md:6/12 w-10/12 shadow-3xl">
+        <div class="bg-white lg:w-5/12 md:6/12 w-10/12 shadow-3xl rounded-lg">
           <div class="bg-gray-800 absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full p-4 md:p-8">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="#FFF">
               <path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z" />
             </svg>
           </div>
           <form class="p-12 md:p-24">
+
+            {loading && <Loading />}
+            {error && <Error text={"Silakan periksa email dan password"}/>}
             <div class="flex items-center text-lg mb-6 md:mb-8">
               <svg class="absolute ml-3" width="24" viewBox="0 0 24 24">
                 <path d="M20.822 18.096c-3.439-.794-6.64-1.49-5.09-4.418 4.72-8.912 1.251-13.678-3.732-13.678-5.082 0-8.464 4.949-3.732 13.678 1.597 2.945-1.725 3.641-5.09 4.418-3.073.71-3.188 2.236-3.178 4.904l.004 1h23.99l.004-.969c.012-2.688-.092-4.222-3.176-4.935z" />
@@ -59,6 +74,12 @@ const LoginContainer = () => {
             >
               Login
             </button>
+            <p className="mt-5">
+              Belum Punya akun?{" "}
+              <Link to={"/register"} className="hover:text-orange-700">
+                Register
+              </Link>{" "}
+            </p>
           </form>
         </div>
       </div>
