@@ -5,11 +5,14 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { getAllFoodsReducer } from "./reducers/foodReducers";
 import { loginUserReducer, registerUserReducer } from "./reducers/userReducers";
+import { getAllStandsReducer } from "./reducers/standReducers";
+
 
 const finalReducer = combineReducers({
   getAllFoodsReducer: getAllFoodsReducer,
   registerUserReducer: registerUserReducer,
   loginUserReducer: loginUserReducer,
+  getAllStandsReducer: getAllStandsReducer,  
 });
 
 const currentUser = localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')) : null

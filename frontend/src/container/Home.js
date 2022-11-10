@@ -18,11 +18,10 @@ const Home = () => {
           </div>
         </div>
 
-        <p className="text-[2.5rem] lg:text-[3.8rem] font-bold tracking-wide text-headingColor">
-          Layanan E-Canteen di
-          <span className="text-orange-600 text-[3rem] lg:text-[4.2rem]">
-            {" "}
-            Kampus Kita
+        <p className="text-[2.5rem] lg:text-[3.5rem] font-bold tracking-wide text-headingColor">
+          Layanan E-Canteen yang&nbsp;
+           <span className="text-orange-600 text-[2.7rem] lg:text-[4.2rem]">
+            memudahkan anda
           </span>
         </p>
 

@@ -4,6 +4,8 @@ const foodSchema = mongoose.Schema(
   {
     name: { type: String, require },
     price: { type: String, require },
+    standID: { type: String, require },
+    image: { type: String, require },
   },
   {
     timestamps: true,

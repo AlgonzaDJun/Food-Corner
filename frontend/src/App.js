@@ -5,6 +5,7 @@ import Home from "./container/Home";
 import { MainContainer } from "./components";
 import LoginContainer from "./container/LoginContainer";
 import RegisterContainer from "./container/RegisterContainer";
+import Cart from "./container/Cart";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<MainContainer />} />
           <Route path="/login" element={<LoginContainer />} />
           <Route path="/register" element={<RegisterContainer />} />
+          <Route path="/cart" element={<Cart/>} />
         </Routes>
       </main>
     </div>
