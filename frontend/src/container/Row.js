@@ -3,19 +3,29 @@ import { useDispatch, useSelector } from "react-redux";
 import I1 from "../assets/ayam_geprek.png";
 import { MdShoppingBasket } from "react-icons/md";
 import { motion } from "framer-motion";
-import { getAllFoods } from "../actions/foodActions";
+// import { getAllFoods } from "../actions/foodActions";
 import { getAllStands } from "../actions/standActions";
+import { addToCart } from "../actions/cartActions";
 
 const Row = ({ flag }) => {
   const dispatch = useDispatch();
   // const foodState = useSelector((state) => state.getAllFoodsReducer);
   const standState = useSelector((state) => state.getAllStandsReducer);
+  const cartState = useSelector((state) => state.cartReducer);
 
   const { stands, error, loading } = standState;
+  const { cartItems } = cartState;
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     dispatch(getAllStands());
   }, []);
+
+  const addtocart = (menu) => {
+    dispatch(addToCart(menu, quantity));
+  };
+
+  // console.log(cartItems)
 
   return (
     <div
@@ -31,7 +41,7 @@ const Row = ({ flag }) => {
         stands.map((stand) => {
           return (
             <div
-              className="sm:min-w-620 my-12 md:w-340 hover:drop-shadow-lg h-auto backdrop-blur-lg bg-gray-100 rounded-lg sm:flex"
+              className="sm:min-w-[530px] my-12 md:w-340 hover:drop-shadow-lg h-auto backdrop-blur-lg bg-gray-100 rounded-lg sm:flex block"
               key={stand._id}
             >
               {stand.menu.map((menu, index) => {
@@ -44,13 +54,14 @@ const Row = ({ flag }) => {
                         alt=""
                         className="w-40 h-28 drop-shadow-2xl rounded-lg object-cover"
                       />
-
-                      <motion.div
-                        whileTap={{ scale: 0.75 }}
-                        className="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center cursor-pointer hover:shadow-md"
-                      >
-                        <MdShoppingBasket className="text-white" />
-                      </motion.div>
+                      <button onClick={() => addtocart(menu)}>
+                        <motion.div
+                          whileTap={{ scale: 0.75 }}
+                          className="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center cursor-pointer hover:shadow-md"
+                        >
+                          <MdShoppingBasket className="text-white" />
+                        </motion.div>
+                      </button>
                     </div>
                     <div className="w-full flex flex-col gap-4 items-end justify-end">
                       <p className="text-textColor font-semibold text-base ">
