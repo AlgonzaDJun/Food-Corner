@@ -6,22 +6,14 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
       );
       if (duplicate) {
         state.cartItems.map((item) => {
-          //   return item._id === action.payload._id
-          //     ? { ...item, quantity: item.quantity + action.payload.quantity }
-          //     : item;
-
           if (item._id === action.payload._id) {
             return {
               ...item,
               quantity: (item.quantity += action.payload.quantity),
+              prices : item.prices = item.quantity * item.price,
             };
           } else return item;
-          // console.log(item._id)
         });
-
-        // return [...state, (state.cartItems.quantity += 1)];
-
-        // return "duplikat";
       } else {
         return {
           ...state,
