@@ -1,13 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { addToCart } from "../actions/cartActions";
+import { addToCart, deleteFromcart } from "../actions/cartActions";
 
 const Cart = () => {
   const cartState = useSelector((state) => state.cartReducer);
   const { cartItems } = cartState;
 
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
 
   console.log(cartItems);
 
@@ -57,16 +57,19 @@ const Cart = () => {
                         <span className="text-red-500 text-xs">
                           {item.standName}
                         </span>
-                        <a
-                          href="#"
-                          className="font-semibold hover:text-red-500 text-gray-500 text-xs"
+                        <button
+                          className="text-left font-semibold hover:text-red-500 text-gray-500 text-xs"
+                          onClick={() => dispatch(deleteFromcart(item))}
                         >
                           Remove
-                        </a>
+                        </button>
                       </div>
                     </div>
                     <div className="flex justify-center w-1/5">
-                      <button className="active:scale-50 transition ease-in-out hover:scale-125">
+                      <button
+                        className="active:scale-50 transition ease-in-out hover:scale-125"
+                        onClick={() => dispatch(addToCart(item, -1))}
+                      >
                         <svg
                           className="fill-current text-gray-600 w-3"
                           viewBox="0 0 448 512"
@@ -79,13 +82,13 @@ const Cart = () => {
                         className="mx-2 border text-center w-8"
                         type="text"
                         value={item.quantity}
+                        readOnly
                       />
+                      {/* <span>{item.quantity}</span> */}
 
                       <button
                         className="active:scale-50 transition ease-in-out hover:scale-125"
-                        onClick={() =>
-                          dispatch(addToCart(item, 1))
-                        }
+                        onClick={() => dispatch(addToCart(item, 1))}
                       >
                         <svg
                           className="fill-current text-gray-600 w-3"

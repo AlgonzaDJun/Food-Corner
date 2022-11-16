@@ -5,21 +5,34 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
         (item) => item._id === action.payload._id
       );
       if (duplicate) {
-        state.cartItems.map((item) => {
-          if (item._id === action.payload._id) {
-            return {
-              ...item,
-              quantity: (item.quantity += action.payload.quantity),
-              prices : item.prices = item.quantity * item.price,
-            };
-          } else return item;
-        });
+        return {
+          ...state,
+          cartItems: state.cartItems.map((item) =>
+            // item._id === action.payload._id ? action.payload : item
+            {
+              if (item._id === action.payload._id) {
+                return {
+                  ...item,
+                  quantity: (item.quantity += action.payload.quantity),
+                  prices: item.quantity * item.price,
+                };
+              } else return item;
+            }
+          ),
+        };
       } else {
         return {
           ...state,
           cartItems: [...state.cartItems, action.payload],
         };
       }
+    case "DELETE_FROM_CART":
+      return {
+        ...state,
+        cartItems: state.cartItems.filter(
+          (item) => item._id !== action.payload._id
+        ),
+      };
     default:
       return state;
   }

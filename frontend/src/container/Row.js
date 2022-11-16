@@ -21,9 +21,9 @@ const Row = ({ flag }) => {
     dispatch(getAllStands());
   }, []);
 
-  const addtocart = (menu) => {
-    dispatch(addToCart(menu, quantity));
-  };
+  // const addtocart = (menu) => {
+  //   dispatch(addToCart(menu, quantity));
+  // };
 
   // console.log(cartItems)
 
@@ -54,7 +54,7 @@ const Row = ({ flag }) => {
                         alt=""
                         className="w-40 h-28 drop-shadow-2xl rounded-lg object-cover"
                       />
-                      <button onClick={() => addtocart(menu)}>
+                      <button onClick={() => dispatch(addToCart(menu, 1))}>
                         <motion.div
                           whileTap={{ scale: 0.75 }}
                           className="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center cursor-pointer hover:shadow-md"
