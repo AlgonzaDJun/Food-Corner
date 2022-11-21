@@ -41,12 +41,13 @@ const Row = ({ flag }) => {
         stands.map((stand) => {
           return (
             <div
-              className="sm:min-w-[530px] my-12 md:w-340 hover:drop-shadow-lg h-auto backdrop-blur-lg bg-gray-100 rounded-lg sm:flex block"
+              className="sm:min-w-[530px] my-12 md:w-340 hover:drop-shadow-lg h-auto backdrop-blur-lg bg-gray-100 rounded-lg "
               key={stand._id}
             >
+              <h1 className="text-center w-full">{stand.standName}</h1>
               {stand.menu.map((menu, index) => {
                 return (
-                  <div className="sm:w-50 h-50 p-5" key={index}>
+                  <div className="sm:w-50 h-50 p-5 sm:flex block" key={index}>
                     <div className="w-full flex items-center justify-between">
                       <motion.img
                         whileHover={{ scale: 1.2 }}

@@ -6,10 +6,11 @@ import { addToCart, deleteFromcart } from "../actions/cartActions";
 const Cart = () => {
   const cartState = useSelector((state) => state.cartReducer);
   const { cartItems } = cartState;
+  let subTotal = cartItems.reduce((x, item) => x + item.prices, 0);
 
   const dispatch = useDispatch();
 
-  console.log(cartItems);
+  // console.log(cartItems);
 
   return (
     <div>
@@ -68,7 +69,11 @@ const Cart = () => {
                     <div className="flex justify-center w-1/5">
                       <button
                         className="active:scale-50 transition ease-in-out hover:scale-125"
-                        onClick={() => dispatch(addToCart(item, -1))}
+                        onClick={
+                          item.quantity < 1
+                            ? () => dispatch(deleteFromcart(item))
+                            : () => dispatch(addToCart(item, -1))
+                        }
                       >
                         <svg
                           className="fill-current text-gray-600 w-3"
@@ -129,7 +134,7 @@ const Cart = () => {
             </h1>
             <div className="flex justify-between mt-10 mb-5">
               <span className="font-semibold text-sm uppercase">Items 3</span>
-              <span className="font-semibold text-sm">590$</span>
+              <span className="font-semibold text-sm">{subTotal}</span>
             </div>
             <div>
               <label className="font-medium inline-block mb-3 text-sm uppercase">
@@ -143,7 +148,7 @@ const Cart = () => {
             <div className="border-t mt-8">
               <div className="flex font-semibold justify-between py-6 text-sm uppercase">
                 <span>Total cost</span>
-                <span>$600</span>
+                <span>{subTotal}</span>
               </div>
               <button className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
                 Checkout

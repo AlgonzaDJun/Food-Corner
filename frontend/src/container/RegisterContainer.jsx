@@ -15,13 +15,13 @@ const RegisterContainer = () => {
   const { error, loading, success } = registerState;
   const [samePassword, SetSamePassword] = useState(false);
 
-  // useEffect(() => {
-  //   if (localStorage.getItem("currentUser")) {
-  //     setTimeout(() => {
-  //       navigate("/");
-  //     }, 2000);
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (localStorage.getItem("currentUser")) {
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    }
+  }, []);
 
   const [state, setState] = useState({
     name: "",
