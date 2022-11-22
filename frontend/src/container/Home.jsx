@@ -1,4 +1,5 @@
 import React from "react";
+import navbarLogo from '../assets/images/logo2.png';
 import foodLogo from "../assets/images/main-b.jpg";
 import bgstand from "../assets/images/menu-bg.png";
 import dish1 from "../assets/images/dish/1.png";
@@ -11,9 +12,9 @@ import bg1 from "../assets/images/menu-1.png";
 import bg2 from "../assets/images/menu-2.png";
 import bg3 from "../assets/images/menu-3.png";
 import bg4 from "../assets/images/menu-4.png";
-import HeroBg from "../assets/heroBg.png";
-import { heroData } from "../utils/Data";
-// Import Swiper styles
+import stand from "../assets/images/title-shape.svg";
+// import HeroBg from "../assets/heroBg.png";
+// import { heroData } from "../utils/Data";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from "swiper";
 import 'swiper/css';
@@ -92,7 +93,7 @@ const Home = () => {
     // </section>
 
 
-    <div className="body-fixed h-auto mb-5">
+    <div className="body-fixed h-auto w-100">
       {/* start */}
       <section class="main-banner" id="home">
         <div class="sec-wp">
@@ -222,8 +223,8 @@ const Home = () => {
       </section>
       {/* end of rekomdasi */}
       {/* stand */}
-      <section style={{ backgroundImage: `url(${bgstand})`, }}
-                class="our-menu section bg-light repeat-img" id="menu">
+      <section style={{ backgroundImage: `url(${bgstand})`}}
+                class="our-menu section bg-light repeat-img w-100" id="menu">
                 <div class="sec-wp">
                     <div class="container">
                         <div class="row">
@@ -231,7 +232,7 @@ const Home = () => {
                                 <div class="sec-title text-center mb-5">
                                     <h2 class="h2-title">mau makan apa? <span>langsung pilih di menu</span></h2>
                                     <div class="sec-title-shape mb-4">
-                                        <img src="assets/images/title-shape.svg" alt=""/>
+                                        <img src={stand} alt=""/>
                                     </div>
                                 </div>
                             </div>
@@ -247,15 +248,15 @@ const Home = () => {
                                                 All
                                             </li>
                                             <li class="filter" data-filter=".stand1">
-                                                <img src="assets/images/menu-2.png" alt=""/>
+                                                <img src={bg2} alt=""/>
                                                 Stand 1
                                             </li>
                                             <li class="filter" data-filter=".stand2">
-                                                <img src="assets/images/menu-3.png" alt=""/>
+                                                <img src={bg3} alt=""/>
                                                 Stand 2
                                             </li>
                                             <li class="filter" data-filter=".stand3">
-                                                <img src="assets/images/menu-4.png" alt=""/>
+                                                <img src={bg4} alt=""/>
                                                 Stand 3
                                             </li>
                                         </ul>
@@ -270,7 +271,7 @@ const Home = () => {
                                 <div class="col-lg-4 col-sm-6 dish-box-wp stand1" data-cat="stand1">
                                     <div class="dish-box text-center">
                                         <div class="dist-img">
-                                            <img src="assets/images/dish/2.png" alt=""/>
+                                            <img src={dish1} alt=""/>
                                         </div>
                                         <div class="star-rating-wp">
                                             <div class="star-rating">
@@ -292,11 +293,11 @@ const Home = () => {
                                 <div class="col-lg-4 col-sm-6 dish-box-wp stand1" data-cat="stand1">
                                     <div class="dish-box text-center">
                                         <div class="dist-img">
-                                            <img src="assets/images/dish/3.png" alt=""/>
+                                            <img src={dish2} alt=""/>
                                         </div>
                                         <div class="star-rating-wp">
                                             <div class="star-rating">
-                                                <span class="star-rating__fill" style="width:85%"></span>
+                                                <span class="star-rating__fill" style={{width:'83%'}}></span>
                                             </div>
                                         </div>
                                         <div class="dish-title">
@@ -314,11 +315,11 @@ const Home = () => {
                                 <div class="col-lg-4 col-sm-6 dish-box-wp stand3" data-cat="stand3">
                                     <div class="dish-box text-center">
                                         <div class="dist-img">
-                                            <img src="assets/images/dish/4.png" alt=""/>
+                                            <img src={dish3} alt=""/>
                                         </div>
                                         <div class="star-rating-wp">
                                             <div class="star-rating">
-                                                <span class="star-rating__fill" style="width:95%"></span>
+                                                <span class="star-rating__fill" sstyle={{width:'70%'}}></span>
                                             </div>
                                         </div>
                                         <div class="dish-title">
@@ -336,11 +337,11 @@ const Home = () => {
                                 <div class="col-lg-4 col-sm-6 dish-box-wp stand3" data-cat="stand3">
                                     <div class="dish-box text-center">
                                         <div class="dist-img">
-                                            <img src="assets/images/dish/5.png" alt=""/>
+                                            <img src={dish4} alt=""/>
                                         </div>
                                         <div class="star-rating-wp">
                                             <div class="star-rating">
-                                                <span class="star-rating__fill" style="width:85%"></span>
+                                                <span class="star-rating__fill" style={{width:'90%'}}></span>
                                             </div>
                                         </div>
                                         <div class="dish-title">
@@ -358,11 +359,11 @@ const Home = () => {
                                 <div class="col-lg-4 col-sm-6 dish-box-wp stand1" data-cat="stand1">
                                     <div class="dish-box text-center">
                                         <div class="dist-img">
-                                            <img src="assets/images/dish/6.png" alt=""/>
+                                            <img src={dish5} alt=""/>
                                         </div>
                                         <div class="star-rating-wp">
                                             <div class="star-rating">
-                                                <span class="star-rating__fill" style="width:75%"></span>
+                                                <span class="star-rating__fill" style={{width:'100%'}}></span>
                                             </div>
                                         </div>
                                         <div class="dish-title">
@@ -382,6 +383,124 @@ const Home = () => {
                 </div>
             </section>
       {/* end of stand */}
+      {/* about us */}
+      <section class="two-col-sec section">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-5">
+                            <div class="sec-img mt-5">
+                                <img src={navbarLogo} alt=""/>
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="sec-text">
+                                <h2 class="xxl-title">FooD CorneR</h2>
+                                <p>This is Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet dolores
+                                    eligendi earum eveniet soluta officiis asperiores repellat, eum praesentium nihil
+                                    totam. Non ipsa expedita repellat atque mollitia praesentium assumenda quo
+                                    distinctio excepturi nobis tenetur, cum ab vitae fugiat hic aspernatur? Quos
+                                    laboriosam, repudiandae exercitationem atque a excepturi vel. Voluptas, ipsa.</p>
+                                <p>This is Lorem ipsum dolor sit amet consectetur adipisicing elit. At fugit laborum
+                                    voluptas magnam sed ad illum? Minus officiis quod deserunt.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+      {/* end of about us */}
+      {/* footer */}
+      <footer class="site-footer" id="contact">
+                <div class="top-footer section">
+                    <div class="sec-wp">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="footer-info">
+                                        <div class="footer-logo">
+                                            <a href="index.html">
+                                                <img src={navbarLogo} alt="" style={{height: '80px', borderRadius: '50%',}}/>
+                                            </a>
+                                        </div>
+                                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia, tenetur.
+                                        </p>
+                                        <div class="social-icon">
+                                            <ul>
+                                                <li>
+                                                    <a src="https://www.facebook.com/">
+                                                        <i class="uil uil-facebook-f"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="uil uil-instagram"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="uil uil-github-alt"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="uil uil-youtube"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="footer-flex-box">
+                                        <div class="footer-table-info">
+                                            <h3 class="h3-title">open hours</h3>
+                                            <ul>
+                                                <li><i class="uil uil-clock"></i> Mon-Thurs : 9am - 22pm</li>
+                                                <li><i class="uil uil-clock"></i> Fri-Sun : 11am - 22pm</li>
+                                            </ul>
+                                        </div>
+                                        <div class="footer-menu food-nav-menu">
+                                            <h3 class="h3-title">Links</h3>
+                                            <ul class="column-2">
+                                                <li>
+                                                    <a href="#home" class="footer-active-menu">Home</a>
+                                                </li>
+                                                <li><a href="#about">About</a></li>
+                                                <li><a href="#menu">Menu</a></li>
+                                                <li><a href="#gallery">Gallery</a></li>
+                                                <li><a href="#blog">Blog</a></li>
+                                                <li><a href="#contact">Contact</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="footer-menu">
+                                            <h3 class="h3-title">Company</h3>
+                                            <ul>
+                                                <li><a href="#">Terms & Conditions</a></li>
+                                                <li><a href="#">Privacy Policy</a></li>
+                                                <li><a href="#">Cookie Policy</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom-footer">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <div class="copyright-text">
+                                    <p>Copyright &copy; 2021 <span class="name">TechieCoder.</span>All Rights Reserved.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="scrolltop"><i class="uil uil-angle-up"></i></button>
+                    </div>
+                </div>
+            </footer>
+      {/* end of footer */}
     </div>
   );
 };

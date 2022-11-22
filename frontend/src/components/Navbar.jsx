@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import navbarLogo from '../assets/images/logo2.png'
+import navbarLogo from '../assets/images/logo2.png';
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";

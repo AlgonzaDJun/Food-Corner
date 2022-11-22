@@ -14,6 +14,10 @@
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
 
   <!--
@@ -29,6 +33,7 @@
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700;900&display=swap");
   </style>
+  <script src="../src/container/script.js"></script>
 </head>
 
 <body>
@@ -46,39 +51,13 @@
     -->
 </body>
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+<script src="assets/js/font-awesome.min.js"></script>
 
 <script type="module">
 
   import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.esm.browser.min.js'
-  const swiper = new Swiper(".slide-content", {
-    slidesPerView: 3,
-    spaceBetween: 25,
-    loop: true,
-    centerSlide: 'true',
-    fade: 'true',
-    grabCursor: 'true',
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-      dynamicBullets: true,
-    },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-
-    breakpoints: {
-      0: {
-        slidesPerView: 1,
-      },
-      520: {
-        slidesPerView: 2,
-      },
-      950: {
-        slidesPerView: 3,
-      },
-    },
-  });
+  
+  
 </script>
 
 </html>
