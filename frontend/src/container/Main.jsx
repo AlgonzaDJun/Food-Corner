@@ -32,7 +32,9 @@ const Main = () => {
     //     <RowContainer flag={true}/>
     //   </section>
     // </div>
-    <div>Main</div>
+    <div className="w-100 h-auto flex-column d-flex align-items-center justify-content-center">
+      <HomeContainer/>
+    </div>
   );
 };
 

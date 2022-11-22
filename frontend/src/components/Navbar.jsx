@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import navbarLogo from "../assets/navbarLogo.png";
+import navbarLogo from '../assets/images/logo2.png'
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
@@ -19,83 +19,66 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg bg-light">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="#">
-            Navbar
-          </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
-                  Home
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Link
-                </a>
-              </li>
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Dropdown
-                </a>
-                <ul className="dropdown-menu">
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Action
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Another action
-                    </a>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </li>
+    <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0" href="index.html">
+                <img src={navbarLogo} alt="site icon"/>
+                <h4 class="text-capitalize fw-lighter ms-2">FooD CorneR</h4>
+            </a>
+            <div class="order-lg-2 nav-btns">
+                <button type="button" class="btn position-relative">
+                    <li class="nav-item d-flex">
+                        <a class="nav-link ml-auto" href="cart.html">
+                            <i class="uil uil-shopping-bag"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge bg-primary">8</span>
+                        </a>
+                    </li>
+                </button>
+                <button type="button" class="btn position-relative">
+                    <i class="uil uil-user"></i>
+                </button>
+                <button type="button" class="btn position-relative">
+                    <li class="nav-item d-flex">
+                        <div class="collapse fade mt-5 position-absolute" id="searchForm"
+                            style={{ width: '300px', right: '35px', height: '30px',}}>
+                            <input id="search" type="search" class="form-control-lg border-0 bg-light "
+                                placeholder="Cari Produk" />
+                        </div>
+                        <a class="nav-link ml-auto" href="#searchForm" data-bs-target="#searchForm"
+                            data-bs-toggle="collapse">
+                            <i class="uil uil-search"></i>
+                        </a>
+                    </li>
+                </button>
+            </div>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse order-lg-1" id="navMenu">
+                <ul class="navbar-nav mx-auto text-center">
+                    <li class="nav-item px-2 py-2">
+                        <a class="nav-link text-capitalize text-dark" href="index.html">home</a>
+                    </li>
+                    <li class="nav-item px-2 py-2">
+                        <a class="nav-link text-capitalize text-dark" href="collection.html">collection</a>
+                    </li>
+                    <li class="nav-item px-2 py-2">
+                        <a class="nav-link text-capitalize text-dark" href="blogs.html">blogs</a>
+                    </li>
+                    <li class="nav-item px-2 py-2">
+                        <a class="nav-link text-capitalize text-dark" href="aboutUs.html">About Us</a>
+                    </li>
+                    <li class="nav-item px-2 py-2 border-0">
+                        <a class="nav-link text-capitalize text-dark" href="contact.html">Contact</a>
+                    </li>
+
                 </ul>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link disabled">Disabled</a>
-              </li>
-            </ul>
-            <form className="d-flex" role="search">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button className="btn btn-outline-success" type="submit">
-                Search
-              </button>
-            </form>
-          </div>
+
+            </div>
         </div>
-      </nav>
+    </nav>
     </div>
   );
 };
