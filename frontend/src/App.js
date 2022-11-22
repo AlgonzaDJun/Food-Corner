@@ -7,9 +7,11 @@ import LoginContainer from "./container/LoginContainer";
 import RegisterContainer from "./container/RegisterContainer";
 import Cart from "./container/Cart";
 
+
+
 function App() {
   return (
-    <div className="">
+    <div className="w-100 h-h-auto d-flex flex-column">
       {/* w-full h-auto flex flex-col bg-primary */}
       <Navbar />
       <main className="">
