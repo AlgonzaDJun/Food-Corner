@@ -7,6 +7,10 @@ import dish3 from "../assets/images/dish/3.png";
 import dish4 from "../assets/images/dish/4.png";
 import dish5 from "../assets/images/dish/5.png";
 import dish6 from "../assets/images/dish/6.png";
+import bg1 from "../assets/images/menu-1.png";
+import bg2 from "../assets/images/menu-2.png";
+import bg3 from "../assets/images/menu-3.png";
+import bg4 from "../assets/images/menu-4.png";
 import HeroBg from "../assets/heroBg.png";
 import { heroData } from "../utils/Data";
 // Import Swiper styles
@@ -239,7 +243,7 @@ const Home = () => {
                                         <ul class="filters">
                                             <div class="filter-active"></div>
                                             <li class="filter" data-filter=".all, .stand1, .stand2, .stand3">
-                                                <img src="assets/images/menu-1.png" alt=""/>
+                                                <img src={bg1} alt=""/>
                                                 All
                                             </li>
                                             <li class="filter" data-filter=".stand1">
