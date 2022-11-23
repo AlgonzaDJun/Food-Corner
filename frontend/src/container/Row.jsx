@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import I1 from "../assets/ayam_geprek.png";
-import { MdAdd, MdAddShoppingCart } from "react-icons/md";
+import { MdAddShoppingCart } from "react-icons/md";
 import { motion } from "framer-motion";
 // import { getAllFoods } from "../actions/foodActions";
 import { getAllStands } from "../actions/standActions";
