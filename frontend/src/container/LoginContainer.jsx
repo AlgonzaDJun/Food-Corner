@@ -5,6 +5,7 @@ import { loginUser } from "../actions/userActions";
 import { Link, useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
+import bg from "../assets/images/carousel.jpg"
 
 const LoginContainer = () => {
   const [email, setEmail] = useState("");
@@ -30,7 +31,7 @@ const LoginContainer = () => {
     dispatch(loginUser(currentUser));
   };
   return (
-    <div>
+    <div className=" w-100">
       {/* <div class=" h-screen overflow-hidden flex items-center justify-center">
         <div class="bg-white lg:w-5/12 md:6/12 w-10/12 shadow-3xl rounded-lg">
           <div class="bg-gray-800 absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full p-4 md:p-8">
@@ -83,36 +84,37 @@ const LoginContainer = () => {
           </form>
         </div>
       </div> */}
-      <div class="container p-5">
-        <form class="form-signup">
+    
+      <div class="login w-100" style={{ backgroundImage: `url(${bg})`, paddingTop: '150px'}}>
+        <form class="form-signup" >
           <h2>Register</h2>
           <p>Create your account it's free only take a minute.</p>
           <div class="form-group">
             <div class="row">
               <div class="col-md-6">
-                <input type="text" class="form-control" name="firstname" placeholder="First Name"/>
+                <input type="text" class="form-control mb-3" name="firstname" placeholder="First Name"/>
               </div>
               <div class="col-md-6">
-                <input type="text" class="form-control" name="lastname" placeholder="Last Name"/>
+                <input type="text" class="form-control mb-3" name="lastname" placeholder="Last Name"/>
               </div>
             </div>
           </div>
           <div class="form-group">
-            <input type="email" name="email" class="form-control" placeholder="Email Address"/>
+            <input type="email" name="email" class="form-control mb-3" placeholder="Email Address"/>
           </div>
           <div class="form-group">
-            <input type="password" name="password" class="form-control" placeholder="Password"/>
+            <input type="password" name="password" class="form-control mb-3" placeholder="Password"/>
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password"/>
+            <input type="password" class="form-control mb-3" name="confirm_password" placeholder="Confirm Password"/>
           </div>
           <div class="form-group">
             <label>
-              <input type="checkbox" name=""/>
+              <input type="checkbox" name="" class="mb-3"/>
                 I accept the <a href="a"> Terms of Use</a> & <a href="">Privacy Policy</a>
             </label>
           </div>
-          <input type="submit" class="btn btn-dark btn-block" name="" value="Submit"/>
+          <input type="submit" class="btn-login btn btn-dark btn-block" name="" value="Submit"/>
         </form>
       </div>
     </div>

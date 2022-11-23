@@ -11,10 +11,10 @@ import Cart from "./container/Cart";
 
 function App() {
   return (
-    <div className="w-100 h-h-auto d-flex flex-column">
+    <div className="w-100 h-auto d-flex flex-column">
       {/* w-full h-auto flex flex-col bg-primary */}
       <Navbar />
-      <main className="">
+      <main className="w-100">
         {/* mt-[60px] md:mt-[60px] px-4 md:px-16 py-4 w-full */}
         <Routes>
           <Route path="/" element={<MainContainer />} />

@@ -19,7 +19,7 @@ const Navbar = () => {
 
   return (
     <div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top">
         <div class="container">
             <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0" href="index.html">
                 <img src={navbarLogo} alt="site icon"/>
