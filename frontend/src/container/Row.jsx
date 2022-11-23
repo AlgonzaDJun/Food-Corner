@@ -6,6 +6,12 @@ import { motion } from "framer-motion";
 // import { getAllFoods } from "../actions/foodActions";
 import { getAllStands } from "../actions/standActions";
 import { addToCart } from "../actions/cartActions";
+import dish1 from "../assets/images/dish/1.png";
+import dish2 from "../assets/images/dish/2.png";
+import dish3 from "../assets/images/dish/3.png";
+import dish4 from "../assets/images/dish/4.png";
+import dish5 from "../assets/images/dish/5.png";
+import dish6 from "../assets/images/dish/6.png";
 
 const Row = ({ flag }) => {
   const dispatch = useDispatch();
@@ -85,7 +91,105 @@ const Row = ({ flag }) => {
     //   )}
     // </div>
 
-    <div>Row</div>
+    <div className="h-auto w-100">
+      {/* rekommendasi */}
+      <section class="body-swiper">
+        <div class="slide-container swiper">
+          <div class="recom">
+            <p class="recom">rekomendasi</p>
+          </div>
+          <div class="slide-content">
+            <div class="card-wrapper swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="image-content">
+                  <span class="overlay"></span>
+                  <div class="card-image">
+                    <img src={dish1} class="card-img" />
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="image-content">
+                  <span class="overlay"></span>
+
+                  <div class="card-image">
+                    <img src={dish2} alt="" class="card-img" />
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="image-content">
+                  <span class="overlay"></span>
+
+                  <div class="card-image">
+                    <img src={dish3} alt="" class="card-img" />
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="image-content">
+                  <span class="overlay"></span>
+
+                  <div class="card-image">
+                    <img src={dish4} alt="" class="card-img" />
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="image-content">
+                  <span class="overlay"></span>
+
+                  <div class="card-image">
+                    <img src={dish5} alt="" class="card-img" />
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="image-content">
+                  <span class="overlay"></span>
+
+                  <div class="card-image">
+                    <img src={dish6} alt="" class="card-img" />
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="image-content">
+                  <span class="overlay"></span>
+
+                  <div class="card-image">
+                    <img src={dish1} class="card-img" />
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="image-content">
+                  <span class="overlay"></span>
+
+                  <div class="card-image">
+                    <img src={dish4} alt="" class="card-img" />
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="image-content">
+                  <span class="overlay"></span>
+
+                  <div class="card-image">
+                    <img src={dish6} alt="" class="card-img" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-button-next swiper-navBtn"></div>
+          <div class="swiper-button-prev swiper-navBtn"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </section>
+      {/* end of rekomdasi */}
+    </div>
   );
 };
 
