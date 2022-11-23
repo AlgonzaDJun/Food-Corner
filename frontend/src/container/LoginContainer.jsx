@@ -5,7 +5,7 @@ import { loginUser } from "../actions/userActions";
 import { Link, useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
-import bg from "../assets/images/carousel.jpg"
+import bg from "../assets/images/carousel.jpg";
 
 const LoginContainer = () => {
   const [email, setEmail] = useState("");
@@ -13,7 +13,7 @@ const LoginContainer = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const loginState = useSelector(state => state.loginUserReducer)
+  const loginState = useSelector((state) => state.loginUserReducer);
   const { loading, error } = loginState;
 
   useEffect(() => {
@@ -84,37 +84,45 @@ const LoginContainer = () => {
           </form>
         </div>
       </div> */}
-    
-      <div class="login w-100" style={{ backgroundImage: `url(${bg})`, paddingTop: '150px'}}>
-        <form class="form-signup" >
-          <h2>Register</h2>
-          <p>Create your account it's free only take a minute.</p>
+
+      <div
+        class="login w-100"
+        style={{ backgroundImage: `url(${bg})`, paddingTop: "150px" }}
+      >
+        <form class="form-signup">
+        {loading && <Loading />}
+        {error && <Error text={"Silakan periksa email dan password"}/>}
+          <h2>Login</h2>
+          <p>Silakan Memasukkan username dan password</p>
           <div class="form-group">
-            <div class="row">
-              <div class="col-md-6">
-                <input type="text" class="form-control mb-3" name="firstname" placeholder="First Name"/>
-              </div>
-              <div class="col-md-6">
-                <input type="text" class="form-control mb-3" name="lastname" placeholder="Last Name"/>
-              </div>
-            </div>
+            <input
+              value={email}
+              type="email"
+              name="email"
+              class="form-control mb-3"
+              placeholder="Email Address"
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
           <div class="form-group">
-            <input type="email" name="email" class="form-control mb-3" placeholder="Email Address"/>
+            <input
+              value={password}
+              type="password"
+              name="password"
+              class="form-control mb-3"
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
-          <div class="form-group">
-            <input type="password" name="password" class="form-control mb-3" placeholder="Password"/>
-          </div>
-          <div class="form-group">
-            <input type="password" class="form-control mb-3" name="confirm_password" placeholder="Confirm Password"/>
-          </div>
-          <div class="form-group">
-            <label>
-              <input type="checkbox" name="" class="mb-3"/>
-                I accept the <a href="a"> Terms of Use</a> & <a href="">Privacy Policy</a>
-            </label>
-          </div>
-          <input type="submit" class="btn-login btn btn-dark btn-block" name="" value="Submit"/>
+          <button
+            onClick={login}
+            class="btn-login btn btn-dark btn-block"
+          >
+            Login
+          </button>
+          <p className="mt-3">
+            Belum Punya akun ? <Link to={"/register"}>Register</Link>
+          </p>
         </form>
       </div>
     </div>

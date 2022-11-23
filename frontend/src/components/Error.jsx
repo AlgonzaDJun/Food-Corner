@@ -1,9 +1,9 @@
 import React from "react";
 
-const Error = ({text}) => {
+const Error = ({ text }) => {
   return (
-    <div>
-      error message : {text}
+    <div class="alert alert-danger">
+      <strong>Error!</strong> {text}
     </div>
   );
 };

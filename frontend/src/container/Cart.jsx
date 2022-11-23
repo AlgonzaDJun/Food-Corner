@@ -13,8 +13,10 @@ const Cart = () => {
   // console.log(cartItems);
 
   return (
-    <div>
-      Cart
+    <div className="w-100 vh-100">
+      <div style={{marginTop: 100}}>
+        ini cart jan...
+      </div>
     </div>
   );
 };

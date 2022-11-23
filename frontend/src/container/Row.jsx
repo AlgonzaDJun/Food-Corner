@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import I1 from "../assets/ayam_geprek.png";
-import { MdShoppingBasket } from "react-icons/md";
+import { MdAdd, MdAddShoppingCart } from "react-icons/md";
 import { motion } from "framer-motion";
 // import { getAllFoods } from "../actions/foodActions";
 import { getAllStands } from "../actions/standActions";
@@ -94,25 +94,43 @@ const Row = ({ flag }) => {
           </div>
           <div className="slide-content">
             <div className="card-wrapper swiper-wrapper">
-              {stands.map((stand) => {
-                return (
-                  <>
-                    {stand.menu.map((menu, index) => {
-                      return (
-                        <div className="swiper-slide" key={index}>
-                          <div className="image-content">
-                            <span className="overlay"></span>
-                            <div className="card-image">
-                              <img src={menu.image} className="card-img" />
+              {loading ? (
+                <h1 className="mx-auto">Loading...</h1>
+              ) : error ? (
+                <h1 className="mx-auto"> Terjadi Error</h1>
+              ) : (
+                stands.map((stand) => {
+                  return (
+                    <>
+                      {stand.menu.map((menu, index) => {
+                        return (
+                          <div className="swiper-slide" key={index}>
+                            <div className="image-content">
+                              <span className="overlay"></span>
+                              <div className="card-image position-relative">
+                                <img src={menu.image} className="card-img" />
+                                <div
+                                  className="position-absolute"
+                                  style={{ bottom: 0, right: 0 }}
+                                >
+                                  <button
+                                    className="border-0 m-0 p-1 rounded-4 bg-light"
+                                    style={{ backgroundColor: "transparent" }}
+                                    onClick={() => {alert('anjing')}}
+                                  >
+                                    <MdAddShoppingCart size={30} />
+                                  </button>
+                                </div>
+                              </div>
+                              <p>{menu.name}</p>
                             </div>
-                            <p>{menu.name}</p>
                           </div>
-                        </div>
-                      );
-                    })}
-                  </>
-                );
-              })}
+                        );
+                      })}
+                    </>
+                  );
+                })
+              )}
             </div>
           </div>
 

@@ -31,6 +31,7 @@ body {
     max-width: 400px;
     background-color: white;
     padding: 30px;
+    border-radius: 10px;
 }
 
 .form-signup h2 {

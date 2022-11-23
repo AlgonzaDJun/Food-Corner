@@ -7,8 +7,6 @@ import LoginContainer from "./container/LoginContainer";
 import RegisterContainer from "./container/RegisterContainer";
 import Cart from "./container/Cart";
 
-
-
 function App() {
   return (
     <div className="w-100 h-auto d-flex flex-column">
@@ -20,7 +18,7 @@ function App() {
           <Route path="/" element={<MainContainer />} />
           <Route path="/login" element={<LoginContainer />} />
           <Route path="/register" element={<RegisterContainer />} />
-          <Route path="/cart" element={<Cart/>} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </main>
     </div>

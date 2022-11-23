@@ -1,9 +1,9 @@
 import React from "react";
 
-const Success = ({text}) => {
+const Success = ({ text }) => {
   return (
-    <div>
-      success message : {text}
+    <div class="alert alert-success">
+      <strong>Success!</strong> {text}
     </div>
   );
 };

@@ -11,10 +11,13 @@ router.post("/register", async (req, res) => {
   });
   try {
     const userExist = await User.findOne({ email: email });
+
     if (userExist) {
-      return res
-        .status(400)
-        .json({ error: "Email sudah dipakai" });
+      return res.status(400).json({ error: "Email sudah dipakai" });
+    } else if (!email || !name || !password) {
+      return res.status(400).json({ error: "Masukkan semua data" });
+    } else if (password.length < 6) {
+      return res.status(400).json({ error: "Password anda terlalu pendek" });
     }
 
     newUser.save();

@@ -131,7 +131,7 @@ const Home = () => {
               <div className="col-lg-6">
                 <div className="banner-text">
                   <h1 className="h1-title">
-                    Mau Makan Apa
+                    Mau Makan Apa {''}
                     <span>HARI INI</span>?
                   </h1>
                   <p>
@@ -411,7 +411,7 @@ const Home = () => {
                 <div className="col-lg-4">
                   <div className="footer-info">
                     <div className="footer-logo">
-                      <a href="index.html">
+                      <a href="/">
                         <img
                           src={navbarLogo}
                           alt=""

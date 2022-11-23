@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../actions/userActions";
+import bg from "../assets/images/carousel.jpg";
 import Loading from "../components/Loading";
 import Success from "../components/Success";
 import Error from "../components/Error";
@@ -38,7 +39,8 @@ const RegisterContainer = () => {
     });
   };
 
-  const register = () => {
+  const register = (e) => {
+    e.preventDefault();
     SetSamePassword(false);
     if (state.password != state.confirmPassword) {
       SetSamePassword(true);
@@ -119,36 +121,65 @@ const RegisterContainer = () => {
           </div>
         </div>
       </div> */}
-      <div class="login w-100" style={{ backgroundImage: `url(${bg})`, paddingTop: '150px'}}>
-        <form class="form-signup" >
+      <div
+        class="login w-100"
+        style={{ backgroundImage: `url(${bg})`, paddingTop: "100px" }}
+      >
+        <form class="form-signup">
+          {loading && <Loading />}
+          {success && <Success text={"Berhasil Registrasi"} />}
+          {error && <Error text={error.response.data.error} />}
+          {samePassword && <Error text={"password tidak sama"} />}
           <h2>Register</h2>
-          <p>Create your account it's free only take a minute.</p>
+          <p className="text-center">Silakan melakukan registrasi akun.</p>
           <div class="form-group">
-            <div class="row">
-              <div class="col-md-6">
-                <input type="text" class="form-control mb-3" name="firstname" placeholder="First Name"/>
-              </div>
-              <div class="col-md-6">
-                <input type="text" class="form-control mb-3" name="lastname" placeholder="Last Name"/>
-              </div>
-            </div>
+            <input
+              type="text"
+              class="form-control mb-3"
+              name="name"
+              placeholder="Nama Lengkap"
+              value={state.name}
+              onChange={handleChange}
+              required
+            />
           </div>
           <div class="form-group">
-            <input type="email" name="email" class="form-control mb-3" placeholder="Email Address"/>
+            <input
+              type="email"
+              class="form-control mb-3"
+              name="email"
+              placeholder="Email"
+              value={state.email}
+              onChange={handleChange}
+              required
+            />
           </div>
           <div class="form-group">
-            <input type="password" name="password" class="form-control mb-3" placeholder="Password"/>
+            <input
+              type="password"
+              class="form-control mb-3"
+              name="password"
+              placeholder="Password"
+              value={state.password}
+              onChange={handleChange}
+            />
           </div>
           <div class="form-group">
-            <input type="password" class="form-control mb-3" name="confirm_password" placeholder="Confirm Password"/>
+            <input
+              type="password"
+              class="form-control mb-3"
+              name="confirmPassword"
+              placeholder="Konfirmasi Password"
+              value={state.confirmPassword}
+              onChange={handleChange}
+            />
           </div>
-          <div class="form-group">
-            <label>
-              <input type="checkbox" name="" class="mb-3"/>
-                I accept the <a href="a"> Terms of Use</a> & <a href="">Privacy Policy</a>
-            </label>
-          </div>
-          <input type="submit" class="btn-login btn btn-dark btn-block" name="" value="Submit"/>
+          <button class="btn-login btn btn-dark btn-block" onClick={register}>
+            Register
+          </button>
+          <p className="mt-3">
+            Sudah Punya akun ? <Link to={"/login"}>Login</Link>
+          </p>
         </form>
       </div>
     </div>

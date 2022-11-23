@@ -17,33 +17,72 @@ const Navbar = () => {
 
   const { currentUser } = userState;
 
-  console.log(currentUser)
+  console.log(currentUser);
 
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-transparent py-4 fixed-top">
         <div className="container">
-          <a
+          <Link
             className="navbar-brand d-flex justify-content-between align-items-center order-lg-0"
-            href="/"
+            to={'/'}
           >
             <img src={navbarLogo} alt="site icon" />
             <h4 className="text-capitalize fw-lighter ms-2">FooD CorneR</h4>
-          </a>
+          </Link>
           <div className="order-lg-2 nav-btns">
             <button type="button" className="btn position-relative">
               <li className="nav-item d-flex">
-                <a className="nav-link ml-auto" href="cart.html">
+                <Link className="nav-link ml-auto" to={'/cart'}>
                   <i className="uil uil-shopping-bag"></i>
                   <span className="position-absolute top-0 start-100 translate-middle badge bg-primary">
                     8
                   </span>
-                </a>
+                </Link>
               </li>
             </button>
-            <button type="button" className="btn position-relative">
-              <i className="uil uil-user"></i>
-            </button>
+            {currentUser ? (
+              <button
+                onClick={() => setOpenLoginMenu(!openLoginMenu)}
+                className="btn position-relative mt-4"
+              >
+                <h5 className="rounded-circle border border-1 p-2 text-truncate">
+                  {currentUser.name}
+                </h5>
+                {openLoginMenu && (
+                  <motion.div
+                    style={{
+                      display: "flex",
+                      position: "absolute",
+                      backgroundColor: "#F9FAFB",
+                      flexDirection: "column",
+                      width: "10rem",
+                      borderRadius: "0.5rem",
+                      boxShadow:
+                        "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+                    }}
+                    initial={{ opacity: 0, scale: 0.6 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.6 }}
+                    className="rounded-2"
+                  >
+                    <p>Pesanan saya</p>
+                    <button className="btn" onClick={() => dispatch(logoutUser())}>
+                      <p>Log Out</p>
+                    </button>
+                  </motion.div>
+                )}
+              </button>
+            ) : (
+              <button
+                onClick={() => alert("apa")}
+                type="button"
+                className="btn position-relative"
+              >
+                <i className="uil uil-user"></i>
+              </button>
+            )}
+
             <button type="button" className="btn position-relative">
               <li className="nav-item d-flex">
                 <div
@@ -82,27 +121,33 @@ const Navbar = () => {
           <div className="collapse navbar-collapse order-lg-1" id="navMenu">
             <ul className="navbar-nav mx-auto text-center">
               <li className="nav-item px-2 py-2">
-                <a className="nav-link text-capitalize text-dark" href="index.html">
+                <Link
+                  className="nav-link text-capitalize text-dark"
+                  to={'/'}
+                >
                   home
-                </a>
+                </Link>
               </li>
               <li className="nav-item px-2 py-2">
                 <a
                   className="nav-link text-capitalize text-dark"
-                  href="collection.html"
+                  href="collection"
                 >
                   collection
                 </a>
               </li>
               <li className="nav-item px-2 py-2">
-                <a className="nav-link text-capitalize text-dark" href="blogs.html">
+                <a
+                  className="nav-link text-capitalize text-dark"
+                  href="blogs"
+                >
                   blogs
                 </a>
               </li>
               <li className="nav-item px-2 py-2">
                 <a
                   className="nav-link text-capitalize text-dark"
-                  href="aboutUs.html"
+                  href="aboutUs"
                 >
                   About Us
                 </a>
@@ -110,7 +155,7 @@ const Navbar = () => {
               <li className="nav-item px-2 py-2 border-0">
                 <a
                   className="nav-link text-capitalize text-dark"
-                  href="contact.html"
+                  href="contact"
                 >
                   Contact
                 </a>
