@@ -7,7 +7,7 @@ import dish2 from "../assets/images/dish/2.png";
 import dish3 from "../assets/images/dish/3.png";
 import dish4 from "../assets/images/dish/4.png";
 import dish5 from "../assets/images/dish/5.png";
-import dish6 from "../assets/images/dish/6.png";
+// import dish6 from "../assets/images/dish/6.png";
 import bg1 from "../assets/images/menu-1.png";
 import bg2 from "../assets/images/menu-2.png";
 import bg3 from "../assets/images/menu-3.png";
@@ -124,13 +124,13 @@ const Home = () => {
 
     <div className="body-fixed h-auto w-100">
       {/* start */}
-      <section class="main-banner" id="home">
-        <div class="sec-wp">
-          <div class="container">
-            <div class="row" style={{ paddingTop: "10px" }}>
-              <div class="col-lg-6">
-                <div class="banner-text">
-                  <h1 class="h1-title">
+      <section className="main-banner" id="home">
+        <div className="sec-wp">
+          <div className="container">
+            <div className="row" style={{ paddingTop: "10px" }}>
+              <div className="col-lg-6">
+                <div className="banner-text">
+                  <h1 className="h1-title">
                     Mau Makan Apa
                     <span>HARI INI</span>?
                   </h1>
@@ -139,17 +139,17 @@ const Home = () => {
                     elit. Numquam eius vel tempore consectetur nesciunt? Nam
                     eius tenetur recusandae optio aperiam.
                   </p>
-                  <div class="banner-btn mt-4">
-                    <a href="#menu" class="sec-btn">
+                  <div className="banner-btn mt-4">
+                    <a href="#menu" className="sec-btn">
                       Check our Menu
                     </a>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-6">
-                <div class="banner-img-wp">
+              <div className="col-lg-6">
+                <div className="banner-img-wp">
                   <div
-                    class="banner-img"
+                    className="banner-img"
                     style={{ backgroundImage: `url(${foodLogo})` }}
                   ></div>
                 </div>
@@ -165,45 +165,45 @@ const Home = () => {
       {/* stand */}
       <section
         style={{ backgroundImage: `url(${bgstand})` }}
-        class="our-menu section bg-light repeat-img w-100"
+        className="our-menu section bg-light repeat-img w-100"
         id="menu"
       >
-        <div class="sec-wp">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="sec-title text-center mb-5">
-                  <h2 class="h2-title">
+        <div className="sec-wp">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-12">
+                <div className="sec-title text-center mb-5">
+                  <h2 className="h2-title">
                     mau makan apa? <span>langsung pilih di menu</span>
                   </h2>
-                  <div class="sec-title-shape mb-4">
+                  <div className="sec-title-shape mb-4">
                     <img src={stand} alt="" />
                   </div>
                 </div>
               </div>
             </div>
-            <div class="menu-tab-wp">
-              <div class="row">
-                <div class="col-lg-12 m-auto">
-                  <div class="menu-tab text-center">
-                    <ul class="filters">
-                      <div class="filter-active"></div>
+            <div className="menu-tab-wp">
+              <div className="row">
+                <div className="col-lg-12 m-auto">
+                  <div className="menu-tab text-center">
+                    <ul className="filters">
+                      <div className="filter-active"></div>
                       <li
-                        class="filter"
+                        className="filter"
                         data-filter=".all, .stand1, .stand2, .stand3"
                       >
                         <img src={bg1} alt="" />
                         All
                       </li>
-                      <li class="filter" data-filter=".stand1">
+                      <li className="filter" data-filter=".stand1">
                         <img src={bg2} alt="" />
                         Stand 1
                       </li>
-                      <li class="filter" data-filter=".stand2">
+                      <li className="filter" data-filter=".stand2">
                         <img src={bg3} alt="" />
                         Stand 2
                       </li>
-                      <li class="filter" data-filter=".stand3">
+                      <li className="filter" data-filter=".stand3">
                         <img src={bg4} alt="" />
                         Stand 3
                       </li>
@@ -212,32 +212,32 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div class="menu-list-row">
-              <div class="row g-xxl-5 bydefault_show" id="menu-dish">
+            <div className="menu-list-row">
+              <div className="row g-xxl-5 bydefault_show" id="menu-dish">
                 {/* 1 */}
                 <div
-                  class="col-lg-4 col-sm-6 dish-box-wp stand1"
+                  className="col-lg-4 col-sm-6 dish-box-wp stand1"
                   data-cat="stand1"
                 >
-                  <div class="dish-box text-center">
-                    <div class="dist-img">
+                  <div className="dish-box text-center">
+                    <div className="dist-img">
                       <img src={dish1} alt="" />
                     </div>
-                    <div class="star-rating-wp">
-                      <div class="star-rating">
+                    <div className="star-rating-wp">
+                      <div className="star-rating">
                         <span
-                          class="star-rating__fill"
+                          className="star-rating__fill"
                           style={{ width: "100%" }}
                         ></span>
                       </div>
                     </div>
-                    <div class="dish-title">
-                      <h3 class="h3-title">Grilled Chicken</h3>
+                    <div className="dish-title">
+                      <h3 className="h3-title">Grilled Chicken</h3>
                     </div>
-                    <div class="dist-bottom-row">
+                    <div className="dist-bottom-row">
                       <p>Rp 20.000</p>
-                      <button class="dish-add-btn">
-                        <i class="uil uil-shopping-cart px-3 py-3">
+                      <button className="dish-add-btn">
+                        <i className="uil uil-shopping-cart px-3 py-3">
                           Add to cart
                         </i>
                       </button>
@@ -246,28 +246,28 @@ const Home = () => {
                 </div>
                 {/* 2 */}
                 <div
-                  class="col-lg-4 col-sm-6 dish-box-wp stand1"
+                  className="col-lg-4 col-sm-6 dish-box-wp stand1"
                   data-cat="stand1"
                 >
-                  <div class="dish-box text-center">
-                    <div class="dist-img">
+                  <div className="dish-box text-center">
+                    <div className="dist-img">
                       <img src={dish2} alt="" />
                     </div>
-                    <div class="star-rating-wp">
-                      <div class="star-rating">
+                    <div className="star-rating-wp">
+                      <div className="star-rating">
                         <span
-                          class="star-rating__fill"
+                          className="star-rating__fill"
                           style={{ width: "83%" }}
                         ></span>
                       </div>
                     </div>
-                    <div class="dish-title">
-                      <h3 class="h3-title">Panner Noodles</h3>
+                    <div className="dish-title">
+                      <h3 className="h3-title">Panner Noodles</h3>
                     </div>
-                    <div class="dist-bottom-row">
+                    <div className="dist-bottom-row">
                       <p>Rp 20.000</p>
-                      <button class="dish-add-btn">
-                        <i class="uil uil-shopping-cart px-3 py-3">
+                      <button className="dish-add-btn">
+                        <i className="uil uil-shopping-cart px-3 py-3">
                           Add to cart
                         </i>
                       </button>
@@ -276,28 +276,28 @@ const Home = () => {
                 </div>
                 {/* 3 */}
                 <div
-                  class="col-lg-4 col-sm-6 dish-box-wp stand3"
+                  className="col-lg-4 col-sm-6 dish-box-wp stand3"
                   data-cat="stand3"
                 >
-                  <div class="dish-box text-center">
-                    <div class="dist-img">
+                  <div className="dish-box text-center">
+                    <div className="dist-img">
                       <img src={dish3} alt="" />
                     </div>
-                    <div class="star-rating-wp">
-                      <div class="star-rating">
+                    <div className="star-rating-wp">
+                      <div className="star-rating">
                         <span
-                          class="star-rating__fill"
+                          className="star-rating__fill"
                           sstyle={{ width: "70%" }}
                         ></span>
                       </div>
                     </div>
-                    <div class="dish-title">
-                      <h3 class="h3-title">Chicken Noodles</h3>
+                    <div className="dish-title">
+                      <h3 className="h3-title">Chicken Noodles</h3>
                     </div>
-                    <div class="dist-bottom-row">
+                    <div className="dist-bottom-row">
                       <p>Rp 20.000</p>
-                      <button class="dish-add-btn">
-                        <i class="uil uil-shopping-cart px-3 py-3">
+                      <button className="dish-add-btn">
+                        <i className="uil uil-shopping-cart px-3 py-3">
                           Add to cart
                         </i>
                       </button>
@@ -306,28 +306,28 @@ const Home = () => {
                 </div>
                 {/* 4 */}
                 <div
-                  class="col-lg-4 col-sm-6 dish-box-wp stand3"
+                  className="col-lg-4 col-sm-6 dish-box-wp stand3"
                   data-cat="stand3"
                 >
-                  <div class="dish-box text-center">
-                    <div class="dist-img">
+                  <div className="dish-box text-center">
+                    <div className="dist-img">
                       <img src={dish4} alt="" />
                     </div>
-                    <div class="star-rating-wp">
-                      <div class="star-rating">
+                    <div className="star-rating-wp">
+                      <div className="star-rating">
                         <span
-                          class="star-rating__fill"
+                          className="star-rating__fill"
                           style={{ width: "90%" }}
                         ></span>
                       </div>
                     </div>
-                    <div class="dish-title">
-                      <h3 class="h3-title">Bread Boiled Egg</h3>
+                    <div className="dish-title">
+                      <h3 className="h3-title">Bread Boiled Egg</h3>
                     </div>
-                    <div class="dist-bottom-row">
+                    <div className="dist-bottom-row">
                       <p>Rp 20.000</p>
-                      <button class="dish-add-btn">
-                        <i class="uil uil-shopping-cart px-3 py-3">
+                      <button className="dish-add-btn">
+                        <i className="uil uil-shopping-cart px-3 py-3">
                           Add to cart
                         </i>
                       </button>
@@ -336,28 +336,28 @@ const Home = () => {
                 </div>
                 {/* 5 */}
                 <div
-                  class="col-lg-4 col-sm-6 dish-box-wp stand1"
+                  className="col-lg-4 col-sm-6 dish-box-wp stand1"
                   data-cat="stand1"
                 >
-                  <div class="dish-box text-center">
-                    <div class="dist-img">
+                  <div className="dish-box text-center">
+                    <div className="dist-img">
                       <img src={dish5} alt="" />
                     </div>
-                    <div class="star-rating-wp">
-                      <div class="star-rating">
+                    <div className="star-rating-wp">
+                      <div className="star-rating">
                         <span
-                          class="star-rating__fill"
+                          className="star-rating__fill"
                           style={{ width: "100%" }}
                         ></span>
                       </div>
                     </div>
-                    <div class="dish-title">
-                      <h3 class="h3-title">Immunity Dish</h3>
+                    <div className="dish-title">
+                      <h3 className="h3-title">Immunity Dish</h3>
                     </div>
-                    <div class="dist-bottom-row">
+                    <div className="dist-bottom-row">
                       <p>Rp 20.000</p>
-                      <button class="dish-add-btn">
-                        <i class="uil uil-shopping-cart px-3 py-3">
+                      <button className="dish-add-btn">
+                        <i className="uil uil-shopping-cart px-3 py-3">
                           Add to cart
                         </i>
                       </button>
@@ -371,17 +371,17 @@ const Home = () => {
       </section>
       {/* end of stand */}
       {/* about us */}
-      <section class="two-col-sec section">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-lg-5">
-              <div class="sec-img mt-5">
+      <section className="two-col-sec section">
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-lg-5">
+              <div className="sec-img mt-5">
                 <img src={navbarLogo} alt="" />
               </div>
             </div>
-            <div class="col-lg-7">
-              <div class="sec-text">
-                <h2 class="xxl-title">FooD CorneR</h2>
+            <div className="col-lg-7">
+              <div className="sec-text">
+                <h2 className="xxl-title">FooD CorneR</h2>
                 <p>
                   This is Lorem ipsum dolor sit amet consectetur adipisicing
                   elit. Amet dolores eligendi earum eveniet soluta officiis
@@ -403,14 +403,14 @@ const Home = () => {
       </section>
       {/* end of about us */}
       {/* footer */}
-      <footer class="site-footer" id="contact">
-        <div class="top-footer section">
-          <div class="sec-wp">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-4">
-                  <div class="footer-info">
-                    <div class="footer-logo">
+      <footer className="site-footer" id="contact">
+        <div className="top-footer section">
+          <div className="sec-wp">
+            <div className="container">
+              <div className="row">
+                <div className="col-lg-4">
+                  <div className="footer-info">
+                    <div className="footer-logo">
                       <a href="index.html">
                         <img
                           src={navbarLogo}
@@ -423,50 +423,50 @@ const Home = () => {
                       Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                       Mollitia, tenetur.
                     </p>
-                    <div class="social-icon">
+                    <div className="social-icon">
                       <ul>
                         <li>
                           <a src="https://www.facebook.com/">
-                            <i class="uil uil-facebook-f"></i>
+                            <i className="uil uil-facebook-f"></i>
                           </a>
                         </li>
                         <li>
                           <a href="#">
-                            <i class="uil uil-instagram"></i>
+                            <i className="uil uil-instagram"></i>
                           </a>
                         </li>
                         <li>
                           <a href="#">
-                            <i class="uil uil-github-alt"></i>
+                            <i className="uil uil-github-alt"></i>
                           </a>
                         </li>
                         <li>
                           <a href="#">
-                            <i class="uil uil-youtube"></i>
+                            <i className="uil uil-youtube"></i>
                           </a>
                         </li>
                       </ul>
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-8">
-                  <div class="footer-flex-box">
-                    <div class="footer-table-info">
-                      <h3 class="h3-title">open hours</h3>
+                <div className="col-lg-8">
+                  <div className="footer-flex-box">
+                    <div className="footer-table-info">
+                      <h3 className="h3-title">open hours</h3>
                       <ul>
                         <li>
-                          <i class="uil uil-clock"></i> Mon-Thurs : 9am - 22pm
+                          <i className="uil uil-clock"></i> Mon-Thurs : 9am - 22pm
                         </li>
                         <li>
-                          <i class="uil uil-clock"></i> Fri-Sun : 11am - 22pm
+                          <i className="uil uil-clock"></i> Fri-Sun : 11am - 22pm
                         </li>
                       </ul>
                     </div>
-                    <div class="footer-menu food-nav-menu">
-                      <h3 class="h3-title">Links</h3>
-                      <ul class="column-2">
+                    <div className="footer-menu food-nav-menu">
+                      <h3 className="h3-title">Links</h3>
+                      <ul className="column-2">
                         <li>
-                          <a href="#home" class="footer-active-menu">
+                          <a href="#home" className="footer-active-menu">
                             Home
                           </a>
                         </li>
@@ -487,8 +487,8 @@ const Home = () => {
                         </li>
                       </ul>
                     </div>
-                    <div class="footer-menu">
-                      <h3 class="h3-title">Company</h3>
+                    <div className="footer-menu">
+                      <h3 className="h3-title">Company</h3>
                       <ul>
                         <li>
                           <a href="#">Terms & Conditions</a>
@@ -507,20 +507,20 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div class="bottom-footer">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-12 text-center">
-                <div class="copyright-text">
+        <div className="bottom-footer">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-12 text-center">
+                <div className="copyright-text">
                   <p>
-                    Copyright &copy; 2021 <span class="name">TechieCoder.</span>
+                    Copyright &copy; 2021 <span className="name">TechieCoder.</span>
                     All Rights Reserved.
                   </p>
                 </div>
               </div>
             </div>
-            <button class="scrolltop">
-              <i class="uil uil-angle-up"></i>
+            <button className="scrolltop">
+              <i className="uil uil-angle-up"></i>
             </button>
           </div>
         </div>
