@@ -13,7 +13,7 @@ const LoginContainer = () => {
   const navigate = useNavigate();
 
   const loginState = useSelector(state => state.loginUserReducer)
-  const {loading, error } = loginState;
+  const { loading, error } = loginState;
 
   useEffect(() => {
     if (localStorage.getItem("currentUser")) {
@@ -83,6 +83,38 @@ const LoginContainer = () => {
           </form>
         </div>
       </div> */}
+      <div class="container p-5">
+        <form class="form-signup">
+          <h2>Register</h2>
+          <p>Create your account it's free only take a minute.</p>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                <input type="text" class="form-control" name="firstname" placeholder="First Name"/>
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="form-control" name="lastname" placeholder="Last Name"/>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" class="form-control" placeholder="Email Address"/>
+          </div>
+          <div class="form-group">
+            <input type="password" name="password" class="form-control" placeholder="Password"/>
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password"/>
+          </div>
+          <div class="form-group">
+            <label>
+              <input type="checkbox" name=""/>
+                I accept the <a href="a"> Terms of Use</a> & <a href="">Privacy Policy</a>
+            </label>
+          </div>
+          <input type="submit" class="btn btn-dark btn-block" name="" value="Submit"/>
+        </form>
+      </div>
     </div>
   );
 };
