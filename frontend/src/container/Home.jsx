@@ -455,10 +455,10 @@ const Home = () => {
                       <h3 className="h3-title">open hours</h3>
                       <ul>
                         <li>
-                          <i className="uil uil-clock"></i> Mon-Thurs : 9am - 22pm
+                          <i className="uil uil-clock"></i> Mon-Thurs : 8am - 19pm
                         </li>
                         <li>
-                          <i className="uil uil-clock"></i> Fri-Sun : 11am - 22pm
+                          <i className="uil uil-clock"></i> Fri-Sun : 9am - 18pm
                         </li>
                       </ul>
                     </div>
@@ -513,7 +513,7 @@ const Home = () => {
               <div className="col-lg-12 text-center">
                 <div className="copyright-text">
                   <p>
-                    Copyright &copy; 2021 <span className="name">TechieCoder.</span>
+                    Copyright &copy; 2021 <span className="name">Kelompok 7.</span>
                     All Rights Reserved.
                   </p>
                 </div>

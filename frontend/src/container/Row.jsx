@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 // import { getAllFoods } from "../actions/foodActions";
 import { getAllStands } from "../actions/standActions";
 import { addToCart } from "../actions/cartActions";
+import Error from "../components/Error";
 
 const Row = ({ flag }) => {
   const dispatch = useDispatch();
@@ -13,9 +14,14 @@ const Row = ({ flag }) => {
   const standState = useSelector((state) => state.getAllStandsReducer);
   const cartState = useSelector((state) => state.cartReducer);
 
+  const [errorState, setErrorState] = useState(false);
+
+  const userState = useSelector((state) => state.loginUserReducer);
+  const { currentUser } = userState;
+
   const { stands, error, loading } = standState;
-  const { cartItems } = cartState;
-  const [quantity, setQuantity] = useState(1);
+  // const { cartItems } = cartState;
+  // const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     dispatch(getAllStands());
@@ -90,8 +96,9 @@ const Row = ({ flag }) => {
       <section className="body-swiper">
         <div className="slide-container swiper">
           <div className="recom">
-            <p className="recom">rekomendasi</p>
+            <p className="recom mx-2">Rekomendasi Menu</p>
           </div>
+          {errorState && <Error text={"Silakan Login terlebih dahulu"} />}
           <div className="slide-content">
             <div className="card-wrapper swiper-wrapper">
               {loading ? (
@@ -108,7 +115,11 @@ const Row = ({ flag }) => {
                             <div className="image-content">
                               <span className="overlay"></span>
                               <div className="card-image position-relative">
-                                <img src={menu.image} className="card-img" />
+                                <img
+                                  src={menu.image}
+                                  className="card-img"
+                                  alt="menu"
+                                />
                                 <div
                                   className="position-absolute"
                                   style={{ bottom: 0, right: 0 }}
@@ -116,7 +127,11 @@ const Row = ({ flag }) => {
                                   <button
                                     className="border-0 m-0 p-1 rounded-4 bg-light"
                                     style={{ backgroundColor: "transparent" }}
-                                    onClick={() => {alert('anjing')}}
+                                    onClick={
+                                      !currentUser
+                                        ? () => setErrorState(!errorState)
+                                        : () => dispatch(addToCart(menu, 1))
+                                    }
                                   >
                                     <MdAddShoppingCart size={30} />
                                   </button>

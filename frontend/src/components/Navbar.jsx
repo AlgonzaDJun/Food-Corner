@@ -12,13 +12,13 @@ const Navbar = () => {
   const [openProfilMenu, setOpenProfilMenu] = useState(false);
 
   const dispatch = useDispatch();
-  const userState = useSelector((state) => state.loginUserReducer);
   const cartState = useSelector((state) => state.cartReducer);
   const { cartItems } = cartState;
-
+  
+  const userState = useSelector((state) => state.loginUserReducer);
   const { currentUser } = userState;
 
-  console.log(currentUser);
+  // console.log(currentUser);
 
   return (
     <div>
@@ -37,7 +37,7 @@ const Navbar = () => {
                 <Link className="nav-link ml-auto" to={"/cart"}>
                   <i className="uil uil-shopping-bag"></i>
                   <span className="position-absolute top-0 start-100 translate-middle badge bg-primary">
-                    8
+                    {cartItems.length}
                   </span>
                 </Link>
               </li>

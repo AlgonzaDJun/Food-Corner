@@ -7,237 +7,173 @@ import "./css/Cart.css";
 const Cart = () => {
   const cartState = useSelector((state) => state.cartReducer);
   const { cartItems } = cartState;
-  let subTotal = cartItems.reduce((x, item) => x + item.prices, 0);
+  const userState = useSelector((state) => state.loginUserReducer);
+  const { currentUser } = userState;
 
+  let subTotal = cartItems.reduce((x, item) => x + item.prices, 0);
+  subTotal = subTotal.toString();
+
+  const formatRupiah = (money) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0,
+    }).format(money);
+  };
   const dispatch = useDispatch();
 
   // console.log(cartItems);
 
   return (
     <div className="w-100">
-      <div style={{ marginTop: 100 }}>
-        <section class="h-100 h-custom" style={{ backgroundColor: "#d2c9ff" }}>
-          <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-              <div class="col-12">
+      <div style={{ marginTop: 90 }}>
+        <section
+          className="h-100 h-auto"
+          style={{ backgroundColor: "#d2c9ff" }}
+        >
+          <div className="container py-5 h-100">
+            <div className="row d-flex justify-content-center align-items-center h-100">
+              <div className="col-12">
                 <div
-                  class="card card-registration card-registration-2"
+                  className="card card-registration card-registration-2"
                   style={{ borderRadius: "15px" }}
                 >
-                  <div class="card-body p-0">
-                    <div class="row g-0">
-                      <div class="col-lg-8">
-                        <div class="p-5">
-                          <div class="d-flex justify-content-between align-items-center mb-5">
-                            <h1 class="fw-bold mb-0 text-black">
+                  <div className="card-body p-0">
+                    <div className="row g-0">
+                      <div className="col-lg-8">
+                        <div className="p-5">
+                          <div className="d-flex justify-content-between align-items-center mb-5">
+                            <h1 className="fw-bold mb-0 text-black">
                               Shopping Cart
                             </h1>
-                            <h6 class="mb-0 text-muted">3 items</h6>
+                            <h6 className="mb-0 text-muted">
+                              {cartItems.length} items
+                            </h6>
                           </div>
-                          <hr class="my-4" />
+                          <hr className="my-3" />
+                          {!currentUser ? (
+                            <h1>Silakan Login terlebih dahulu</h1>
+                          ) : (
+                            <>
+                              {cartItems.map((item) => {
+                                return (
+                                  <div key={item._id}>
+                                    <div
+                                      className="row mb-4 d-flex justify-content-between align-items-center"
+                                      key={item._id}
+                                    >
+                                      <div className="col-md-2 col-lg-2 col-xl-2">
+                                        <img
+                                          src={item.image}
+                                          className="img-fluid rounded-3"
+                                          alt="Cotton T-shirt"
+                                        />
+                                      </div>
+                                      <div className="col-md-3 col-lg-3 col-xl-3">
+                                        <h6 className="text-muted">
+                                          {item.standName}
+                                        </h6>
+                                        <h6 className="text-black mb-0">
+                                          {item.name}
+                                        </h6>
+                                      </div>
+                                      <div className="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                        <button
+                                          className="btn btn-link px-2"
+                                          onClick={
+                                            item.quantity < 1
+                                              ? () =>
+                                                  dispatch(deleteFromcart(item))
+                                              : () =>
+                                                  dispatch(addToCart(item, -1))
+                                          }
+                                        >
+                                          <i className="fas fa-minus"></i>
+                                        </button>
 
-                          <div class="row mb-4 d-flex justify-content-between align-items-center">
-                            <div class="col-md-2 col-lg-2 col-xl-2">
-                              <img
-                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img5.webp"
-                                class="img-fluid rounded-3"
-                                alt="Cotton T-shirt"
-                              />
-                            </div>
-                            <div class="col-md-3 col-lg-3 col-xl-3">
-                              <h6 class="text-muted">Shirt</h6>
-                              <h6 class="text-black mb-0">Cotton T-shirt</h6>
-                            </div>
-                            <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                              <button
-                                class="btn btn-link px-2"
-                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                              >
-                                <i class="fas fa-minus"></i>
-                              </button>
+                                        <input
+                                          min="0"
+                                          name="quantity"
+                                          value={item.quantity}
+                                          type="number"
+                                          className="form-control form-control-sm mx-2"
+                                          style={{ width: "50px" }}
+                                          readOnly
+                                        />
 
-                              <input
-                                id="form1"
-                                min="0"
-                                name="quantity"
-                                value="1"
-                                type="number"
-                                class="form-control form-control-sm"
-                              />
+                                        <button
+                                          className="btn btn-link px-2"
+                                          onClick={() =>
+                                            dispatch(addToCart(item, 1))
+                                          }
+                                        >
+                                          <i className="fas fa-plus"></i>
+                                        </button>
+                                      </div>
+                                      <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                        <h6 className="mb-0">
+                                          {formatRupiah(item.price)}
+                                        </h6>
+                                      </div>
+                                      <div className="col-md-1 col-lg-1 col-xl-1 text-end">
+                                        <button
+                                          className="btn border-0"
+                                          onClick={() =>
+                                            dispatch(deleteFromcart(item))
+                                          }
+                                        >
+                                          <i className="fas fa-times"></i>
+                                        </button>
+                                      </div>
+                                    </div>
 
-                              <button
-                                class="btn btn-link px-2"
-                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                              >
-                                <i class="fas fa-plus"></i>
-                              </button>
-                            </div>
-                            <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                              <h6 class="mb-0">€ 44.00</h6>
-                            </div>
-                            <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                              <a href="#!" class="text-muted">
-                                <i class="fas fa-times"></i>
-                              </a>
-                            </div>
-                          </div>
+                                    <hr className="my-3" />
+                                  </div>
+                                );
+                              })}
+                            </>
+                          )}
 
-                          <hr class="my-4" />
-
-                          <div class="row mb-4 d-flex justify-content-between align-items-center">
-                            <div class="col-md-2 col-lg-2 col-xl-2">
-                              <img
-                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img6.webp"
-                                class="img-fluid rounded-3"
-                                alt="Cotton T-shirt"
-                              />
-                            </div>
-                            <div class="col-md-3 col-lg-3 col-xl-3">
-                              <h6 class="text-muted">Shirt</h6>
-                              <h6 class="text-black mb-0">Cotton T-shirt</h6>
-                            </div>
-                            <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                              <button
-                                class="btn btn-link px-2"
-                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                              >
-                                <i class="fas fa-minus"></i>
-                              </button>
-
-                              <input
-                                id="form1"
-                                min="0"
-                                name="quantity"
-                                value="1"
-                                type="number"
-                                class="form-control form-control-sm"
-                              />
-
-                              <button
-                                class="btn btn-link px-2"
-                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                              >
-                                <i class="fas fa-plus"></i>
-                              </button>
-                            </div>
-                            <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                              <h6 class="mb-0">€ 44.00</h6>
-                            </div>
-                            <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                              <a href="#!" class="text-muted">
-                                <i class="fas fa-times"></i>
-                              </a>
-                            </div>
-                          </div>
-
-                          <hr class="my-4" />
-
-                          <div class="row mb-4 d-flex justify-content-between align-items-center">
-                            <div class="col-md-2 col-lg-2 col-xl-2">
-                              <img
-                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img7.webp"
-                                class="img-fluid rounded-3"
-                                alt="Cotton T-shirt"
-                              />
-                            </div>
-                            <div class="col-md-3 col-lg-3 col-xl-3">
-                              <h6 class="text-muted">Shirt</h6>
-                              <h6 class="text-black mb-0">Cotton T-shirt</h6>
-                            </div>
-                            <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                              <button
-                                class="btn btn-link px-2"
-                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                              >
-                                <i class="fas fa-minus"></i>
-                              </button>
-
-                              <input
-                                id="form1"
-                                min="0"
-                                name="quantity"
-                                value="1"
-                                type="number"
-                                class="form-control form-control-sm"
-                              />
-
-                              <button
-                                class="btn btn-link px-2"
-                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                              >
-                                <i class="fas fa-plus"></i>
-                              </button>
-                            </div>
-                            <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                              <h6 class="mb-0">€ 44.00</h6>
-                            </div>
-                            <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                              <a href="#!" class="text-muted">
-                                <i class="fas fa-times"></i>
-                              </a>
-                            </div>
-                          </div>
-
-                          <hr class="my-4" />
-
-                          <div class="pt-5">
-                            <h6 class="mb-0">
-                              <a href="#!" class="text-body">
-                                <i class="fas fa-long-arrow-alt-left me-2"></i>
+                          <div className="pt-5">
+                            <h6 className="mb-0">
+                              <Link to={"/"} className="text-body">
+                                <i className="fas fa-long-arrow-alt-left me-2"></i>
                                 Back to shop
-                              </a>
+                              </Link>
                             </h6>
                           </div>
                         </div>
                       </div>
-                      <div class="col-lg-4 bg-grey">
-                        <div class="p-5">
-                          <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
-                          <hr class="my-4" />
-
-                          <div class="d-flex justify-content-between mb-4">
-                            <h5 class="text-uppercase">items 3</h5>
-                            <h5>€ 132.00</h5>
+                      <div className="col-lg-4 bg-grey">
+                        <div className="p-5">
+                          <div className="d-flex justify-content-between mb-4">
+                            <h5 className="text-uppercase">
+                              items {cartItems.length}
+                            </h5>
                           </div>
 
-                          <h5 class="text-uppercase mb-3">Shipping</h5>
-
-                          <div class="mb-4 pb-2">
-                            <select class="select">
-                              <option value="1">
-                                Standard-Delivery- €5.00
-                              </option>
-                              <option value="2">Two</option>
-                              <option value="3">Three</option>
-                              <option value="4">Four</option>
+                          <div className="mb-4 pb-2">
+                            <select className="select">
+                              <option value="1">Dine in</option>
+                              <option value="2">Takeaway</option>
                             </select>
                           </div>
 
-                          <h5 class="text-uppercase mb-3">Give code</h5>
+                          <hr className="my-4" />
 
-                          <div class="mb-5">
-                            <div class="form-outline">
-                              <input
-                                type="text"
-                                id="form3Examplea2"
-                                class="form-control form-control-lg"
-                              />
-                              <label class="form-label" for="form3Examplea2">
-                                Enter your code
-                              </label>
-                            </div>
-                          </div>
+                          <div className="d-flex justify-content-between mb-5">
+                            <h5 className="text-uppercase">Total price</h5>
 
-                          <hr class="my-4" />
-
-                          <div class="d-flex justify-content-between mb-5">
-                            <h5 class="text-uppercase">Total price</h5>
-                            <h5>€ 137.00</h5>
+                            {!currentUser ? (
+                              <h5>0</h5>
+                            ) : (
+                              <h5>{formatRupiah(subTotal)}</h5>
+                            )}
                           </div>
 
                           <button
                             type="button"
-                            class="btn btn-dark btn-block btn-lg w-100"
+                            className="btn btn-dark btn-block btn-lg w-100"
                             data-mdb-ripple-color="dark"
                           >
                             Bayar
