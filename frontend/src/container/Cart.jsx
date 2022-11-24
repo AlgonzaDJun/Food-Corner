@@ -47,7 +47,7 @@ const Cart = () => {
                               Shopping Cart
                             </h1>
                             <h6 className="mb-0 text-muted">
-                              {cartItems.length} items
+                              {currentUser && cartItems.length} items
                             </h6>
                           </div>
                           <hr className="my-3" />
@@ -148,7 +148,7 @@ const Cart = () => {
                         <div className="p-5">
                           <div className="d-flex justify-content-between mb-4">
                             <h5 className="text-uppercase">
-                              items {cartItems.length}
+                              items {currentUser && cartItems.length}
                             </h5>
                           </div>
 

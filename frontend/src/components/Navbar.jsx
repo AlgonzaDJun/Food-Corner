@@ -37,7 +37,7 @@ const Navbar = () => {
                 <Link className="nav-link ml-auto" to={"/cart"}>
                   <i className="uil uil-shopping-bag"></i>
                   <span className="position-absolute top-0 start-100 translate-middle badge bg-primary">
-                    {cartItems.length}
+                    {currentUser && cartItems.length}
                   </span>
                 </Link>
               </li>
