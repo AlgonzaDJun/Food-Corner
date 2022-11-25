@@ -1,15 +1,15 @@
-export const registerUserReducer = (state = {}, action) => {
+export const placeOrderReducer = (state = {}, action) => {
     switch (action.type) {
-      case "USER_REGISTER_REQUEST":
+      case "PLACE_ORDER_REQUEST":
         return {
           loading: true,
         };
-      case "USER_REGISTER_SUCCESS":
+      case "PLACE_ORDER_SUCCESS":
         return {
           loading: false,
           success: true,
         };
-      case "USER_REGISTER_FAILED":
+      case "PLACE_ORDER_FAILED":
         return {
           loading: false,
           error: action.payload,

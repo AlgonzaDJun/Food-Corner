@@ -115,7 +115,8 @@ const Row = ({ flag }) => {
                             <div className="image-content">
                               <span className="overlay"></span>
                               <div className="card-image position-relative">
-                                <img
+                                <motion.img
+                                  whileHover={{ scale: 1.2 }}
                                   src={menu.image}
                                   className="card-img"
                                   alt="menu"
