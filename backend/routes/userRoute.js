@@ -31,28 +31,28 @@ router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.find({ email });
+    const user = await User.find({ email, password });
 
     if (user.length > 0) {
-      const isMatched = await User.comparePassword(password);
-      if (!isMatched) {
-        return res.status(400).json({ message: "user Loged in failed" });
-      } else {
-        const currentUser = {
-          name: user[0].name,
-          email: user[0].email,
-          role: user[0].role,
-          _id: user[0]._id,
-        };
-        res.send(currentUser);
-      }
-      // const currentUser = {
-      //   name: user[0].name,
-      //   email: user[0].email,
-      //   role: user[0].role,
-      //   _id: user[0]._id,
-      // };
-      // res.send(currentUser);
+      // const isMatched = await User.comparePassword(password);
+      // if (!isMatched) {
+      //   return res.status(400).json({ message: "user Loged in failed" });
+      // } else {
+      //   const currentUser = {
+      //     name: user[0].name,
+      //     email: user[0].email,
+      //     role: user[0].role,
+      //     _id: user[0]._id,
+      //   };
+      //   res.send(currentUser);
+      // }
+      const currentUser = {
+        name: user[0].name,
+        email: user[0].email,
+        role: user[0].role,
+        _id: user[0]._id,
+      };
+      res.send(currentUser);
     } else {
       return res.status(400).json({ message: "user Loged in failed" });
     }
