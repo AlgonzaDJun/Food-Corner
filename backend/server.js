@@ -2,19 +2,21 @@ const express = require("express");
 const app = express();
 const db = require("./db");
 // const Food = require("./models/foodModel");
-const cors = require('cors')
-require('dotenv').config()
+const cors = require("cors");
+const bodyParser = require("body-parser");
+require("dotenv").config();
 
-app.use(express.json());
-app.use(cors())
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 const foodsRoute = require("./routes/foodsRoute");
 const userRoute = require("./routes/userRoute");
-const standsRoute = require('./routes/standsRoute')
+const standsRoute = require("./routes/standsRoute");
 
 app.use("/api/foods/", foodsRoute);
 app.use("/api/users/", userRoute);
-app.use('/api/stands/', standsRoute);
+app.use("/api/stands/", standsRoute);
 
 app.get("/", (req, res) => {
   res.send("Server Working... ");
