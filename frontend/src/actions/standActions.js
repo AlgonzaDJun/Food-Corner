@@ -6,7 +6,7 @@ export const getAllStands = () => async (dispatch) => {
   });
 
   try {
-    const response = await axios.get("/api/stands/getallstands");
+    const response = await axios.get("http://localhost:5000/api/stands/getallstands");
     // console.log(response);
     dispatch({
       type: "GET_STAND_SUCCESS",

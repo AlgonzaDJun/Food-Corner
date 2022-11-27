@@ -42,7 +42,7 @@ const RegisterContainer = () => {
   const register = (e) => {
     e.preventDefault();
     SetSamePassword(false);
-    if (state.password != state.confirmPassword) {
+    if (state.password !== state.confirmPassword) {
       SetSamePassword(true);
     } else {
       const user = {
@@ -56,71 +56,6 @@ const RegisterContainer = () => {
   };
   return (
     <div className="w-100">
-      {/* <div class="bg-grey-lighter min-h-screen flex flex-col">
-        <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
-          <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-            {loading && <Loading />}
-            {success && <Success text={"Berhasil Registrasi"} />}
-            {error && <Error text={error.response.data.error} />}
-            {samePassword && <Error text={"password tidak sama"} />}
-            <h1 class="mb-8 text-3xl text-center">Sign up</h1>
-            <input
-              type="text"
-              class="block border border-grey-light w-full p-3 rounded mb-4"
-              name="name"
-              placeholder="Full Name"
-              value={state.name}
-              onChange={handleChange}
-              required
-            />
-
-            <input
-              type="email"
-              class="block border border-grey-light w-full p-3 rounded mb-4"
-              name="email"
-              placeholder="Email"
-              value={state.email}
-              onChange={handleChange}
-              required
-            />
-
-            <input
-              type="password"
-              class="block border border-grey-light w-full p-3 rounded mb-4"
-              name="password"
-              placeholder="Password"
-              value={state.password}
-              onChange={handleChange}
-            />
-            <input
-              type="password"
-              class="block border border-grey-light w-full p-3 rounded mb-4"
-              name="confirmPassword"
-              placeholder="Confirm Password"
-              value={state.confirmPassword}
-              onChange={handleChange}
-            />
-
-            <button
-              type="submit"
-              onClick={register}
-              class="w-full text-center py-3 rounded bg-green text-white bg-slate-900 hover:bg-green-900 focus:outline-none my-1"
-            >
-              Create Account
-            </button>
-            <div class="text-grey-dark mt-6">
-              Already have an account?
-              <Link
-                class="no-underline border-b border-blue text-blue ml-4"
-                to={"/login"}
-              >
-                Log in
-              </Link>
-              .
-            </div>
-          </div>
-        </div>
-      </div> */}
       <div
         class="login w-100"
         style={{ backgroundImage: `url(${bg})`, paddingTop: "100px" }}

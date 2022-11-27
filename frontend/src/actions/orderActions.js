@@ -10,7 +10,7 @@ export const placeOrder = (token, totalPrice) => async (dispatch, getState) => {
   const cartItems = getState().cartReducer.cartItems;
 
   try {
-    const response = await axios.post("/api/orders/placeorders", {
+    const response = await axios.post("http://localhost:5000/api/orders/placeorders", {
       token,
       totalPrice,
       currentUser,

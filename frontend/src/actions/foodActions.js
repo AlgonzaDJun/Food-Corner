@@ -6,7 +6,7 @@ export const getAllFoods = () => async (dispatch) => {
   });
 
   try {
-    const response = await axios.get("/api/foods/getallfoods");
+    const response = await axios.get("http://localhost:5000/api/foods/getallfoods");
     console.log(response);
     dispatch({
       type: "GET_FOODS_SUCCESS",

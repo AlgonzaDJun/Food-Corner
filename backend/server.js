@@ -1,14 +1,15 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const db = require("./db");
 // const Food = require("./models/foodModel");
-const cors = require("cors");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 
-app.use(cors());
+// middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
 
 const foodsRoute = require("./routes/foodsRoute");
 const userRoute = require("./routes/userRoute");

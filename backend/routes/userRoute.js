@@ -1,4 +1,5 @@
 const express = require("express");
+const bcrypt = require("bcryptjs");
 const router = express.Router();
 const User = require("../models/userModel");
 
@@ -31,53 +32,29 @@ router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.find({ email, password });
-
-    if (user.length > 0) {
-      // const isMatched = await User.comparePassword(password);
-      // if (!isMatched) {
-      //   return res.status(400).json({ message: "user Loged in failed" });
-      // } else {
-      //   const currentUser = {
-      //     name: user[0].name,
-      //     email: user[0].email,
-      //     role: user[0].role,
-      //     _id: user[0]._id,
-      //   };
-      //   res.send(currentUser);
-      // }
-      const currentUser = {
-        name: user[0].name,
-        email: user[0].email,
-        role: user[0].role,
-        _id: user[0]._id,
-      };
-      res.send(currentUser);
-    } else {
-      return res.status(400).json({ message: "user Loged in failed" });
-    }
+    const user = await User.findOne({ email });
 
     // jika tidak ada user atau password yang sama
-    // if (!user) {
-    //   return res.status(400).json({ message: "user Loged in failed" });
-    // }
+    if (!user) {
+      return res.status(400).json({ message: "Maaf user tidak ada" });
+    }
 
     // decrypted password dengan bcrypt
-    // const isMatched = await user.comparePassword(password);
-    // if (!isMatched) {
-    //   return res.status(400).json({ message: "user Loged in failed" });
-    // }
+    const isMatched = await bcrypt.compare(password, user.password);
+    if (!isMatched) {
+      return res.status(400).json({ message: "Password tidak sama" });
+    }
 
     // jika ada user
-    // if (user.length > 0) {
-    //   const currentUser = {
-    //     name: user[0].name,
-    //     email: user[0].email,
-    //     role: user[0].role,
-    //     _id: user[0]._id,
-    //   };
-    //   res.send(currentUser);
-    // }
+    if (user) {
+      const currentUser = {
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        _id: user._id,
+      };
+      res.send(currentUser);
+    }
   } catch (error) {
     return res.status(400).json({ message: error });
   }

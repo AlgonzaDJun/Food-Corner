@@ -1,8 +1,7 @@
 import { React } from "react";
 import Navbar from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
-import Home from "./container/Home";
-import { MainContainer } from "./components";
+import { HomeContainer } from "./components";
 import LoginContainer from "./container/LoginContainer";
 import RegisterContainer from "./container/RegisterContainer";
 import Cart from "./container/Cart";
@@ -10,12 +9,10 @@ import Cart from "./container/Cart";
 function App() {
   return (
     <div className="w-100 h-auto d-flex flex-column">
-      {/* w-full h-auto flex flex-col bg-primary */}
       <Navbar />
       <main className="w-100">
-        {/* mt-[60px] md:mt-[60px] px-4 md:px-16 py-4 w-full */}
         <Routes>
-          <Route path="/" element={<MainContainer />} />
+          <Route path="/" element={<HomeContainer />} />
           <Route path="/login" element={<LoginContainer />} />
           <Route path="/register" element={<RegisterContainer />} />
           <Route path="/cart" element={<Cart />} />
