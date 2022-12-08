@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const placeOrder = (token, totalPrice) => async (dispatch, getState) => {
+export const placeOrder = (totalPrice) => async (dispatch, getState) => {
   //   var items = [];
 
   dispatch({
@@ -11,7 +11,6 @@ export const placeOrder = (token, totalPrice) => async (dispatch, getState) => {
 
   try {
     const response = await axios.post("http://localhost:5000/api/orders/placeorders", {
-      token,
       totalPrice,
       currentUser,
       cartItems,

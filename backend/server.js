@@ -14,10 +14,13 @@ app.use(cors());
 const foodsRoute = require("./routes/foodsRoute");
 const userRoute = require("./routes/userRoute");
 const standsRoute = require("./routes/standsRoute");
+const orderRoute = require('./routes/orderRoute')
 
 app.use("/api/foods/", foodsRoute);
 app.use("/api/users/", userRoute);
 app.use("/api/stands/", standsRoute);
+app.use("/api/orders/", orderRoute);
+
 
 app.get("/", (req, res) => {
   res.send("Server Working... ");
