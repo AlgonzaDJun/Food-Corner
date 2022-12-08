@@ -1,4 +1,5 @@
 import React from "react";
+import bgstand from "../assets/images/menu-bg.png";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { addToCart, deleteFromcart } from "../actions/cartActions";
@@ -37,10 +38,10 @@ const Cart = () => {
 
   return (
     <div className="w-100">
-      <div style={{ marginTop: 90 }}>
+      <div>
         <section
-          className="h-100 h-auto"
-          style={{ backgroundColor: "#d2c9ff" }}
+          className=" bg-light repeat-img w-100 vh-100"
+          style={{ backgroundImage: `url(${bgstand})`}}
         >
           <div className="container py-5 h-100">
             <div className="row d-flex justify-content-center align-items-center h-100">

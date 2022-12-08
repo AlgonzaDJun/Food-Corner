@@ -62,7 +62,7 @@ const Home = () => {
         <section className="main-banner" id="home">
           <div className="sec-wp">
             <div className="container">
-              <div className="row" style={{ paddingTop: "10px" }}>
+              <div className="row" style={{ paddingTop: "10px"}}>
                 <div className="col-lg-6">
                   <div className="banner-text">
                     <h1 className="h1-title">
@@ -306,7 +306,7 @@ const Home = () => {
         </section>
         {/* end of stand */}
         {/* about us */}
-        <section className="two-col-sec section">
+        <section className="two-col-sec section" id="aboutUs">
           <div className="container">
             <div className="row align-items-center">
               <div className="col-lg-5">

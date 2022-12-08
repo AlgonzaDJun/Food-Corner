@@ -1,0 +1,25 @@
+.h2-title {
+    font-size: 46px;
+    line-height: 56px;
+    margin-bottom: 15px;
+    text-transform: capitalize;
+    position: relative;
+    font-size: 38px;
+    line-height: 48px;
+}
+
+.h5-title {
+    display: block;
+    border-bottom: 1px solid black;
+}
+.box-struk{
+    border-radius: 30px;
+    background: linear-gradient(145deg, #fff, #ffffff);
+    /* box-shadow: 28px 28px 45px #d4d4d4, -28px -28px 45px #ffffff; */
+    display: flow-root;
+    padding: 20px 30px 40px;
+    margin: 13px 3px 3px;
+    transition: 0.8s cubic-bezier(0.22, 0.78, 0.45, 1.02);
+    border-style: solid;
+    border-color: black;
+}
