@@ -11,7 +11,7 @@ body {
     font-family: 'Poppins', sans-serif;
     --lg-font: 'Playfair', serif;
     text-rendering: optimizeLegibility !important;
-    background: #f3f3f5;
+    background-color: #f3f3f5;
     scroll-behavior: smooth;
     overflow-x: hidden;
 }

@@ -1,10 +1,14 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { addToCart, deleteFromcart } from "../actions/cartActions";
+import { placeOrder } from "../actions/orderActions";
 import "./css/Cart.css";
 
 const Cart = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const cartState = useSelector((state) => state.cartReducer);
   const { cartItems } = cartState;
   const userState = useSelector((state) => state.loginUserReducer);
@@ -20,7 +24,14 @@ const Cart = () => {
       minimumFractionDigits: 0,
     }).format(money);
   };
-  const dispatch = useDispatch();
+
+  const checkoutHandler = (arg) => {
+    if (parseInt(subTotal) > 0) {
+      dispatch(placeOrder(subTotal))
+      navigate('/checkoutdetails')
+    }
+
+  };
 
   // console.log(cartItems);
 
@@ -175,6 +186,7 @@ const Cart = () => {
                             type="button"
                             className="btn btn-dark btn-block btn-lg w-100"
                             data-mdb-ripple-color="dark"
+                            onClick={checkoutHandler}
                           >
                             Bayar
                           </button>
