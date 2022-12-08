@@ -1,16 +1,24 @@
-.h2-title {
-    font-size: 46px;
-    line-height: 56px;
-    margin-bottom: 15px;
+.nama-pesan {
+    font-size: 16px;
+    line-height: 16px;
+    margin-bottom: 8px;
     text-transform: capitalize;
     position: relative;
-    font-size: 38px;
-    line-height: 48px;
 }
-
-.h5-title {
-    display: block;
-    border-bottom: 1px solid black;
+.pesan span{
+    font-size: 46px;
+    line-height: 26px;
+    margin-bottom: 18px;
+    text-transform: capitalize;
+    position: relative;
+    color: black;
+}
+.harga{
+    /* width: '3rem'; */
+    /* background: #000; */
+}
+.horizon {
+    border-bottom: 0.5px dashed grey;
 }
 .box-struk{
     border-radius: 30px;

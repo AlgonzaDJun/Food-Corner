@@ -15,8 +15,8 @@ const Checkout = () => {
         <div className="row">
           <div className="col-lg-12">
             <div className="sec-title text-center mb-5 mt-5">
-              <h2 className="h2-title">
-                <span>Pesanan Anda</span>
+              <h2 className="pesan">
+                <span></span>Daftar Menu Pesanan
               </h2>
               <div className="sec-title-shape mb-4">
                 <img src={stand} alt="" />
@@ -24,33 +24,62 @@ const Checkout = () => {
             </div>
           </div>
         </div>
-        <div class="card mx-auto" style={{ width: '18rem' }}>
+        <div class="card mx-auto" style={{ width: '25rem', }}>
           <div class="card-body">
-            <h5 class="card-title">Nama : Vica Fresinsya</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Tanggal : 12 Juni 2012</h6>
-            <table class="table table-borderless" >
-              <thead className="w-100 ">
+            <h2 class="nama-pesan">Member : Vica Fresinsya</h2>
+            <h6 class="horizon text-muted ">Tgl : 12-06-12</h6>
+            <table class="table table-border" >
+              {/* <thead className="w-100">
                 <tr>
-                  <th>Firstname</th>
-                  <th>Lastname</th>
+                  <th>stand</th>
+                  <th>menu</th>
                   <th>Email</th>
                 </tr>
-              </thead>
-              <tbody className="">
-                <tr className="">
-                  <td>John</td>
-                  <td>Doe</td>
-                  <td className=" text-wrap">john@example.com</td>
+              </thead> */}
+              <tbody>
+                <tr>
+                  <td>
+                    {/* <div className="col-md-3 col-lg-3 col-xl-3"> */}
+                    <h6 className="text-muted " style={{ width: '7rem', }}>
+                      {/* {item.standName} */}Stand pepaya:
+                    </h6>
+                    <h6 className="text-black mb-0">
+                      {/* {item.name} */}geprek
+                    </h6>
+                    {/* </div> */}
+                  </td>
+                  <td>1</td>
+                  {/* <td className="bg-black" style={{ width: '7rem', }}>10,000</td> */}
+                  <td><p className="harga" style={{ width: '3rem', }}>20,000</p></td>
+                  <td>20,000</td>
+
+                  {/* <td><p className="text-text-wrap" style={{width: '5rem',}}>10,000</p></td> */}
                 </tr>
                 <tr>
-                  <td>Mary</td>
-                  <td>Moe</td>
-                  <td>mary@example.com</td>
+                  <td>
+                    <h6 className="text-muted " style={{ width: '7rem', }}>
+                      {/* {item.standName} */}Stand pepaya:
+                    </h6>
+                    <h6 className="text-black mb-0">
+                      {/* {item.name} */}geprek
+                    </h6>
+                  </td>
+                  <td>3</td>
+                  <td>10,000</td>
+                  <td><p className="harga" style={{ width: '3rem', }}>30,000</p></td>
                 </tr>
                 <tr>
-                  <td>July</td>
-                  <td>Dooley</td>
-                  <td>july@example.com</td>
+                  <td>
+                    <h6 className="text-muted " style={{ width: '7rem', }}>
+                      {/* {item.standName} */}Stand pepaya:
+                    </h6>
+                    <h6 className="text-black mb-0">
+                      {/* {item.name} */}geprek
+                    </h6>
+                  </td>
+                  <td>1</td>
+                  <td><p className="harga" style={{ width: '3rem', }}>20,000</p></td>
+                  <td>20,000</td>
                 </tr>
               </tbody>
             </table>
