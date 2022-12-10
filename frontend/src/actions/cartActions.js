@@ -1,8 +1,11 @@
-export const addToCart = (menu, quantity) => (dispatch, getState) => {
+import axios from "axios";
+
+export const addToCart = (menu, quantity, currentUser) => async (dispatch, getState) => {
   const cartItems = getState().cartReducer.cartItems;
   //   var items = [];
-
+  
   var cartItem = {
+    currentUserId : currentUser._id,
     name: menu.name,
     standID: menu.standID,
     standName: menu.standName,
@@ -10,8 +13,16 @@ export const addToCart = (menu, quantity) => (dispatch, getState) => {
     image: menu.image,
     quantity: quantity,
     price: menu.price,
-    prices: menu.price * quantity,
+    prices: menu.price * quantity
   };
+
+  try {
+    const response = await axios.patch("http://localhost:5000/api/users/addcart", cartItem)
+    console.log(response);
+    dispatch({ type: "ADD_TO_CART_SUCCESS" });
+  } catch (error) {
+    dispatch({ type: "ADD_TO_CART_FAILED", payload: error });
+  }
 
   dispatch({ type: "ADD_TO_CART", payload: cartItem });
   localStorage.setItem("cartItems", JSON.stringify(cartItems));

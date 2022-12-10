@@ -6,6 +6,7 @@ const userSchema = mongoose.Schema(
     name: { type: String, require },
     email: { type: String, require },
     password: { type: String, require },
+    cart: { type: Array },
     role: { type: String, require, default: "user" },
   },
   {
@@ -22,8 +23,8 @@ userSchema.pre("save", async function (next) {
 });
 
 // verify password
-userSchema.methods.comparePassword = async function(userPassword){
-  return await bcrypt.compare(userPassword, this.password)
-}
+userSchema.methods.comparePassword = async function (userPassword) {
+  return await bcrypt.compare(userPassword, this.password);
+};
 
 module.exports = mongoose.model("users", userSchema);

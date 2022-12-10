@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const placeOrder = (totalPrice) => async (dispatch, getState) => {
+export const placeOrder = () => async (dispatch, getState) => {
   //   var items = [];
 
   dispatch({
@@ -9,18 +9,23 @@ export const placeOrder = (totalPrice) => async (dispatch, getState) => {
   const currentUser = getState().loginUserReducer.currentUser;
   const cartItems = getState().cartReducer.cartItems;
 
+  let reducePrice = cartItems.reduce((x, item) => x + item.prices, 0)
+  let totalPrice = reducePrice.toFixed(2)
+
   try {
-    const response = await axios.post("http://localhost:5000/api/orders/placeorders", {
-      totalPrice,
-      currentUser,
-      cartItems,
-    });
+    const response = await axios.post(
+      "http://localhost:5000/api/orders/placeorders",
+      {
+        totalPrice,
+        currentUser,
+        cartItems,
+      }
+    );
     // console.log(response);
     dispatch({
-      type: "PLACE_ORDER_SUCCESS",
-      //   payload: response.data,
+      type: "PLACE_ORDER_SUCCESS"
     });
-    console.log(response);
+    localStorage.removeItem('cartItems')
   } catch (error) {
     dispatch({
       type: "PLACE_ORDER_FAILED",
