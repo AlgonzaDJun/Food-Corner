@@ -11,11 +11,15 @@
     margin-bottom: 18px;
     text-transform: capitalize;
     position: relative;
-    color: black;
 }
+.porsi{
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
 .harga{
-    /* width: '3rem'; */
-    /* background: #000; */
+    margin-top: 2px;
+    margin-bottom: 2px;
 }
 .horizon {
     border-bottom: 0.5px dashed grey;
