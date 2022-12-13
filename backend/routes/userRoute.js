@@ -78,10 +78,10 @@ router.get("/getuser", isAuth, async (req, res) => {
 });
 
 // tambah ke keranjang
-router.post("/addcart", async (req, res) => {
+router.post("/addcart", isAuth, async (req, res) => {
   const cartItem = req.body;
   try {
-    const user = await User.findById(cartItem.currentUserId);
+    const user = await User.findById(req.user._id);
     if (!user) return res.status(400).json({ message: "User does not exist." });
 
     const newCart = {
@@ -98,12 +98,13 @@ router.post("/addcart", async (req, res) => {
     if (checkCart) {
       user.cart = user.cart.map((item) => {
         if (item._id === cartItem._id) {
-          item.quantity = parseInt(item.quantity) + 1;
+          item.quantity = item.quantity + 1;
+          item.prices = item.quantity * item.price;
         }
         return item;
       });
       await User.findByIdAndUpdate(
-        { _id: cartItem.currentUserId },
+        { _id: req.user._id },
         {
           cart: user.cart,
         }
@@ -114,16 +115,31 @@ router.post("/addcart", async (req, res) => {
       await user.save();
       res.status(200).json({ message: "Cart Added" });
     }
-  } catch (err) {
-    return res.status(500).json({ message: "terjadi error" + err.message });
+  } catch (error) {
+    return res.status(500).json({ message: "terjadi error" + error.message });
   }
 });
 
-// tambah dan kurang keranjang
-router.post("/incrementcart", async (req, res) => {
+// mengambil data cart
+router.get("/getcart", isAuth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user) return res.status(400).json({ message: "User not found" });
+    const products = await user.cart.map((item) => item);
+    // const products = await Food.find({
+    //   _id: { $in: user.cart.map((item) => item._id) },
+    // });
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// tambah dan kurang kuantitas keranjang
+router.post("/incrementcart", isAuth, async (req, res) => {
   const cartItem = req.body;
   try {
-    const user = await User.findById(cartItem.currentUserId);
+    const user = await User.findById(req.user._id);
     if (!user) return res.status(400).json({ message: "User does not exist." });
     // const food = await Food.findById(cartItem._id);
     const checkCart = user.cart.find((item) => item._id === cartItem._id);
@@ -132,13 +148,14 @@ router.post("/incrementcart", async (req, res) => {
     } else {
       user.cart = user.cart.map((item) => {
         if (item._id === cartItem._id) {
-          item.quantity = parseInt(item.quantity) + cartItem.quantity;
+          item.quantity = item.quantity + cartItem.quantity;
+          item.prices = item.quantity * item.price;
         }
         return item;
       });
     }
     await User.findByIdAndUpdate(
-      { _id: cartItem.currentUserId },
+      { _id: req.user._id },
       {
         cart: user.cart,
       }
@@ -149,11 +166,33 @@ router.post("/incrementcart", async (req, res) => {
   }
 });
 
+// menghapus item dari cart
+router.delete("/removecart", isAuth, async (req, res) => {
+  const cartItem = req.body;
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    const checkCart = user.cart.find((item) => item._id === cartItem._id);
+    if (!checkCart) {
+        return res.status(400).json({ message: "Product not in cart" });
+    } else {
+        user.cart = user.cart.filter((item) => item._id !== cartItem._id);
+        await user.save();
+        res.status(200).json({ message: "Product removed from cart" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Membuat token JWT
 const generateJWT = (data) => {
   const { _id } = data;
   return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 };
 
+// Menyimpan token JWT ke Cookie dan kedaluwarsa dalam 1 hari
 const generateToken = async (user, statusCode, res) => {
   const token = await generateJWT(user);
 

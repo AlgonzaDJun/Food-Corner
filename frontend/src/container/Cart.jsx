@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import bgstand from "../assets/images/menu-bg.png";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { addToCart, deleteFromcart } from "../actions/cartActions";
+import { deleteFromcart, getCart, incrementCart } from "../actions/cartActions";
 import { placeOrder } from "../actions/orderActions";
 import "./css/Cart.css";
 
@@ -10,13 +10,16 @@ const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const cartState = useSelector((state) => state.cartReducer);
+  const cartState = useSelector((state) => state.getCartReducer);
   const { cartItems } = cartState;
   const userState = useSelector((state) => state.loginUserReducer);
   const { currentUser } = userState;
 
+  useEffect(() => {
+    dispatch(getCart());
+  }, []);
+
   let subTotal = cartItems.reduce((x, item) => x + item.prices, 0);
-  subTotal = subTotal.toString();
 
   const formatRupiah = (money) => {
     return new Intl.NumberFormat("id-ID", {
@@ -28,10 +31,9 @@ const Cart = () => {
 
   const checkoutHandler = (arg) => {
     if (parseInt(subTotal) > 0) {
-      dispatch(placeOrder(subTotal))
-      navigate('/checkoutdetails')
+      dispatch(placeOrder(subTotal));
+      navigate("/checkoutdetails");
     }
-
   };
 
   // console.log(cartItems);
@@ -40,7 +42,7 @@ const Cart = () => {
     <div className="w-100">
       <section
         className=" bg-light repeat-img w-100 vh-100"
-        style={{ backgroundImage: `url(${bgstand})`, marginTop: '60px' }}
+        style={{ backgroundImage: `url(${bgstand})`, marginTop: "60px" }}
       >
         <div className="container py-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
@@ -49,7 +51,7 @@ const Cart = () => {
                 className="card card-registration card-registration-2"
                 style={{ borderRadius: "15px" }}
               >
-                <div className="card-body p-0" >
+                <div className="card-body p-0">
                   <div className="row g-0">
                     <div className="col-lg-8">
                       <div className="p-5">
@@ -93,10 +95,18 @@ const Cart = () => {
                                         className="btn btn-link px-2"
                                         onClick={
                                           item.quantity < 1
-                                            ? () =>
-                                              dispatch(deleteFromcart(item))
-                                            : () =>
-                                              dispatch(addToCart(item, -1))
+                                            ? async () => {
+                                                await dispatch(
+                                                  deleteFromcart(item)
+                                                );
+                                                dispatch(getCart());
+                                              }
+                                            : async () => {
+                                                await dispatch(
+                                                  incrementCart(item, -1)
+                                                );
+                                                dispatch(getCart());
+                                              }
                                         }
                                       >
                                         <i className="fas fa-minus"></i>
@@ -114,9 +124,12 @@ const Cart = () => {
 
                                       <button
                                         className="btn btn-link px-2"
-                                        onClick={() =>
-                                          dispatch(addToCart(item, 1))
-                                        }
+                                        onClick={async () => {
+                                          await dispatch(
+                                            incrementCart(item, 1)
+                                          );
+                                          dispatch(getCart());
+                                        }}
                                       >
                                         <i className="fas fa-plus"></i>
                                       </button>
@@ -129,9 +142,10 @@ const Cart = () => {
                                     <div className="col-md-1 col-lg-1 col-xl-1 text-end">
                                       <button
                                         className="btn border-0"
-                                        onClick={() =>
-                                          dispatch(deleteFromcart(item))
-                                        }
+                                        onClick={async () => {
+                                          await dispatch(deleteFromcart(item));
+                                          dispatch(getCart());
+                                        }}
                                       >
                                         <i className="fas fa-times"></i>
                                       </button>
