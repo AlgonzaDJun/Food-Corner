@@ -17,7 +17,7 @@ export const addToCart = (menu, quantity, currentUser) => async (dispatch, getSt
   };
 
   try {
-    const response = await axios.patch("http://localhost:5000/api/users/addcart", cartItem)
+    const response = await axios.post("http://localhost:5000/api/users/addcart", cartItem)
     console.log(response);
     dispatch({ type: "ADD_TO_CART_SUCCESS" });
   } catch (error) {

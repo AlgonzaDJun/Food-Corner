@@ -3,6 +3,8 @@ const bcrypt = require("bcryptjs");
 const router = express.Router();
 const User = require("../models/userModel");
 const Food = require("../models/foodModel");
+const jwt = require("jsonwebtoken");
+const { isAuth } = require("../middleware/auth");
 require("dotenv").config();
 
 router.post("/register", async (req, res, next) => {
@@ -48,20 +50,34 @@ router.post("/login", async (req, res) => {
     }
 
     // jika ada user
-    if (user) {
-      const currentUser = {
-        name: user.name,
-        email: user.email,
-        role: user.role,
-        _id: user._id,
-      };
-      res.send(currentUser);
-    }
+    // if (user) {
+    //   const currentUser = {
+    //     name: user.name,
+    //     email: user.email,
+    //     role: user.role,
+    //     _id: user._id,
+    //   };
+    //   res.send(currentUser);
+    // }
+
+    // const token = await generateJWT(user);
+
+    generateToken(user, 200, res);
   } catch (error) {
     return res.status(400).json({ message: error });
   }
 });
 
+// menampilkan data user
+router.get("/getuser", isAuth, async (req, res) => {
+  const user = await User.findById(req.user._id);
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
+
+// tambah ke keranjang
 router.post("/addcart", async (req, res) => {
   const cartItem = req.body;
   try {
@@ -78,15 +94,32 @@ router.post("/addcart", async (req, res) => {
       price: cartItem.price,
       prices: cartItem.prices,
     };
-
-    user.cart.push(newCart);
-    await user.save();
-    res.status(200).json({ message: "Cart Added" });
+    const checkCart = user.cart.find((item) => item._id === cartItem._id);
+    if (checkCart) {
+      user.cart = user.cart.map((item) => {
+        if (item._id === cartItem._id) {
+          item.quantity = parseInt(item.quantity) + 1;
+        }
+        return item;
+      });
+      await User.findByIdAndUpdate(
+        { _id: cartItem.currentUserId },
+        {
+          cart: user.cart,
+        }
+      );
+      res.status(200).json({ message: "Cart Update" });
+    } else {
+      user.cart.push(newCart);
+      await user.save();
+      res.status(200).json({ message: "Cart Added" });
+    }
   } catch (err) {
     return res.status(500).json({ message: "terjadi error" + err.message });
   }
 });
 
+// tambah dan kurang keranjang
 router.post("/incrementcart", async (req, res) => {
   const cartItem = req.body;
   try {
@@ -99,7 +132,7 @@ router.post("/incrementcart", async (req, res) => {
     } else {
       user.cart = user.cart.map((item) => {
         if (item._id === cartItem._id) {
-          item.quantity = parseInt(item.quantity) + 1;
+          item.quantity = parseInt(item.quantity) + cartItem.quantity;
         }
         return item;
       });
@@ -118,28 +151,26 @@ router.post("/incrementcart", async (req, res) => {
 
 const generateJWT = (data) => {
   const { _id } = data;
-  return jwt.sign(
-    { _id },
-    process.env.JWT_SECRET,
-    { expiresIn: "1d" }
-  );
+  return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 };
 
-const generateToken = async (user, statusCode, res) =>{
-
+const generateToken = async (user, statusCode, res) => {
   const token = await generateJWT(user);
 
   const options = {
-      httpOnly: true,
-      expires: new Date(Date.now() + process.env.EXPIRE_TOKEN)
+    httpOnly: true,
+    expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+    // secure: true,
   };
 
-  res
-  .status(statusCode)
-  .cookie('token', token, options )
-  .json({success: true, token})
-}
+  const currentUser = {
+    name: user.name,
+    email: user.email,
+    role: user.role,
+    _id: user._id,
+  };
 
-
+  res.status(statusCode).cookie("token", token, options).json(currentUser);
+};
 
 module.exports = router;

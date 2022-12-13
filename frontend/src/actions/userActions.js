@@ -23,20 +23,26 @@ export const loginUser = (user) => async (dispatch) => {
   try {
     const response = await axios.post(
       "http://localhost:5000/api/users/login",
-      user
+      user,
+      {
+        withCredentials: true,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+      }
     );
     console.log(response);
     dispatch({ type: "USER_LOGIN_SUCCESS", payload: response.data });
     localStorage.setItem("currentUser", JSON.stringify(response.data));
 
-    if(response.data.role === "user") {
-      window.location.href = "/" 
+    if (response.data.role === "user") {
+      window.location.href = "/";
     } else if (response.data.role === "admin") {
-      window.location.href = "/admin" 
+      window.location.href = "/admin";
     } else if (response.data.role === "seller") {
-      window.location.href = "/seller" 
+      window.location.href = "/seller";
     }
-    
   } catch (error) {
     dispatch({ type: "USER_LOGIN_FAILED", payload: error });
   }
