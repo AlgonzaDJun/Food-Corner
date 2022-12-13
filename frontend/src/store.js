@@ -6,7 +6,7 @@ import { composeWithDevTools } from "@redux-devtools/extension";
 import { getAllFoodsReducer } from "./reducers/foodReducers";
 import { loginUserReducer, registerUserReducer } from "./reducers/userReducers";
 import { getAllStandsReducer } from "./reducers/standReducers";
-import { cartReducer } from "./reducers/cartReducer";
+import { cartReducer, getCartReducer } from "./reducers/cartReducer";
 import { placeOrderReducer } from "./reducers/orderReducer";
 
 const finalReducer = combineReducers({
@@ -16,6 +16,7 @@ const finalReducer = combineReducers({
   getAllStandsReducer: getAllStandsReducer,
   cartReducer: cartReducer,
   placeOrderReducer : placeOrderReducer,
+  getCartReducer : getCartReducer,
 });
 
 const cartItems = localStorage.getItem("cartItems")

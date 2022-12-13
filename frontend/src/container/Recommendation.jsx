@@ -5,7 +5,7 @@ import { MdAddShoppingCart } from "react-icons/md";
 import { motion } from "framer-motion";
 // import { getAllFoods } from "../actions/foodActions";
 import { getAllStands } from "../actions/standActions";
-import { addToCart } from "../actions/cartActions";
+import { addToCart, getCart } from "../actions/cartActions";
 import Error from "../components/Error";
 
 const Recommendation = () => {
@@ -34,7 +34,6 @@ const Recommendation = () => {
   // console.log(cartItems)
 
   return (
-
     <div className="h-auto w-100">
       {/* rekommendasi */}
       <section className="body-swiper">
@@ -75,7 +74,10 @@ const Recommendation = () => {
                                     onClick={
                                       !currentUser
                                         ? () => setErrorState(!errorState)
-                                        : () => dispatch(addToCart(menu, 1))
+                                        : async () => {
+                                            await dispatch(addToCart(menu, 1));
+                                            dispatch(getCart());
+                                          }
                                     }
                                   >
                                     <MdAddShoppingCart size={30} />

@@ -12,7 +12,7 @@ const Navbar = () => {
   const [openProfilMenu, setOpenProfilMenu] = useState(false);
 
   const dispatch = useDispatch();
-  const cartState = useSelector((state) => state.cartReducer);
+  const cartState = useSelector((state) => state.getCartReducer);
   const { cartItems } = cartState;
   
   const userState = useSelector((state) => state.loginUserReducer);
