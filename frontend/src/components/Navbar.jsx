@@ -22,13 +22,13 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-transparent py-4 fixed-top">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light  fixed-top">
         <div className="container">
           <Link
             className="navbar-brand d-flex justify-content-between align-items-center order-lg-0"
             to={"/"}
           >
-            <img src={navbarLogo} alt="site icon" />
+            <img src={navbarLogo} alt="site icon" />  
             <h4 className="text-capitalize fw-lighter ms-2">FooD CorneR</h4>
           </Link>
           <div className="order-lg-2 nav-btns">
@@ -156,20 +156,20 @@ const Navbar = () => {
               <li className="nav-item px-2 py-2">
                 <a
                   className="nav-link text-capitalize text-dark"
-                  href="collection"
+                  href="#menu"
                 >
                   collection
                 </a>
               </li>
-              <li className="nav-item px-2 py-2">
-                <a className="nav-link text-capitalize text-dark" href="blogs">
+              {/* <li className="nav-item px-2 py-2">
+                <a className="nav-link text-capitalize text-dark" href="#aboutUs">
                   blogs
                 </a>
-              </li>
+              </li> */}
               <li className="nav-item px-2 py-2">
                 <a
                   className="nav-link text-capitalize text-dark"
-                  href="aboutUs"
+                  href="#aboutUs"
                 >
                   About Us
                 </a>

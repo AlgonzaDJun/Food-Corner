@@ -1,0 +1,37 @@
+.nama-pesan {
+    font-size: 16px;
+    line-height: 16px;
+    margin-bottom: 8px;
+    text-transform: capitalize;
+    position: relative;
+}
+.pesan span{
+    font-size: 46px;
+    line-height: 26px;
+    margin-bottom: 18px;
+    text-transform: capitalize;
+    position: relative;
+}
+.porsi{
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.harga{
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+.horizon {
+    border-bottom: 0.5px dashed grey;
+}
+.box-struk{
+    border-radius: 30px;
+    background: linear-gradient(145deg, #fff, #ffffff);
+    /* box-shadow: 28px 28px 45px #d4d4d4, -28px -28px 45px #ffffff; */
+    display: flow-root;
+    padding: 20px 30px 40px;
+    margin: 13px 3px 3px;
+    transition: 0.8s cubic-bezier(0.22, 0.78, 0.45, 1.02);
+    border-style: solid;
+    border-color: black;
+}
