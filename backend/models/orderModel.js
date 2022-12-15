@@ -6,8 +6,16 @@ const orderSchema = mongoose.Schema(
     email: { type: String, require },
     orderItems: [],
     orderAmount: { type: Number, require },
-    isComplete: { type: Boolean, require, default: false },
+    eatPlace: { type: String },
+    adminFee: { type: Number, require, default: 1000 },
     isPaid: { type: Boolean, require, default: false },
+    isDelivered: { type: Boolean, require, default: false },
+    paidAt: {
+      type: Date,
+    },
+    deliveredAt: {
+      type: Date,
+    },
   },
   {
     timestamps: true,

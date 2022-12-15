@@ -50,18 +50,6 @@ router.post("/login", async (req, res) => {
     }
 
     // jika ada user
-    // if (user) {
-    //   const currentUser = {
-    //     name: user.name,
-    //     email: user.email,
-    //     role: user.role,
-    //     _id: user._id,
-    //   };
-    //   res.send(currentUser);
-    // }
-
-    // const token = await generateJWT(user);
-
     generateToken(user, 200, res);
   } catch (error) {
     return res.status(400).json({ message: error });
@@ -85,6 +73,7 @@ router.post("/addcart", isAuth, async (req, res) => {
     if (!user) return res.status(400).json({ message: "User does not exist." });
 
     const newCart = {
+      pembeli : req.user.name,
       name: cartItem.name,
       standID: cartItem.standID,
       standName: cartItem.standName,
@@ -93,6 +82,8 @@ router.post("/addcart", isAuth, async (req, res) => {
       quantity: cartItem.quantity,
       price: cartItem.price,
       prices: cartItem.prices,
+      isPaid: false,
+      isDelivered: false,
     };
     const checkCart = user.cart.find((item) => item._id === cartItem._id);
     if (checkCart) {
@@ -175,11 +166,11 @@ router.delete("/removecart", isAuth, async (req, res) => {
 
     const checkCart = user.cart.find((item) => item._id === cartItem._id);
     if (!checkCart) {
-        return res.status(400).json({ message: "Product not in cart" });
+      return res.status(400).json({ message: "Product not in cart" });
     } else {
-        user.cart = user.cart.filter((item) => item._id !== cartItem._id);
-        await user.save();
-        res.status(200).json({ message: "Product removed from cart" });
+      user.cart = user.cart.filter((item) => item._id !== cartItem._id);
+      await user.save();
+      res.status(200).json({ message: "Product removed from cart" });
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
