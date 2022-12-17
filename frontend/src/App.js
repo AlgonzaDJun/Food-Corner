@@ -6,6 +6,7 @@ import LoginContainer from "./container/LoginContainer";
 import RegisterContainer from "./container/RegisterContainer";
 import Cart from "./container/Cart";
 import Checkout from "./container/Checkout";
+import Contact from "./container/Contact";
 import Seller from "./container/seller/Seller";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/register" element={<RegisterContainer />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/Seller" element={<Seller />} />
+          <Route path="/Contact" element={<Contact />} />
           <Route path="/checkoutdetails" element={<Checkout/>}></Route>
         </Routes>
       </main>
