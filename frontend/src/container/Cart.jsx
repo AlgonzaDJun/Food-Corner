@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import bgstand from "../assets/images/menu-bg.png";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -14,6 +14,11 @@ const Cart = () => {
   const { cartItems } = cartState;
   const userState = useSelector((state) => state.loginUserReducer);
   const { currentUser } = userState;
+  const [eatPlace, setEatPlace] = useState("dine-in");
+
+  const eatPlaceHandle = (e) => {
+    setEatPlace(e.target.value);
+  };
 
   useEffect(() => {
     dispatch(getCart());
@@ -29,9 +34,9 @@ const Cart = () => {
     }).format(money);
   };
 
-  const checkoutHandler = (arg) => {
+  const checkoutHandler = (cartItem, eatPlace) => {
     if (parseInt(subTotal) > 0) {
-      dispatch(placeOrder(arg));
+      dispatch(placeOrder(cartItem, eatPlace));
       navigate("/checkoutdetails");
     }
   };
@@ -176,11 +181,14 @@ const Cart = () => {
                             items {currentUser && cartItems.length}
                           </h5>
                         </div>
-
+                        <h5>Jenis Pesanan</h5>
                         <div className="mb-4 pb-2">
-                          <select className="select">
-                            <option value="1">Dine in</option>
-                            <option value="2">Takeaway</option>
+                          <select
+                            className="select"
+                            onChange={eatPlaceHandle}
+                          >
+                            <option value="dine-in">Dine in</option>
+                            <option value="take-away">Takeaway</option>
                           </select>
                         </div>
 
@@ -200,7 +208,7 @@ const Cart = () => {
                           type="button"
                           className="btn btn-dark btn-block btn-lg w-100"
                           data-mdb-ripple-color="dark"
-                          onClick={() => checkoutHandler(cartItems)}
+                          onClick={() => checkoutHandler(cartItems, eatPlace)}
                         >
                           Bayar
                         </button>
