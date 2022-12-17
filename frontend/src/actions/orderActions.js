@@ -1,13 +1,13 @@
 import axios from "axios";
 
-export const placeOrder = () => async (dispatch, getState) => {
+export const placeOrder = (cartItems) => async (dispatch, getState) => {
   //   var items = [];
 
   dispatch({
     type: "PLACE_ORDER_REQUEST",
   });
   const currentUser = getState().loginUserReducer.currentUser;
-  const cartItems = getState().cartReducer.cartItems;
+  // const cartItems = getState().cartReducer.cartItems;
 
   let reducePrice = cartItems.reduce((x, item) => x + item.prices, 0)
   let totalPrice = reducePrice.toFixed(2)

@@ -31,7 +31,7 @@ const initialState = {
   loginUserReducer: {
     currentUser: currentUser,
   },
-  cartReducer: { cartItems: cartItems },
+  cartReducer: { getCartReducer: getCartReducer },
 };
 
 const composeEnhancers = composeWithDevTools({});
