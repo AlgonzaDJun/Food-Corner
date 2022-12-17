@@ -66,7 +66,7 @@ router.put("/:id/:food_id/pay", isSeller, async (req, res) => {
   const food_id = req.params.food_id;
 
   if (!order) {
-    res.status(404).json({ message: "Order not found" });
+    return res.status(404).json({ message: "Order not found" });
   }
   const checkFoodId = order.orderItems.find((item) => item._id === food_id);
   if (!checkFoodId) {
@@ -110,7 +110,7 @@ router.put("/:id/:food_id/deliver", isSeller, async (req, res) => {
   const food_id = req.params.food_id;
 
   if (!order) {
-    res.status(404).json({ message: "Order not found" });
+    return res.status(404).json({ message: "Order not found" });
   }
   const checkFoodId = order.orderItems.find((item) => item._id === food_id);
   if (!checkFoodId) {

@@ -46,10 +46,37 @@ router.get("/getstandfood", isSeller, async (req, res) => {
 });
 
 // Change Food inside the stand
-// code
+router.put("/:id/updatefood", isSeller, async (req, res) => {
+  const { name, price, image } = req.body;
+  const food = await Food.findById(req.params.id);
+  if (!food) {
+    return res.status(404).json({ message: "food not found" });
+  }
+  try {
+    const updatedFood = await Food.findByIdAndUpdate(req.params.id, {
+      name,
+      price,
+      image,
+    });
+    res.status(200).json({ data: food, message: "food updated" });
+  } catch (error) {
+    res.status(400).json(error);
+  }
+});
 
 // Delete Food inside the stand
-// code
+router.delete("/:id/deletefood", isSeller, async (req, res) => {
+  const food = await Food.findById(req.params.id);
+  if (!food) {
+    return res.status(404).json({ message: "food not found" });
+  }
+  try {
+    const deletedFood = await Food.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: "food deleted" });
+  } catch (error) {
+    res.status(400).json(error);
+  }
+});
 
 // router.get("/getStandsFood", async (req, res) => {
 //   const agg = [
