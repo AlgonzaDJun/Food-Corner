@@ -62,7 +62,7 @@ const Home = () => {
         <section className="main-banner" id="home">
           <div className="sec-wp">
             <div className="container">
-              <div className="row" style={{ paddingTop: "10px"}}>
+              <div className="row" style={{ paddingTop: "10px" }}>
                 <div className="col-lg-6">
                   <div className="banner-text">
                     <h1 className="h1-title">
@@ -117,43 +117,40 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              <div className="menu-tab-wp">
+              <button
+                className="navbar-toggler border-0"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#stand"
+              >
+                <span className="navbar-toggler-icon"></span>
+              </button>
+              <div className="menu-tab-wp" id="stand">
                 <div className="row">
                   <div className="col-lg-12 m-auto">
                     <div className="menu-tab text-center">
-                      <ul className="filters">
-                        <div className="filter-active"></div>
-                        <li
-                          className="filter"
-                          data-filter=".all, .stand1, .stand2, .stand3"
-                        >
-                          <img src={bg1} alt="" />
-                          All
-                        </li>
-                        <li className="filter" data-filter=".stand1">
-                          <img src={bg2} alt="" />
-                          Stand 1
-                        </li>
-                        <li className="filter" data-filter=".stand2">
-                          <img src={bg3} alt="" />
-                          Stand 2
-                        </li>
-                        <li className="filter" data-filter=".stand3">
-                          <img src={bg4} alt="" />
-                          Stand 3
-                        </li>
-                      </ul>
+                      {/* <ul className="filters"> */}
+                      <div className="filter-center"></div>
+                      <li className="btn active" onClick={{ filterSelection: 'all' }} to={"/"}>
+                        <img src={bg1} alt="" />All</li>
+                      <li className="btn" href="#stand1">
+                        <img src={bg2} alt="" />Stand 1</li>
+                      <li className="btn" onClick={{ filterSelection: 'stand2' }}>
+                        <img src={bg3} alt="" />Stand 2</li>
+                      <li className="btn" onClick={{ filterSelection: 'stand3' }}>
+                        <img src={bg4} alt="" />Stand 3</li>
+                      {/* </ul> */}
                     </div>
                   </div>
                 </div>
               </div>
+
+
               <div className="menu-list-row">
-                <div className="row g-xxl-5 bydefault_show" id="menu-dish">
+                <div className="row g-xxl-5 bydefault_show" id="stand">
                   {/* 1 */}
                   <div
-                    className="col-lg-4 col-sm-6 dish-box-wp stand1"
-                    data-cat="stand1"
-                  >
+                    className="col-lg-4 col-sm-6 dish-box-wp stand1" id="stand1">
                     <div className="dish-box text-center">
                       <div className="dist-img">
                         <img src={dish1} alt="" />
@@ -181,7 +178,7 @@ const Home = () => {
                   </div>
                   {/* 2 */}
                   <div
-                    className="col-lg-4 col-sm-6 dish-box-wp stand1"
+                    className="col-lg-4 col-sm-6 dish-box-wp stand2"
                     data-cat="stand1"
                   >
                     <div className="dish-box text-center">
