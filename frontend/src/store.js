@@ -7,7 +7,7 @@ import { getAllFoodsReducer } from "./reducers/foodReducers";
 import { loginUserReducer, registerUserReducer } from "./reducers/userReducers";
 import { getAllStandsReducer } from "./reducers/standReducers";
 import { cartReducer, getCartReducer } from "./reducers/cartReducer";
-import { placeOrderReducer } from "./reducers/orderReducer";
+import { placeOrderReducer, getOrderReducer } from "./reducers/orderReducer";
 
 const finalReducer = combineReducers({
   getAllFoodsReducer: getAllFoodsReducer,
@@ -15,8 +15,9 @@ const finalReducer = combineReducers({
   loginUserReducer: loginUserReducer,
   getAllStandsReducer: getAllStandsReducer,
   cartReducer: cartReducer,
-  placeOrderReducer : placeOrderReducer,
-  getCartReducer : getCartReducer,
+  placeOrderReducer: placeOrderReducer,
+  getCartReducer: getCartReducer,
+  getOrderReducer: getOrderReducer,
 });
 
 const cartItems = localStorage.getItem("cartItems")

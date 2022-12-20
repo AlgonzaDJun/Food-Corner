@@ -14,7 +14,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const cartState = useSelector((state) => state.getCartReducer);
   const { cartItems } = cartState;
-  
+
   const userState = useSelector((state) => state.loginUserReducer);
   const { currentUser } = userState;
 
@@ -28,7 +28,7 @@ const Navbar = () => {
             className="navbar-brand d-flex justify-content-between align-items-center order-lg-0"
             to={"/"}
           >
-            <img src={navbarLogo} alt="site icon" />  
+            <img src={navbarLogo} alt="site icon" />
             <h4 className="text-capitalize fw-lighter ms-2">FooD CorneR</h4>
           </Link>
           <div className="order-lg-2 nav-btns">
@@ -67,7 +67,9 @@ const Navbar = () => {
                     exit={{ opacity: 0, scale: 0.6 }}
                     className="rounded-2"
                   >
-                    <p>Pesanan saya</p>
+                    <Link className="text-decoration-none text-black" to={"/checkoutdetails"}>
+                      <p>Pesanan saya</p>
+                    </Link>
                     <button
                       className="btn"
                       onClick={() => dispatch(logoutUser())}
@@ -100,10 +102,16 @@ const Navbar = () => {
                     exit={{ opacity: 0, scale: 0.6 }}
                     className="rounded-2"
                   >
-                    <Link className="p-0 pt-2 m-0 text-decoration-none text-black" to={"/login"}>
+                    <Link
+                      className="p-0 pt-2 m-0 text-decoration-none text-black"
+                      to={"/login"}
+                    >
                       <p>Login</p>
                     </Link>
-                    <Link className="p-0 m-0 text-decoration-none text-black" to={"/register"}>
+                    <Link
+                      className="p-0 m-0 text-decoration-none text-black"
+                      to={"/register"}
+                    >
                       <p>Register</p>
                     </Link>
                   </motion.div>
@@ -154,10 +162,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className="nav-item px-2 py-2">
-                <a
-                  className="nav-link text-capitalize text-dark"
-                  href="#menu"
-                >
+                <a className="nav-link text-capitalize text-dark" href="#menu">
                   collection
                 </a>
               </li>

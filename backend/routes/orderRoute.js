@@ -5,13 +5,14 @@ const router = express.Router();
 
 // user membuat order baru
 router.post("/placeorders", async (req, res) => {
-  const { totalPrice, currentUser, cartItems } = req.body;
+  const { totalPrice, currentUser, cartItems, eatPlace } = req.body;
 
   const newOrder = new orderModel({
     name: currentUser.name,
     email: currentUser.email,
     orderItems: cartItems,
-    orderAmount: totalPrice,
+    orderAmount: parseInt(totalPrice) + 1000,
+    eatPlace: eatPlace,
   });
 
   try {

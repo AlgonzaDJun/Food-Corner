@@ -1,6 +1,14 @@
 import axios from "axios";
 
-export const placeOrder = (cartItems) => async (dispatch, getState) => {
+const instance = axios.create({
+  withCredentials: true,
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json",
+  },
+});
+
+export const placeOrder = (cartItems, eatPlace) => async (dispatch, getState) => {
   //   var items = [];
 
   dispatch({
@@ -19,6 +27,7 @@ export const placeOrder = (cartItems) => async (dispatch, getState) => {
         totalPrice,
         currentUser,
         cartItems,
+        eatPlace
       }
     );
     // console.log(response);
@@ -32,5 +41,18 @@ export const placeOrder = (cartItems) => async (dispatch, getState) => {
       //   payload: error,
     });
     console.log(error);
+  }
+};
+
+// mendapatkan data cart dari database
+export const getOrder = () => async (dispatch) => {
+  dispatch({ type: "GET_ORDER_REQUEST" });
+  try {
+    const response = await instance.get(
+      "http://localhost:5000/api/orders/getuserorder"
+    );
+    dispatch({ type: "GET_ORDER_SUCCESS", payload: response.data });
+  } catch (error) {
+    dispatch({ type: "GET_ORDER_FAILED", payload: error });
   }
 };
