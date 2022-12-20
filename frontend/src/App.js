@@ -7,7 +7,8 @@ import RegisterContainer from "./container/RegisterContainer";
 import Cart from "./container/Cart";
 import Checkout from "./container/Checkout";
 import Contact from "./container/Contact";
-import Seller from "./container/seller/Seller";
+// import Seller from "./container/seller/Seller";
+import Admin from "./container/admin/Admin";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
           <Route path="/login" element={<LoginContainer />} />
           <Route path="/register" element={<RegisterContainer />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/Seller" element={<Seller />} />
+          <Route path="/Admin" element={<Admin />} />
           <Route path="/Contact" element={<Contact />} />
           <Route path="/checkoutdetails" element={<Checkout/>}></Route>
         </Routes>
