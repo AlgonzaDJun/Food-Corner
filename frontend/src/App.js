@@ -8,11 +8,12 @@ import Cart from "./container/Cart";
 import Checkout from "./container/Checkout";
 import Contact from "./container/Contact";
 import Seller from "./container/seller/Seller";
-import Seller2 from "./container/seller/Seller2";
 import RoleAccess from "./components/RoleAccess";
 import NavLayout from "./components/NavLayout";
 import Menu from "./container/seller/pages/Menu";
 import Order from "./container/seller/pages/Order";
+// import Seller from "./container/seller/Seller";
+import Admin from "./container/admin/Admin";
 
 function App() {
   return (
@@ -29,9 +30,11 @@ function App() {
           </Route>
           <Route element={<RoleAccess roles={["seller"]} />}>
             <Route path="/Seller" element={<Seller />} />
-            <Route path="/Seller2" element={<Seller2 />} />
             <Route path="/Menu" element={<Menu />} />
             <Route path="/order" element={<Order />} />
+          </Route>
+          <Route element={<RoleAccess roles={["admin"]} />}>
+            <Route path="/admin" element={<Admin />} />
           </Route>
         </Routes>
       </main>
