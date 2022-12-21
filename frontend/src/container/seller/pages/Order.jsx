@@ -3,8 +3,35 @@ import "../css/styles2.css";
 import "../css/barOrderStyle.css";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { logoutUser } from "../../../actions/userActions";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getOrders } from "../../../actions/standActions";
+import { orderPaid, orderDelivered } from "../../../actions/orderActions";
 
 const Order = () => {
+  const [modalData, setModalData] = useState(null);
+
+  useEffect(() => {
+    dispatch(getOrders());
+  }, []);
+
+  const onHideModalItem = () => {
+    handleItem();
+    setModalData(null);
+  };
+  const onHideModalStatus = () => {
+    handleStatus();
+    setModalData(null);
+  };
+
+  const orderState = useSelector((state) => state.getOrders);
+  const { orders } = orderState;
+
+  console.log(orders);
+
+  const dispatch = useDispatch();
+
   const [headerTogle, setHeaderTogle] = useState(false);
 
   const [statusTogle, setStatusTogle] = useState(false);
@@ -16,12 +43,24 @@ const Order = () => {
     setItemTogle(!itemTogle);
   };
 
+  const [modalChange, setModalChange] = useState(false);
+
+  const paidOrder = (orderId, itemId) => {
+    dispatch(orderPaid(orderId, itemId));
+    dispatch(getOrders());
+  };
+
+  const deliveredOrder = (orderId, itemId) => {
+    dispatch(orderDelivered(orderId, itemId));
+    dispatch(getOrders());
+  };
+
   return (
     <div className="w-100 h-100 d-grid min-vh-100">
       <div
         id="body-pd"
         className={headerTogle ? "body body-pd" : "body"}
-        style={{ backgroundColor: "#80808045"}}
+        style={{ backgroundColor: "#80808045" }}
       >
         <header class={headerTogle ? "body-pd header" : "header"} id="header">
           <div class="header__toggle">
@@ -54,7 +93,7 @@ const Order = () => {
                     <i class="material-icons">&#xE863;</i>{" "}
                     <span>Refresh List</span>
                   </a>
-                  <a href="#" onclick="window.print()" class="btn btn-info">
+                  <a href="#" class="btn btn-info">
                     <i class="material-icons">&#xE24D;</i> <span>Print</span>
                   </a>
                 </div>
@@ -66,7 +105,7 @@ const Order = () => {
           <thead style={{ backgroundColor: "aliceblue" }}>
             <tr>
               <th>Order Id</th>
-              <th>User Id</th>
+              <th>Jenis pesanan</th>
               <th>Nama</th>
               <th>Tagihan</th>
               <th>Status</th>
@@ -74,22 +113,41 @@ const Order = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>orderId_99</td>
-              <td>userId_1</td>
-              <td>Kimi Hime</td>
-              <td>20000</td>
-              <td>
-                <button class="view btn" onClick={handleStatus}>
-                  <i class="material-icons">&#xE5C8;</i>
-                </button>
-              </td>
-              <td>
-                <button class="view btn" onClick={handleItem}>
-                  <i class="material-icons">&#xE5C8;</i>
-                </button>
-              </td>
-            </tr>
+            {orders.map((item, index) => {
+              modalChange && setModalData(item);
+
+              return (
+                <tr key={index}>
+                  <td>{item._id}</td>
+                  <td>{item.eatPlace}</td>
+                  <td>{item.name}</td>
+                  <td>{item.orderAmount}</td>
+                  <td>
+                    <button
+                      class="view btn"
+                      onClick={() => {
+                        handleStatus();
+                        dispatch(getOrders());
+                        setModalData(item);
+                      }}
+                    >
+                      <i class="material-icons">&#xE5C8;</i>
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      class="view btn"
+                      onClick={() => {
+                        handleItem();
+                        setModalData(item);
+                      }}
+                    >
+                      <i class="material-icons">&#xE5C8;</i>
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
         {/* content */}
@@ -97,7 +155,7 @@ const Order = () => {
         {/* modal untuk status*/}
 
         {statusTogle && (
-          <Modal show={statusTogle} onHide={handleStatus} size="lg">
+          <Modal show={statusTogle} onHide={onHideModalStatus} size="lg">
             <Modal.Header closeButton>
               <Modal.Title>Status Orderan</Modal.Title>
             </Modal.Header>
@@ -113,62 +171,98 @@ const Order = () => {
                         <div class="text-center">Jumlah</div>
                       </th>
                       <th scope="col" class="border-0 bg-light">
+                        <div class="text-center">Total Harga</div>
+                      </th>
+                      <th scope="col" class="border-0 bg-light">
                         <div class="text-center">Status Pesanan</div>
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th scope="row">
-                        <div class="p-2">
-                          <img
-                            src="menuOrder.jpg"
-                            alt="dr-database"
-                            width="70"
-                            class="img-fluid rounded shadow-sm"
-                          />
-                          <div class="ml-3 d-inline-block align-middle">
-                            <h6 class="mb-0">Ayam Goreng</h6>
-                            <span class="text-muted font-weight-normal font-italic d-block">
-                              10.000
-                            </span>
-                          </div>
-                        </div>
-                      </th>
-                      <td class="align-middle text-center">
-                        <strong> 2 </strong>
-                      </td>
-                      <td className="align-middle">
-                        <select
-                          className="select"
-                          // onChange={eatPlaceHandle}
-                        >
-                          <option value="dine-in">Dibayar</option>
-                          <option value="take-away">DiAntar</option>
-                        </select>
-                      </td>
-                    </tr>
+                    {modalData.orderItems.map((status) => {
+                      return (
+                        <tr key={status._id}>
+                          <th scope="row">
+                            <div class="p-2">
+                              <img
+                                src={status.image}
+                                alt="dr-database"
+                                width="70"
+                                class="img-fluid rounded shadow-sm"
+                              />
+                              <div class="ml-3 d-inline-block align-middle">
+                                <h6 class="mb-0">{status.name}</h6>
+                                <span class="text-muted font-weight-normal font-italic d-block">
+                                  {status.price}
+                                </span>
+                              </div>
+                            </div>
+                          </th>
+                          <td class="align-middle text-center">
+                            <strong> {status.quantity} </strong>
+                          </td>
+                          <td class="align-middle text-center">
+                            <strong> {status.prices} </strong>
+                          </td>
+                          <td className="align-middle">
+                            {/* <select
+                              className="select"
+                              // onChange={eatPlaceHandle}
+                              
+                            >
+                              <option value="dine-in">Dibayar</option>
+                              <option value="take-away">DiAntar</option>
+                            </select> */}
+                            {!status.isPaid && !status.isDelivered ? (
+                              <Button
+                                onClick={async () => {
+                                  paidOrder(modalData._id, status._id);
+                                  await dispatch(getOrders());
+                                }}
+                              >
+                                Customer Bayar
+                              </Button>
+                            ) : status.isPaid && !status.isDelivered ? (
+                              <Button
+                                onClick={async () => {
+                                  deliveredOrder(modalData._id, status._id);
+                                  await dispatch(getOrders());
+                                }}
+                              >
+                                Antar Pesanan
+                              </Button>
+                            ) : (
+                              <Button
+                                disabled
+                                style={{
+                                  backgroundColor: "green",
+                                  color: "white",
+                                }}
+                              >
+                                Sudah Diantar
+                              </Button>
+                            )}
+                          </td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={handleStatus}>
+              <Button variant="secondary" style={{width: "100%"}} onClick={handleStatus}>
                 Close
-              </Button>
-              <Button variant="primary" onClick={handleStatus}>
-                Save Changes
               </Button>
             </Modal.Footer>
           </Modal>
         )}
 
         {/* modal untuk items*/}
-
         {itemTogle && (
-          <Modal show={itemTogle} onHide={handleItem}>
+          <Modal show={itemTogle} onHide={onHideModalItem}>
             <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
+              <Modal.Title>Item order</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <div class="table-responsive">
@@ -184,37 +278,42 @@ const Order = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th scope="row">
-                        <div class="p-2">
-                          <img
-                            src="menuOrder.jpg"
-                            alt="ngambil-dr-database"
-                            width="70"
-                            class="img-fluid rounded shadow-sm"
-                          />
-                          <div class="ml-3 d-inline-block align-middle">
-                            <h5 class="mb-0">Ayam Goreng</h5>
-                            <span class="text-muted font-weight-normal font-italic d-block">
-                              10.000
-                            </span>
-                          </div>
-                        </div>
-                      </th>
-                      <td class="align-middle text-center">
-                        <strong> 2 </strong>
-                      </td>
-                    </tr>
+                    {modalData.orderItems.map((order) => {
+                      return (
+                        <tr key={order._id}>
+                          <th scope="row">
+                            <div class="p-2">
+                              <img
+                                src={order.image}
+                                alt="dr-database"
+                                width="70"
+                                class="img-fluid rounded shadow-sm"
+                              />
+                              <div class="ml-3 d-inline-block align-middle">
+                                <h5 class="mb-0">{order.name}</h5>
+                                <span class="text-muted font-weight-normal font-italic d-block">
+                                  {order.prices}
+                                </span>
+                              </div>
+                            </div>
+                          </th>
+                          <td class="align-middle text-center">
+                            <strong> {order.quantity}</strong>
+                          </td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={handleItem}>
+              <Button
+                variant="secondary"
+                className="w-100"
+                onClick={handleItem}
+              >
                 Close
-              </Button>
-              <Button variant="primary" onClick={handleItem}>
-                Save Changes
               </Button>
             </Modal.Footer>
           </Modal>
@@ -248,7 +347,7 @@ const Order = () => {
                 </a>
               </div>
             </div>
-            <a href="" class="nav__link">
+            <a class="nav__link" onClick={() => dispatch(logoutUser())}>
               <i class="bx bx-log-out nav__icon"></i>
               <span class="nav__name">Log Out</span>
             </a>

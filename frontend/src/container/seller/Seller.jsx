@@ -1,9 +1,12 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../../actions/userActions";
 import "./css/styles2.css";
 
 const Seller2 = () => {
   const [headerTogle, setHeaderTogle] = useState(false);
+  const dispatch = useDispatch()
 
   return (
     <div style={{ marginTop: 150 }}>
@@ -57,7 +60,7 @@ const Seller2 = () => {
                 </a>
               </div>
             </div>
-            <a href="" class="nav__link">
+            <a class="nav__link" onClick={() => dispatch(logoutUser())}>
               <i class="bx bx-log-out nav__icon"></i>
               <span class="nav__name">Log Out</span>
             </a>
