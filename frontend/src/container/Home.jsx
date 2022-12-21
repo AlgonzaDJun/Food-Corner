@@ -70,9 +70,7 @@ const Home = () => {
                       <span>HARI INI</span>?
                     </h1>
                     <p>
-                      This is Lorem ipsum dolor sit amet, consectetur
-                      adipisicing elit. Numquam eius vel tempore consectetur
-                      nesciunt? Nam eius tenetur recusandae optio aperiam.
+                    Tersedia berbagai macam stand makanan yang bisa kalian pilih berdasarkan selera anda.
                     </p>
                     <div className="banner-btn mt-4">
                       <a href="#menu" className="sec-btn">
@@ -315,18 +313,10 @@ const Home = () => {
                 <div className="sec-text">
                   <h2 className="xxl-title">FooD CorneR</h2>
                   <p>
-                    This is Lorem ipsum dolor sit amet consectetur adipisicing
-                    elit. Amet dolores eligendi earum eveniet soluta officiis
-                    asperiores repellat, eum praesentium nihil totam. Non ipsa
-                    expedita repellat atque mollitia praesentium assumenda quo
-                    distinctio excepturi nobis tenetur, cum ab vitae fugiat hic
-                    aspernatur? Quos laboriosam, repudiandae exercitationem
-                    atque a excepturi vel. Voluptas, ipsa.
+                  Food corner merupakan website kantin yang bisa diakses kapan saja secara online untuk memudahkan proses pemesanan konsumen dan untuk meningkatkan efisiensi dalam mengelola kantin di Universitas Negeri Surabaya.
                   </p>
                   <p>
-                    This is Lorem ipsum dolor sit amet consectetur adipisicing
-                    elit. At fugit laborum voluptas magnam sed ad illum? Minus
-                    officiis quod deserunt.
+                    
                   </p>
                 </div>
               </div>
