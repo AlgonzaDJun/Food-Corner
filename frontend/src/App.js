@@ -14,6 +14,7 @@ import Menu from "./container/seller/pages/Menu";
 import Order from "./container/seller/pages/Order";
 // import Seller from "./container/seller/Seller";
 import Admin from "./container/admin/Admin";
+import Success from "./components/Success";
 
 function App() {
   return (
@@ -35,6 +36,8 @@ function App() {
           </Route>
           <Route element={<RoleAccess roles={["admin"]} />}>
             <Route path="/admin" element={<Admin />} />
+            <Route path="/sukses" element={<Success />} />
+            
           </Route>
         </Routes>
       </main>

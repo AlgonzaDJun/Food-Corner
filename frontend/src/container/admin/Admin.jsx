@@ -2,10 +2,12 @@ import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Success from '../../components/Success';
 
 
 function Admin() {
     const [isActive, setIsActive] = useState(false);
+    const [isSukses, setIsSukses] = useState(false);
 
     const handleClick = event => {
         // 👇️ toggle isActive state on click
@@ -47,7 +49,7 @@ function Admin() {
                     <tr>
                         <td>
                             <button className='btn'>
-                                <i class="uil uil-user-plus"onClick={handleClick}>New Stand</i>
+                                <i class="uil uil-user-plus" onClick={handleClick}>New Stand</i>
                             </button>
                         </td>
                         <td className='float-end'>
@@ -57,7 +59,7 @@ function Admin() {
                         </td>
                     </tr>
 
-                    
+
                 </table>
 
                 <table class="table table-bordered">
@@ -173,6 +175,12 @@ function Admin() {
                     </Modal.Footer>
                 </Modal> : null
             }
+            {
+                isSukses && <Success />
+            }
+            <button className='btn' onClick={() => setIsSukses(!isSukses)}>
+                yaa
+            </button>
         </div>
     );
 };

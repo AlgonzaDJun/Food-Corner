@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@coreui/bootstrap-react": "^1.0.0-beta.0",
     "@popperjs/core": "^2.11.6",
     "@redux-devtools/extension": "^3.2.3",
     "@testing-library/jest-dom": "^5.16.5",
