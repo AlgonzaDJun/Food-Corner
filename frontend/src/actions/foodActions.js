@@ -55,3 +55,50 @@ export const addNewFood = (name, price, image) => async (dispatch) => {
     });
   }
 };
+
+export const updateFood = (name, price, image, idFood) => async (dispatch) => {
+  dispatch({
+    type: "UPDATE_FOOD_REQUEST",
+  });
+
+  try {
+    const response = await instance.put(
+      `http://localhost:5000/api/foods/${idFood}/updatefood`,
+      {
+        name,
+        price,
+        image,
+      }
+    );
+    dispatch({
+      type: "UPDATE_FOOD_SUCCESS",
+      payload: response.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: "UPDATE_FOOD_FAILED",
+      payload: error,
+    });
+  }
+};
+
+export const deleteFood = (idFood) => async (dispatch) => {
+  dispatch({
+    type: "DELETE_FOOD_REQUEST",
+  });
+
+  try {
+    const response = await instance.delete(
+      `http://localhost:5000/api/foods/${idFood}/deletefood`
+    );
+    dispatch({
+      type: "DELETE_FOOD_SUCCESS",
+      payload: response.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: "DELETE_FOOD_FAILED",
+      payload: error,
+    });
+  }
+};

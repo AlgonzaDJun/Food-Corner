@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { getAllStands } from "../actions/standActions";
 import { addToCart, getCart } from "../actions/cartActions";
 import Error from "../components/Error";
+import Success from "../components/Success";
 
 const Recommendation = () => {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ const Recommendation = () => {
             <p className="recom mx-2">Rekomendasi Menu</p>
           </div>
           {errorState && <Error text={"Silakan Login terlebih dahulu"} />}
+          {cartState.success && <Success text={"Berhasil menambah ke keranjang"} />}
           <div className="slide-content">
             <div className="card-wrapper swiper-wrapper">
               {loading ? (

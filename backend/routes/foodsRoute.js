@@ -59,10 +59,15 @@ router.put("/:id/updatefood", isSeller, async (req, res) => {
     return res.status(404).json({ message: "food not found" });
   }
   try {
+    const result = await cloudinary.uploader.upload(image, {
+      folder: "updatedImage",
+      // width: 300,
+      // crop: "scale"
+    });
     const updatedFood = await Food.findByIdAndUpdate(req.params.id, {
       name,
       price,
-      image,
+      image : result.secure_url,
     });
     res.status(200).json({ data: food, message: "food updated" });
   } catch (error) {

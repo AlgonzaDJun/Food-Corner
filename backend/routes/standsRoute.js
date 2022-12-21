@@ -3,6 +3,7 @@ const { isAdmin } = require("../middleware/auth");
 const router = express.Router();
 const Stand = require("../models/standModel");
 const User = require("../models/userModel");
+const bcrypt = require('bcryptjs')
 
 router.get("/getallstands", async (req, res) => {
   try {
@@ -45,7 +46,7 @@ router.get("/getstandsfood", async (req, res) => {
 });
 
 // CREATE STAND - ADMIN
-router.post("/createstand", isAdmin, async (req, res, next) => {
+router.post("/createstand", isAdmin, async (req, res) => {
   const { email, name, password, standID } = req.body;
   const newUser = new User({
     name,
@@ -83,7 +84,7 @@ router.post("/createstand", isAdmin, async (req, res, next) => {
 router.get("/getstands", isAdmin, async (req, res) => {
   try {
     const stand = await User.find({ role: "seller" });
-    res.status(200).json({ stand });
+    res.status(200).json(stand);
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }
@@ -102,7 +103,7 @@ router.put("/:id/updatestand", isAdmin, async (req, res) => {
     const updatedStand = await User.findByIdAndUpdate(req.params.id, {
       name,
       email,
-      password,
+      password : await bcrypt.hash(password, 10)
     });
     standInStand.standName = name;
     await Stand.findOneAndUpdate(

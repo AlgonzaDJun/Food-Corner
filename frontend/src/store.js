@@ -5,9 +5,20 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { getAllFoodsReducer } from "./reducers/foodReducers";
 import { loginUserReducer, registerUserReducer } from "./reducers/userReducers";
-import { getAllStandsReducer, getOrders } from "./reducers/standReducers";
+import {
+  getAllStandsReducer,
+  getOrders,
+  getFoodStand,
+  getStandAdmin,
+  createStand
+} from "./reducers/standReducers";
 import { cartReducer, getCartReducer } from "./reducers/cartReducer";
-import { placeOrderReducer, getOrderReducer, orderDeliverReducer, orderPaidReducer } from "./reducers/orderReducer";
+import {
+  placeOrderReducer,
+  getOrderReducer,
+  orderDeliverReducer,
+  orderPaidReducer,
+} from "./reducers/orderReducer";
 
 const finalReducer = combineReducers({
   getAllFoodsReducer: getAllFoodsReducer,
@@ -18,9 +29,13 @@ const finalReducer = combineReducers({
   placeOrderReducer: placeOrderReducer,
   getCartReducer: getCartReducer,
   getOrderReducer: getOrderReducer,
-  getOrders : getOrders,
-  orderDeliverReducer : orderDeliverReducer,
-  orderPaidReducer : orderPaidReducer,
+  getOrders: getOrders,
+  orderDeliverReducer: orderDeliverReducer,
+  orderPaidReducer: orderPaidReducer,
+  getFoodStand,
+  getStandAdmin,
+  createStand
+
 });
 
 const cartItems = localStorage.getItem("cartItems")

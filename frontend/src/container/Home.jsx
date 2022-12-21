@@ -24,6 +24,7 @@ import Recommendation from "./Recommendation";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllStands } from "../actions/standActions";
 import { addToCart, getCart } from "../actions/cartActions";
+import Success from "../components/Success";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -61,6 +62,8 @@ const Home = () => {
     });
   }, []);
 
+  const cartState = useSelector((state) => state.cartReducer);
+
   const standState = useSelector((state) => state.getAllStandsReducer);
   const { stands, error, loading } = standState;
 
@@ -84,6 +87,7 @@ const Home = () => {
     <div className="w-100 h-auto flex-column d-flex align-items-center justify-content-center">
       <div className="body-fixed h-auto w-100">
         {/* start */}
+        {cartState.success && <Success text={"Berhasil menambah ke keranjang"} />}
         <section className="main-banner" id="home">
           <div className="sec-wp">
             <div className="container">
@@ -165,21 +169,21 @@ const Home = () => {
                         All
                       </li>
                       <li
-                        className="btn"
+                        className={stand === "01" ? "btn btn-stand text-white" : "btn active"}
                         onClick={() => setStand("01")}
                       >
                         <img src={bg2} alt="" />
                         Stand 1
                       </li>
                       <li
-                        className="btn"
+                        className={stand === "02" ? "btn btn-stand text-white" : "btn active"}
                         onClick={() => setStand("02")}
                       >
                         <img src={bg3} alt="" />
                         Stand 2
                       </li>
                       <li
-                        className="btn"
+                        className={stand === "03" ? "btn btn-stand text-white" : "btn active"}
                         onClick={() => setStand("03")}
                       >
                         <img src={bg4} alt="" />
@@ -206,14 +210,7 @@ const Home = () => {
                               <div className="dist-img">
                                 <img src={item.image} alt={item.name} />
                               </div>
-                              <div className="star-rating-wp">
-                                <div className="star-rating">
-                                  <span
-                                    className="star-rating__fill"
-                                    style={{ width: "100%" }}
-                                  ></span>
-                                </div>
-                              </div>
+                              
                               <div className="dish-title">
                                 <h3 className="h3-title">{item.name}</h3>
                               </div>
@@ -247,14 +244,7 @@ const Home = () => {
                               <div className="dist-img">
                                 <img src={item.image} alt={item.name} />
                               </div>
-                              <div className="star-rating-wp">
-                                <div className="star-rating">
-                                  <span
-                                    className="star-rating__fill"
-                                    style={{ width: "100%" }}
-                                  ></span>
-                                </div>
-                              </div>
+                              
                               <div className="dish-title">
                                 <h3 className="h3-title">{item.name}</h3>
                               </div>
@@ -288,14 +278,7 @@ const Home = () => {
                               <div className="dist-img">
                                 <img src={item.image} alt={item.name} />
                               </div>
-                              <div className="star-rating-wp">
-                                <div className="star-rating">
-                                  <span
-                                    className="star-rating__fill"
-                                    style={{ width: "100%" }}
-                                  ></span>
-                                </div>
-                              </div>
+                              
                               <div className="dish-title">
                                 <h3 className="h3-title">{item.name}</h3>
                               </div>
@@ -328,14 +311,7 @@ const Home = () => {
                               <div className="dist-img">
                                 <img src={item.image} alt={item.name} />
                               </div>
-                              <div className="star-rating-wp">
-                                <div className="star-rating">
-                                  <span
-                                    className="star-rating__fill"
-                                    style={{ width: "100%" }}
-                                  ></span>
-                                </div>
-                              </div>
+                              
                               <div className="dish-title">
                                 <h3 className="h3-title">{item.name}</h3>
                               </div>

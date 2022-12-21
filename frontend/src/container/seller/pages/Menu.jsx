@@ -1,19 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../css/styles2.css";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../../actions/userActions";
-import { addNewFood } from "../../../actions/foodActions";
+import { addNewFood, deleteFood, updateFood } from "../../../actions/foodActions";
+import { getFoodStand } from "../../../actions/standActions";
 
 const Menu = () => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getFoodStand());
+  }, []);
+
+  const [modalData, setModalData] = useState(null);
+
+  const foodStandState = useSelector((state) => state.getFoodStand);
+  const { foodStand } = foodStandState;
+
+  // console.log(foodStand);
+
   const [headerTogle, setHeaderTogle] = useState(false);
   const [nama, setNama] = useState("");
   const [harga, setHarga] = useState("");
   const [image, setImage] = useState([]);
 
+  const [updateNama, setUpdateNama] = useState("");
+  const [updateHarga, setUpdateHarga] = useState("");
+  const [updateImage, setUpdateImage] = useState([]);
+
   const [editTogle, setEditTogle] = useState(false);
+
+  const onHideModalEdit = () => {
+    handleEdit();
+    setModalData(null);
+    dispatch(getFoodStand());
+  };
 
   const handleEdit = () => {
     setEditTogle(!editTogle);
@@ -31,14 +54,40 @@ const Menu = () => {
   const handleImage = (e) => {
     const file = e.target.files[0];
     setFileToBase(file);
+    // console.log(file);
+  };
+
+  const setUpdateFileToBase = (file) => {
+    const readerUpdate = new FileReader();
+    readerUpdate.readAsDataURL(file);
+    readerUpdate.onloadend = () => {
+      setUpdateImage(readerUpdate.result);
+    };
+  };
+
+  const handleUpdateImage = (e) => {
+    const file = e.target.files[0];
+    setUpdateFileToBase(file);
     console.log(file);
   };
 
   //submit the form
   const submitForm = async (e) => {
     e.preventDefault();
-    dispatch(addNewFood(nama, harga, image))
+    dispatch(addNewFood(nama, harga, image));
   };
+
+  // update form
+  const updateForm = async (e, idFood) => {
+    e.preventDefault();
+    dispatch(updateFood(updateNama, updateHarga, updateImage, idFood));
+  };
+
+  const deleteForm = async (e, idFood) => {
+    e.preventDefault();
+    dispatch(deleteFood(idFood));
+  };
+
   return (
     <div className="w-100 h-100 d-grid min-vh-100">
       <div
@@ -55,7 +104,7 @@ const Menu = () => {
             ></i>
           </div>
           <div class="header__img">
-            <img src="" alt="profil" />
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="profil" />
           </div>
         </header>
 
@@ -113,7 +162,11 @@ const Menu = () => {
                           style={{ border: 0 }}
                           onChange={handleImage}
                         />
-                        <img className="img-fluid w-50 h-50" src={image} alt="" />
+                        <img
+                          className="img-fluid w-50 h-50"
+                          src={image}
+                          alt=""
+                        />
                         <small id="Info" class="form-text text-muted mx-3">
                           Upload dg format .jpg.
                         </small>
@@ -158,47 +211,55 @@ const Menu = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td class="text-center"> menuId_1</td>
-                          <td>
-                            <img
-                              src="menuStand.jpg"
-                              alt="image for this item"
-                              width="150px"
-                              height="150px"
-                            />
-                          </td>
-                          <td>
-                            <p>
-                              Nama : <b>Mie Goreng Gacor</b>
-                            </p>
-                            <p>
-                              Harga : <b>12000</b>
-                            </p>
-                          </td>
-                          <td class="text-center">
-                            <div class="mx-auto" style={{ width: "112px" }}>
-                              <button
-                                class="btn btn-sm btn-primary"
-                                type="button"
-                                onClick={handleEdit}
-                                style={{ width: "100%" }}
-                              >
-                                Edit
-                              </button>
-                              <form>
-                                <button
-                                  name="removeItem"
-                                  class="btn btn-sm btn-danger"
-                                  style={{ marginLeft: "9px" }}
-                                >
-                                  Delete
-                                </button>
-                                <input type="hidden" name="" value="" />
-                              </form>
-                            </div>
-                          </td>
-                        </tr>
+                        {foodStand.map((item) => {
+                          return (
+                            <tr key={item._id}>
+                              <td class="text-center"> {item._id}</td>
+                              <td>
+                                <img
+                                  src={item.image}
+                                  alt="image item"
+                                  width="100px"
+                                  height="100px"
+                                />
+                              </td>
+                              <td>
+                                <p>
+                                  Nama : <b>{item.name}</b>
+                                </p>
+                                <p>
+                                  Harga : <b>{item.price}</b>
+                                </p>
+                              </td>
+                              <td class="text-center">
+                                <div class="mx-auto" style={{ width: "112px" }}>
+                                  <button
+                                    class="btn btn-sm btn-primary"
+                                    type="button"
+                                    onClick={() => {
+                                      handleEdit();
+                                      setModalData(item);
+                                    }}
+                                    style={{ width: "100%" }}
+                                  >
+                                    Edit
+                                  </button>
+                                  <form>
+                                    <button
+                                      name="removeItem"
+                                      class="btn btn-sm btn-danger"
+                                      style={{ marginLeft: "9px" }}
+                                      onClick={(e) => deleteForm(e, item._id)}
+                                    >
+                                      Delete
+                                    </button>
+                                    <input type="hidden" name="" value="" />
+                                  </form>
+                                </div>
+                              </td>
+                            </tr>
+                          );
+                        })}
                       </tbody>
                     </table>
                   </div>
@@ -211,13 +272,13 @@ const Menu = () => {
 
         {/* modal edit */}
         {editTogle && (
-          <Modal show={editTogle} onHide={handleEdit}>
+          <Modal show={editTogle} onHide={onHideModalEdit}>
             <Modal.Header closeButton>
               <Modal.Title>Modal heading</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <div class="modal-body">
-                <form enctype="multipart/form-data">
+                <form>
                   <div
                     class="text-left my-2 row"
                     style={{ borderBottom: "2px solid #dee2e6" }}
@@ -234,26 +295,19 @@ const Menu = () => {
                         class="form-control"
                         required
                         style={{ border: 0 }}
-                        onchange="document.getElementById('itemPhoto').src = window.URL.createObjectURL(this.files[0])"
+                        onChange={handleUpdateImage}
                       />
                       <small id="Info" class="form-text text-muted mx-3">
                         Upload format .jpg.
                       </small>
-                      <input type="hidden" id="menuId" name="menuId" value="" />
-                      <button
-                        type="submit"
-                        class="btn btn-success my-1"
-                        name="updateItemPhoto"
-                      >
-                        Update Img
-                      </button>
+                      {/* <input type="hidden" id="menuId" name="menuId" value="" /> */}
                     </div>
                     <div class="form-group col-md-4">
                       <img
-                        src="menuStand.jpg"
+                        src={updateImage}
                         id="itemPhoto"
                         name="itemPhoto"
-                        alt="db.collection('standMenu').findById()"
+                        alt="item image"
                         width={100}
                         height={100}
                       />
@@ -269,7 +323,9 @@ const Menu = () => {
                       class="form-control"
                       id="name"
                       name="name"
-                      value=""
+                      value={updateNama}
+                      placeholder={modalData.name}
+                      onChange={(e) => setUpdateNama(e.target.value)}
                       type="text"
                       required
                     />
@@ -283,31 +339,23 @@ const Menu = () => {
                         class="form-control"
                         id="price"
                         name="price"
-                        value="<?php echo $pizzaPrice; ?>"
+                        value={updateHarga}
+                        placeholder={modalData.price}
+                        onChange={(e) => setUpdateHarga(e.target.value)}
                         type="number"
                         min="1"
                         required
                       />
                     </div>
                   </div>
-                  <div class="text-left my-2">
-                    <b>
-                      <label for="desc">Deskripsi</label>
-                    </b>
-                    <textarea
-                      class="form-control"
-                      id="desc"
-                      name="desc"
-                      rows="2"
-                      required
-                      minlength="6"
-                    ></textarea>
-                  </div>
-                  <input type="hidden" id="menuId" name="menuId" value="" />
+                  {/* <input type="hidden" id="menuId" name="menuId" value="" /> */}
                   <button
-                    type="submit"
+                    // type="submit"
                     class="btn btn-success"
                     name="updateItem"
+                    onClick={(e) => {
+                      updateForm(e, modalData._id);
+                    }}
                   >
                     Update
                   </button>
@@ -318,9 +366,6 @@ const Menu = () => {
               <Button variant="secondary" onClick={handleEdit}>
                 Close
               </Button>
-              <Button variant="primary" onClick={handleEdit}>
-                Save Changes
-              </Button>
             </Modal.Footer>
           </Modal>
         )}
@@ -329,13 +374,13 @@ const Menu = () => {
         <div class={headerTogle ? "l-navbar showa" : "l-navbar"} id="nav-bar">
           <nav class="nav">
             <div>
-              <a href="/seller2" class="nav__logo">
+              <a href="/seller" class="nav__logo">
                 <i class="bx bx-layer nav__logo-icon"></i>
                 <span class="nav__logo-name">Stand Management</span>
               </a>
 
               <div class="nav__list">
-                <a href="/seller2" class="nav__link nav-home">
+                <a href="/seller" class="nav__link nav-home">
                   <i class="bx bx-grid-alt nav__icon"></i>
                   <span class="nav__name">Home</span>
                 </a>
@@ -346,10 +391,6 @@ const Menu = () => {
                 <a href="/menu" class="nav__link nav-menuManage">
                   <i class="bx bx-message-square-detail nav__icon"></i>
                   <span class="nav__name">Menu</span>
-                </a>
-                <a href="/" class="nav__link nav-siteManage">
-                  <i class="fas fa-cogs"></i>
-                  <span class="nav__name">Profile Settings</span>
                 </a>
               </div>
             </div>

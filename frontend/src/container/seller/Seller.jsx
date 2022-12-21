@@ -24,25 +24,25 @@ const Seller2 = () => {
             ></i>
           </div>
           <div class="header__img">
-            <img src="" alt="profil" />
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="profil" />
           </div>
         </header>
 
         <h1 style={{ marginTop: "98px" }}>
-          Welcome Back <b>$Seller</b>
+          Welcome Back
         </h1>
 
         {/* navbar */}
         <div class={headerTogle ? "l-navbar showa" : "l-navbar"} id="nav-bar">
           <nav class="nav">
             <div>
-              <a href="/seller2" class="nav__logo">
+              <a href="/seller" class="nav__logo">
                 <i class="bx bx-layer nav__logo-icon"></i>
                 <span class="nav__logo-name">Stand Management</span>
               </a>
 
               <div class="nav__list">
-                <a href="/seller2" class="nav__link nav-home">
+                <a href="/seller" class="nav__link nav-home">
                   <i class="bx bx-grid-alt nav__icon"></i>
                   <span class="nav__name">Home</span>
                 </a>
@@ -53,10 +53,6 @@ const Seller2 = () => {
                 <a href="/Menu" class="nav__link nav-menuManage">
                   <i class="bx bx-message-square-detail nav__icon"></i>
                   <span class="nav__name">Menu</span>
-                </a>
-                <a href="/seller2" class="nav__link nav-siteManage">
-                  <i class="fas fa-cogs"></i>
-                  <span class="nav__name">Profile Settings</span>
                 </a>
               </div>
             </div>

@@ -61,8 +61,18 @@ const Checkout = () => {
                     <h2 className="nama-pesan">Member : {item.name}</h2>
                     <h2 className="nama-pesan text-muted">
                       Status :{" "}
+                      <br />
                       {
                         // map semua pesanan dan logic jika isDelivered true => pesanan ready
+                        item.orderItems.map((item) => {
+                          return !item.isPaid && !item.isDelivered ? (
+                            <b>Belum Dibayar <br /></b> 
+                          ) : item.isPaid && !item.isDelivered ? (
+                            <b>Sudah Dibayar <br /></b>
+                          ) : (
+                            <b>Sudah Diantar <br /></b>
+                          );
+                        })
                       }
                     </h2>
                     <div className="stand-menu">
@@ -113,9 +123,7 @@ const Checkout = () => {
                             <>
                               <tr className="p-0 m-0 mb-0 gap-0">
                                 <td className="mb-0">
-                                  <p
-                                    className="text-muted p-0 m-0"
-                                  >
+                                  <p className="text-muted p-0 m-0">
                                     ({item.standName})
                                   </p>
                                 </td>
