@@ -19,3 +19,25 @@ export const getAllFoodsReducer = (state = {foods : []}, action) => {
       return state;
   }
 };
+
+export const addFoodReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "ADD_FOOD_REQUEST":
+      return {
+        loading: true,
+      };
+    case "ADD_FOOD_SUCCESS":
+      return {
+        loading: false,
+        success: true,
+      };
+    case "ADD_FOOD_FAILED":
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};

@@ -2,6 +2,7 @@ const express = require("express");
 const { isSeller } = require("../middleware/auth");
 const router = express.Router();
 const Food = require("../models/foodModel");
+const cloudinary = require("../utils/cloudinary");
 
 // get all foods - user
 router.get("/getallfoods", async (req, res) => {
@@ -17,17 +18,22 @@ router.get("/getallfoods", async (req, res) => {
 
 // Create Food inside stand
 router.post("/createFood", isSeller, async (req, res) => {
-  const { name, price, standName, image } = req.body;
+  const { name, price, image } = req.body;
   const { standID } = req.user;
-  const newFood = new Food({
-    name: name,
-    price: price,
-    standID: standID,
-    image: image,
-    standName: standName,
-  });
 
   try {
+    const result = await cloudinary.uploader.upload(image, {
+      folder: "products",
+      // width: 300,
+      // crop: "scale"
+    });
+    const newFood = new Food({
+      name: name,
+      price: price,
+      standID: standID,
+      image: result.secure_url,
+      standName: req.user.name,
+    });
     newFood.save();
     res.status(200).json({ message: "food has been added" });
   } catch (error) {}

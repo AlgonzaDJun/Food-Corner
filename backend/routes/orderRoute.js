@@ -55,7 +55,8 @@ router.get("/getstandorder", isSeller, async (req, res) => {
       },
     ];
     const getOrderInStand = await orderModel.aggregate(getOrderStand);
-    res.send(getOrderInStand);
+    const update = getOrderInStand.filter((item) => item.orderItems.length !== 0);
+    res.send(update);
   } catch (error) {
     res.status(400).json(error.message);
   }

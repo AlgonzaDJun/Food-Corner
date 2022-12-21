@@ -2,14 +2,42 @@ import React, { useState } from "react";
 import "../css/styles2.css";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../../../actions/userActions";
+import { addNewFood } from "../../../actions/foodActions";
 
 const Menu = () => {
+  const dispatch = useDispatch();
   const [headerTogle, setHeaderTogle] = useState(false);
+  const [nama, setNama] = useState("");
+  const [harga, setHarga] = useState("");
+  const [image, setImage] = useState([]);
 
   const [editTogle, setEditTogle] = useState(false);
 
   const handleEdit = () => {
     setEditTogle(!editTogle);
+  };
+
+  const setFileToBase = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setImage(reader.result);
+    };
+  };
+
+  //handle and convert it in base 64
+  const handleImage = (e) => {
+    const file = e.target.files[0];
+    setFileToBase(file);
+    console.log(file);
+  };
+
+  //submit the form
+  const submitForm = async (e) => {
+    e.preventDefault();
+    dispatch(addNewFood(nama, harga, image))
   };
   return (
     <div className="w-100 h-100 d-grid min-vh-100">
@@ -36,7 +64,7 @@ const Menu = () => {
           <div class="col-lg-12">
             <div class="row">
               <div class="col-md-4">
-                <form action="#" method="post" enctype="multipart/form-data">
+                <form>
                   <div class="card mb-3">
                     <div
                       class="card-header"
@@ -50,6 +78,8 @@ const Menu = () => {
                       <div class="form-group">
                         <label class="control-label">Nama: </label>
                         <input
+                          onChange={(e) => setNama(e.target.value)}
+                          value={nama}
                           type="text"
                           class="form-control"
                           name="name"
@@ -57,18 +87,10 @@ const Menu = () => {
                         />
                       </div>
                       <div class="form-group">
-                        <label class="control-label">Deskripsi: </label>
-                        <textarea
-                          cols="30"
-                          rows="3"
-                          class="form-control"
-                          name="description"
-                          required
-                        ></textarea>
-                      </div>
-                      <div class="form-group">
                         <label class="control-label">Harga</label>
                         <input
+                          onChange={(e) => setHarga(e.target.value)}
+                          value={harga}
                           type="number"
                           class="form-control"
                           name="price"
@@ -89,7 +111,9 @@ const Menu = () => {
                           class="form-control"
                           required
                           style={{ border: 0 }}
+                          onChange={handleImage}
                         />
+                        <img className="img-fluid w-50 h-50" src={image} alt="" />
                         <small id="Info" class="form-text text-muted mx-3">
                           Upload dg format .jpg.
                         </small>
@@ -103,6 +127,7 @@ const Menu = () => {
                             type="submit"
                             name="createItem"
                             class="btn btn-sm btn-primary"
+                            onClick={submitForm}
                           >
                             {" "}
                             Tambah{" "}
@@ -148,14 +173,6 @@ const Menu = () => {
                               Nama : <b>Mie Goreng Gacor</b>
                             </p>
                             <p>
-                              Deskripsi :{" "}
-                              <b class="truncate">
-                                {" "}
-                                Mie dengan balutan coklat belgia yang renyah
-                                bertaburkan serbuk sari bunga matahari
-                              </b>
-                            </p>
-                            <p>
                               Harga : <b>12000</b>
                             </p>
                           </td>
@@ -169,7 +186,7 @@ const Menu = () => {
                               >
                                 Edit
                               </button>
-                              <form action="" method="POST">
+                              <form>
                                 <button
                                   name="removeItem"
                                   class="btn btn-sm btn-danger"
@@ -203,7 +220,7 @@ const Menu = () => {
                 <form enctype="multipart/form-data">
                   <div
                     class="text-left my-2 row"
-                    style={{borderBottom: "2px solid #dee2e6"}}
+                    style={{ borderBottom: "2px solid #dee2e6" }}
                   >
                     <div class="form-group col-md-8">
                       <b>
@@ -216,7 +233,7 @@ const Menu = () => {
                         accept=".jpg"
                         class="form-control"
                         required
-                        style={{border: 0}}
+                        style={{ border: 0 }}
                         onchange="document.getElementById('itemPhoto').src = window.URL.createObjectURL(this.files[0])"
                       />
                       <small id="Info" class="form-text text-muted mx-3">
@@ -243,7 +260,7 @@ const Menu = () => {
                     </div>
                   </div>
                 </form>
-                <form action="#" method="post">
+                <form>
                   <div class="text-left my-2">
                     <b>
                       <label for="name">Nama</label>
@@ -336,7 +353,7 @@ const Menu = () => {
                 </a>
               </div>
             </div>
-            <a href="" class="nav__link">
+            <a class="nav__link" onClick={() => dispatch(logoutUser())}>
               <i class="bx bx-log-out nav__icon"></i>
               <span class="nav__name">Log Out</span>
             </a>
