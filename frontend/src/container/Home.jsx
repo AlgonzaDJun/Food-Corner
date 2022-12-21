@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import navbarLogo from "../assets/images/logo2.png";
 import foodLogo from "../assets/images/main-b.jpg";
 import bgstand from "../assets/images/menu-bg.png";
@@ -21,9 +21,15 @@ import "swiper/css";
 import "./css/swiper-bundle.min.css";
 import Swiper from "https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.esm.browser.min.js";
 import Recommendation from "./Recommendation";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllStands } from "../actions/standActions";
+import { addToCart, getCart } from "../actions/cartActions";
 
 const Home = () => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
+    dispatch(getAllStands());
     const swiper = new Swiper(".slide-content", {
       slidesPerView: 3,
       spaceBetween: 25,
@@ -54,6 +60,25 @@ const Home = () => {
       },
     });
   }, []);
+
+  const standState = useSelector((state) => state.getAllStandsReducer);
+  const { stands, error, loading } = standState;
+
+  const foodData = stands.map((stand) => {
+    return stand.menu.map((item, index) => {
+      return item;
+    });
+  });
+  // menggabungkan yang berbeda stand
+  const allFood = foodData.reduce((a, b) => a.concat(b), []);
+
+  const [stand, setStand] = useState("all");
+
+  const filterData = (filter) => {
+    return allFood.filter((item) => {
+      return item.standID === filter;
+    });
+  };
 
   return (
     <div className="w-100 h-auto flex-column d-flex align-items-center justify-content-center">
@@ -128,56 +153,215 @@ const Home = () => {
               <div className="menu-tab-wp" id="stand">
                 <div className="row">
                   <div className="col-lg-12 m-auto">
-                    <div className="menu-tab text-center">
+                    <div className="menu-tab text-center d-flex gap-4 justify-content-center">
                       {/* <ul className="filters"> */}
                       <div className="filter-center"></div>
-                      <li className="btn active" onClick={{ filterSelection: 'all' }} to={"/"}>
-                        <img src={bg1} alt="" />All</li>
-                      <li className="btn" href="#stand1">
-                        <img src={bg2} alt="" />Stand 1</li>
-                      <li className="btn" onClick={{ filterSelection: 'stand2' }}>
-                        <img src={bg3} alt="" />Stand 2</li>
-                      <li className="btn" onClick={{ filterSelection: 'stand3' }}>
-                        <img src={bg4} alt="" />Stand 3</li>
+                      <li
+                        className={
+                          stand === "all" ? "btn active btn-stand text-white" : "btn active"
+                        }
+                        onClick={() => setStand("all")}
+                        to={"/"}
+                      >
+                        <img src={bg1} alt="" />
+                        All
+                      </li>
+                      <li
+                        className="btn"
+                        onClick={() => setStand("01")}
+                      >
+                        <img src={bg2} alt="" />
+                        Stand 1
+                      </li>
+                      <li
+                        className="btn"
+                        onClick={() => setStand("02")}
+                      >
+                        <img src={bg3} alt="" />
+                        Stand 2
+                      </li>
+                      <li
+                        className="btn"
+                        onClick={() => setStand("03")}
+                      >
+                        <img src={bg4} alt="" />
+                        Stand 3
+                      </li>
                       {/* </ul> */}
                     </div>
                   </div>
                 </div>
               </div>
 
-
               <div className="menu-list-row">
-                <div className="row g-xxl-5 bydefault_show" id="stand">
+                <div className="row g-xxl-5 bydefault_show">
                   {/* 1 */}
-                  <div
-                    className="col-lg-4 col-sm-6 dish-box-wp stand1" id="stand1">
-                    <div className="dish-box text-center">
-                      <div className="dist-img">
-                        <img src={dish1} alt="" />
-                      </div>
-                      <div className="star-rating-wp">
-                        <div className="star-rating">
-                          <span
-                            className="star-rating__fill"
-                            style={{ width: "100%" }}
-                          ></span>
-                        </div>
-                      </div>
-                      <div className="dish-title">
-                        <h3 className="h3-title">Grilled Chicken</h3>
-                      </div>
-                      <div className="dist-bottom-row">
-                        <p>Rp 20.000</p>
-                        <button className="dish-add-btn">
-                          <i className="uil uil-shopping-cart px-3 py-3">
-                            Add to cart
-                          </i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+                  {stand === "all"
+                    ? allFood.map((item) => {
+                        return (
+                          <div
+                            className="col-lg-4 col-sm-6 dish-box-wp stand1"
+                            id="stand1"
+                            key={item._id}
+                          >
+                            <div className="dish-box text-center">
+                              <div className="dist-img">
+                                <img src={item.image} alt={item.name} />
+                              </div>
+                              <div className="star-rating-wp">
+                                <div className="star-rating">
+                                  <span
+                                    className="star-rating__fill"
+                                    style={{ width: "100%" }}
+                                  ></span>
+                                </div>
+                              </div>
+                              <div className="dish-title">
+                                <h3 className="h3-title">{item.name}</h3>
+                              </div>
+                              <div className="dist-bottom-row">
+                                <p>{item.price}</p>
+                                <button
+                                  className="dish-add-btn"
+                                  onClick={async () => {
+                                    await dispatch(addToCart(item, 1));
+                                    dispatch(getCart());
+                                  }}
+                                >
+                                  <i className="uil uil-shopping-cart px-3 py-3">
+                                    Add to cart
+                                  </i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })
+                    : stand === "01"
+                    ? filterData("01").map((item) => {
+                        return (
+                          <div
+                            className="col-lg-4 col-sm-6 dish-box-wp stand1"
+                            id="stand1"
+                            key={item._id}
+                          >
+                            <div className="dish-box text-center">
+                              <div className="dist-img">
+                                <img src={item.image} alt={item.name} />
+                              </div>
+                              <div className="star-rating-wp">
+                                <div className="star-rating">
+                                  <span
+                                    className="star-rating__fill"
+                                    style={{ width: "100%" }}
+                                  ></span>
+                                </div>
+                              </div>
+                              <div className="dish-title">
+                                <h3 className="h3-title">{item.name}</h3>
+                              </div>
+                              <div className="dist-bottom-row">
+                                <p>{item.price}</p>
+                                <button
+                                  className="dish-add-btn"
+                                  onClick={async () => {
+                                    await dispatch(addToCart(item, 1));
+                                    dispatch(getCart());
+                                  }}
+                                >
+                                  <i className="uil uil-shopping-cart px-3 py-3">
+                                    Add to cart
+                                  </i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })
+                    : stand === "02"
+                    ? filterData("02").map((item) => {
+                        return (
+                          <div
+                            className="col-lg-4 col-sm-6 dish-box-wp stand1"
+                            id="stand1"
+                            key={item._id}
+                          >
+                            <div className="dish-box text-center">
+                              <div className="dist-img">
+                                <img src={item.image} alt={item.name} />
+                              </div>
+                              <div className="star-rating-wp">
+                                <div className="star-rating">
+                                  <span
+                                    className="star-rating__fill"
+                                    style={{ width: "100%" }}
+                                  ></span>
+                                </div>
+                              </div>
+                              <div className="dish-title">
+                                <h3 className="h3-title">{item.name}</h3>
+                              </div>
+                              <div className="dist-bottom-row">
+                                <p>{item.price}</p>
+                                <button
+                                  className="dish-add-btn"
+                                  onClick={async () => {
+                                    await dispatch(addToCart(item, 1));
+                                    dispatch(getCart());
+                                  }}
+                                >
+                                  <i className="uil uil-shopping-cart px-3 py-3">
+                                    Add to cart
+                                  </i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })
+                    : filterData("03").map((item) => {
+                        return (
+                          <div
+                            className="col-lg-4 col-sm-6 dish-box-wp stand1"
+                            id="stand1"
+                            key={item._id}
+                          >
+                            <div className="dish-box text-center">
+                              <div className="dist-img">
+                                <img src={item.image} alt={item.name} />
+                              </div>
+                              <div className="star-rating-wp">
+                                <div className="star-rating">
+                                  <span
+                                    className="star-rating__fill"
+                                    style={{ width: "100%" }}
+                                  ></span>
+                                </div>
+                              </div>
+                              <div className="dish-title">
+                                <h3 className="h3-title">{item.name}</h3>
+                              </div>
+                              <div className="dist-bottom-row">
+                                <p>{item.price}</p>
+                                <button
+                                  className="dish-add-btn"
+                                  onClick={async () => {
+                                    await dispatch(addToCart(item, 1));
+                                    dispatch(getCart());
+                                  }}
+                                >
+                                  <i className="uil uil-shopping-cart px-3 py-3">
+                                    Add to cart
+                                  </i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+
                   {/* 2 */}
-                  <div
+                  {/* <div
                     className="col-lg-4 col-sm-6 dish-box-wp stand2"
                     data-cat="stand1"
                   >
@@ -205,97 +389,7 @@ const Home = () => {
                         </button>
                       </div>
                     </div>
-                  </div>
-                  {/* 3 */}
-                  <div
-                    className="col-lg-4 col-sm-6 dish-box-wp stand3"
-                    data-cat="stand3"
-                  >
-                    <div className="dish-box text-center">
-                      <div className="dist-img">
-                        <img src={dish3} alt="" />
-                      </div>
-                      <div className="star-rating-wp">
-                        <div className="star-rating">
-                          <span
-                            className="star-rating__fill"
-                            sstyle={{ width: "70%" }}
-                          ></span>
-                        </div>
-                      </div>
-                      <div className="dish-title">
-                        <h3 className="h3-title">Chicken Noodles</h3>
-                      </div>
-                      <div className="dist-bottom-row">
-                        <p>Rp 20.000</p>
-                        <button className="dish-add-btn">
-                          <i className="uil uil-shopping-cart px-3 py-3">
-                            Add to cart
-                          </i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  {/* 4 */}
-                  <div
-                    className="col-lg-4 col-sm-6 dish-box-wp stand3"
-                    data-cat="stand3"
-                  >
-                    <div className="dish-box text-center">
-                      <div className="dist-img">
-                        <img src={dish4} alt="" />
-                      </div>
-                      <div className="star-rating-wp">
-                        <div className="star-rating">
-                          <span
-                            className="star-rating__fill"
-                            style={{ width: "90%" }}
-                          ></span>
-                        </div>
-                      </div>
-                      <div className="dish-title">
-                        <h3 className="h3-title">Bread Boiled Egg</h3>
-                      </div>
-                      <div className="dist-bottom-row">
-                        <p>Rp 20.000</p>
-                        <button className="dish-add-btn">
-                          <i className="uil uil-shopping-cart px-3 py-3">
-                            Add to cart
-                          </i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  {/* 5 */}
-                  <div
-                    className="col-lg-4 col-sm-6 dish-box-wp stand1"
-                    data-cat="stand1"
-                  >
-                    <div className="dish-box text-center">
-                      <div className="dist-img">
-                        <img src={dish5} alt="" />
-                      </div>
-                      <div className="star-rating-wp">
-                        <div className="star-rating">
-                          <span
-                            className="star-rating__fill"
-                            style={{ width: "100%" }}
-                          ></span>
-                        </div>
-                      </div>
-                      <div className="dish-title">
-                        <h3 className="h3-title">Immunity Dish</h3>
-                      </div>
-                      <div className="dist-bottom-row">
-                        <p>Rp 20.000</p>
-                        <button className="dish-add-btn">
-                          <i className="uil uil-shopping-cart px-3 py-3">
-                            Add to cart
-                          </i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
