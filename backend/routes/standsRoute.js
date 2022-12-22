@@ -83,7 +83,7 @@ router.post("/createstand", isAdmin, async (req, res) => {
 // READ STAND - ADMIN
 router.get("/getstands", isAdmin, async (req, res) => {
   try {
-    const stand = await User.find({ role: "seller" });
+    const stand = await User.find({ role: "seller" }).sort({ createdAt: "desc" });
     res.status(200).json(stand);
   } catch (error) {
     return res.status(400).json({ message: error.message });

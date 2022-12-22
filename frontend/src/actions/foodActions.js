@@ -51,7 +51,7 @@ export const addNewFood = (name, price, image) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "ADD_FOOD_FAILED",
-      payload: error,
+      payload: error.response.data,
     });
   }
 };
@@ -77,7 +77,7 @@ export const updateFood = (name, price, image, idFood) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "UPDATE_FOOD_FAILED",
-      payload: error,
+      payload: error.response.data,
     });
   }
 };
@@ -98,7 +98,7 @@ export const deleteFood = (idFood) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "DELETE_FOOD_FAILED",
-      payload: error,
+      payload: error.response.data,
     });
   }
 };

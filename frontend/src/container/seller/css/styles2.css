@@ -106,6 +106,7 @@ a {
 
 .nav__logo {
   margin-bottom: 2rem;
+  text-decoration : none;
 }
 
 .nav__logo-icon {
@@ -116,6 +117,7 @@ a {
 .nav__logo-name {
   color: var(--white-color);
   font-weight: 700;
+  text-decoration : none;
 }
 
 .nav__link {
@@ -123,6 +125,11 @@ a {
   color: var(--first-color-light);
   margin-bottom: 1.5rem;
   transition: 0.3s;
+  text-decoration: none;
+}
+
+a .log-out {
+  cursor: pointer;
 }
 
 .nav__link:hover {

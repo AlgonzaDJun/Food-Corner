@@ -4,8 +4,14 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../../actions/userActions";
-import { addNewFood, deleteFood, updateFood } from "../../../actions/foodActions";
+import {
+  addNewFood,
+  deleteFood,
+  updateFood,
+} from "../../../actions/foodActions";
 import { getFoodStand } from "../../../actions/standActions";
+import Error from "../../../components/Error";
+import Success from "../../../components/Success";
 
 const Menu = () => {
   const dispatch = useDispatch();
@@ -20,6 +26,13 @@ const Menu = () => {
   const { foodStand } = foodStandState;
 
   // console.log(foodStand);
+  const addFoodState = useSelector((state) => state.addFoodReducer);
+  const deleteFoodState = useSelector((state) => state.deleteFoodReducer);
+  const updateFoodState = useSelector((state) => state.updateFoodReducer);
+
+  useEffect(() => {
+    dispatch(getFoodStand());
+  }, [addFoodState.success, deleteFoodState.success, updateFoodState.success]);
 
   const [headerTogle, setHeaderTogle] = useState(false);
   const [nama, setNama] = useState("");
@@ -35,7 +48,6 @@ const Menu = () => {
   const onHideModalEdit = () => {
     handleEdit();
     setModalData(null);
-    dispatch(getFoodStand());
   };
 
   const handleEdit = () => {
@@ -54,6 +66,7 @@ const Menu = () => {
   const handleImage = (e) => {
     const file = e.target.files[0];
     setFileToBase(file);
+
     // console.log(file);
   };
 
@@ -75,17 +88,20 @@ const Menu = () => {
   const submitForm = async (e) => {
     e.preventDefault();
     dispatch(addNewFood(nama, harga, image));
+    await dispatch(getFoodStand());
   };
 
   // update form
   const updateForm = async (e, idFood) => {
     e.preventDefault();
     dispatch(updateFood(updateNama, updateHarga, updateImage, idFood));
+    await dispatch(getFoodStand());
   };
 
   const deleteForm = async (e, idFood) => {
     e.preventDefault();
     dispatch(deleteFood(idFood));
+    await dispatch(getFoodStand());
   };
 
   return (
@@ -95,6 +111,14 @@ const Menu = () => {
         className={headerTogle ? "body body-pd" : "body"}
         style={{ backgroundColor: "#80808045" }}
       >
+        {addFoodState.success ||
+        deleteFoodState.success ||
+        updateFoodState.success ? (
+          <Success text="Sukses!" />
+        ) : null}
+        {addFoodState.error && <Error text="Terjadi error!!" />}
+        {deleteFoodState.error && <Error text="Terjadi error!!" />}
+        {updateFoodState.error && <Error text="Terjadi error!!" />}
         <header class={headerTogle ? "body-pd header" : "header"} id="header">
           <div class="header__toggle">
             <i
@@ -104,7 +128,10 @@ const Menu = () => {
             ></i>
           </div>
           <div class="header__img">
-            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="profil" />
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+              alt="profil"
+            />
           </div>
         </header>
 
@@ -127,7 +154,15 @@ const Menu = () => {
                       <div class="form-group">
                         <label class="control-label">Nama: </label>
                         <input
-                          onChange={(e) => setNama(e.target.value)}
+                          onChange={(e) => {
+                            setNama(e.target.value);
+                            addFoodState.error = null;
+                            updateFoodState.error = null;
+                            deleteFoodState.error = null;
+                            addFoodState.success = null;
+                            updateFoodState.success = null;
+                            deleteFoodState.success = null;
+                          }}
                           value={nama}
                           type="text"
                           class="form-control"
@@ -138,7 +173,15 @@ const Menu = () => {
                       <div class="form-group">
                         <label class="control-label">Harga</label>
                         <input
-                          onChange={(e) => setHarga(e.target.value)}
+                          onChange={(e) => {
+                            setHarga(e.target.value);
+                            addFoodState.error = null;
+                            updateFoodState.error = null;
+                            deleteFoodState.error = null;
+                            addFoodState.success = null;
+                            updateFoodState.success = null;
+                            deleteFoodState.success = null;
+                          }}
                           value={harga}
                           type="number"
                           class="form-control"
@@ -180,7 +223,7 @@ const Menu = () => {
                             type="submit"
                             name="createItem"
                             class="btn btn-sm btn-primary"
-                            onClick={submitForm}
+                            onClick={(e) => submitForm(e)}
                           >
                             {" "}
                             Tambah{" "}
@@ -232,9 +275,9 @@ const Menu = () => {
                                 </p>
                               </td>
                               <td class="text-center">
-                                <div class="mx-auto" style={{ width: "112px" }}>
+                                <div class="mx-auto" style={{ width: "80px" }}>
                                   <button
-                                    class="btn btn-sm btn-primary"
+                                    class="btn btn-sm btn-primary mb-2"
                                     type="button"
                                     onClick={() => {
                                       handleEdit();
@@ -248,7 +291,7 @@ const Menu = () => {
                                     <button
                                       name="removeItem"
                                       class="btn btn-sm btn-danger"
-                                      style={{ marginLeft: "9px" }}
+                                      style={{ width: "100%" }}
                                       onClick={(e) => deleteForm(e, item._id)}
                                     >
                                       Delete
@@ -325,7 +368,15 @@ const Menu = () => {
                       name="name"
                       value={updateNama}
                       placeholder={modalData.name}
-                      onChange={(e) => setUpdateNama(e.target.value)}
+                      onChange={(e) => {
+                        setUpdateNama(e.target.value);
+                        addFoodState.error = null;
+                        updateFoodState.error = null;
+                        deleteFoodState.error = null;
+                        addFoodState.success = null;
+                        updateFoodState.success = null;
+                        deleteFoodState.success = null;
+                      }}
                       type="text"
                       required
                     />
@@ -341,7 +392,15 @@ const Menu = () => {
                         name="price"
                         value={updateHarga}
                         placeholder={modalData.price}
-                        onChange={(e) => setUpdateHarga(e.target.value)}
+                        onChange={(e) => {
+                          setUpdateHarga(e.target.value);
+                          addFoodState.error = null;
+                          updateFoodState.error = null;
+                          deleteFoodState.error = null;
+                          addFoodState.success = null;
+                          updateFoodState.success = null;
+                          deleteFoodState.success = null;
+                        }}
                         type="number"
                         min="1"
                         required
@@ -374,7 +433,7 @@ const Menu = () => {
         <div class={headerTogle ? "l-navbar showa" : "l-navbar"} id="nav-bar">
           <nav class="nav">
             <div>
-              <a href="/seller" class="nav__logo">
+              <a class="nav__logo">
                 <i class="bx bx-layer nav__logo-icon"></i>
                 <span class="nav__logo-name">Stand Management</span>
               </a>

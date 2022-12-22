@@ -3,14 +3,21 @@ import { legacy_createStore as createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 
 import { composeWithDevTools } from "@redux-devtools/extension";
-import { getAllFoodsReducer } from "./reducers/foodReducers";
+import {
+  getAllFoodsReducer,
+  addFoodReducer,
+  deleteFoodReducer,
+  updateFoodReducer,
+} from "./reducers/foodReducers";
 import { loginUserReducer, registerUserReducer } from "./reducers/userReducers";
 import {
   getAllStandsReducer,
   getOrders,
   getFoodStand,
   getStandAdmin,
-  createStand
+  createStand,
+  deleteStand,
+  updateStand,
 } from "./reducers/standReducers";
 import { cartReducer, getCartReducer } from "./reducers/cartReducer";
 import {
@@ -34,8 +41,12 @@ const finalReducer = combineReducers({
   orderPaidReducer: orderPaidReducer,
   getFoodStand,
   getStandAdmin,
-  createStand
-
+  createStand,
+  updateStand,
+  deleteStand,
+  addFoodReducer,
+  deleteFoodReducer,
+  updateFoodReducer
 });
 
 const cartItems = localStorage.getItem("cartItems")

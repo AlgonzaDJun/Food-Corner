@@ -8,13 +8,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getOrders } from "../../../actions/standActions";
 import { orderPaid, orderDelivered } from "../../../actions/orderActions";
+import Success from "../../../components/Success";
+import Error from "../../../components/Error";
 
 const Order = () => {
   const [modalData, setModalData] = useState(null);
+  const orderDeliveredState = useSelector((state) => state.orderDeliverReducer);
+  const orderPaidState = useSelector((state) => state.orderPaidReducer);
 
   useEffect(() => {
     dispatch(getOrders());
   }, []);
+
+  useEffect(() => {
+    dispatch(getOrders());
+  }, [orderPaidState.success ,orderDeliveredState.success]);
 
   const onHideModalItem = () => {
     handleItem();
@@ -23,6 +31,8 @@ const Order = () => {
   const onHideModalStatus = () => {
     handleStatus();
     setModalData(null);
+    orderPaidState.success = false;
+    orderDeliveredState.success = false;
   };
 
   const orderState = useSelector((state) => state.getOrders);
@@ -62,6 +72,12 @@ const Order = () => {
         className={headerTogle ? "body body-pd" : "body"}
         style={{ backgroundColor: "#80808045" }}
       >
+        {orderPaidState.error || orderDeliveredState.error ? (
+          <Error text={"terjadi error"} />
+        ) : null}
+        {orderPaidState.success || orderDeliveredState.success ? (
+          <Success text={"berhasil merubah status"} />
+        ) : null}
         <header class={headerTogle ? "body-pd header" : "header"} id="header">
           <div class="header__toggle">
             <i
@@ -71,7 +87,10 @@ const Order = () => {
             ></i>
           </div>
           <div class="header__img">
-            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="profil" />
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+              alt="profil"
+            />
           </div>
         </header>
 
@@ -127,8 +146,8 @@ const Order = () => {
                       class="view btn"
                       onClick={() => {
                         handleStatus();
-                        dispatch(getOrders());
                         setModalData(item);
+                        dispatch(getOrders());
                       }}
                     >
                       <i class="material-icons">&#xE5C8;</i>
@@ -215,18 +234,16 @@ const Order = () => {
                             </select> */}
                             {!status.isPaid && !status.isDelivered ? (
                               <Button
-                                onClick={async () => {
+                                onClick={() => {
                                   paidOrder(modalData._id, status._id);
-                                  await dispatch(getOrders());
                                 }}
                               >
                                 Customer Bayar
                               </Button>
                             ) : status.isPaid && !status.isDelivered ? (
                               <Button
-                                onClick={async () => {
+                                onClick={ () => {
                                   deliveredOrder(modalData._id, status._id);
-                                  await dispatch(getOrders());
                                 }}
                               >
                                 Antar Pesanan
@@ -251,7 +268,11 @@ const Order = () => {
               </div>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" style={{width: "100%"}} onClick={handleStatus}>
+              <Button
+                variant="secondary"
+                style={{ width: "100%" }}
+                onClick={handleStatus}
+              >
                 Close
               </Button>
             </Modal.Footer>
@@ -323,7 +344,7 @@ const Order = () => {
         <div class={headerTogle ? "l-navbar showa" : "l-navbar"} id="nav-bar">
           <nav class="nav">
             <div>
-              <a href="/seller" class="nav__logo">
+              <a class="nav__logo">
                 <i class="bx bx-layer nav__logo-icon"></i>
                 <span class="nav__logo-name">Stand Management</span>
               </a>
@@ -345,7 +366,7 @@ const Order = () => {
             </div>
             <a class="nav__link" onClick={() => dispatch(logoutUser())}>
               <i class="bx bx-log-out nav__icon"></i>
-              <span class="nav__name">Log Out</span>
+              <span class="nav__name log-out">Log Out</span>
             </a>
           </nav>
         </div>

@@ -36,7 +36,7 @@ const Seller2 = () => {
         <div class={headerTogle ? "l-navbar showa" : "l-navbar"} id="nav-bar">
           <nav class="nav">
             <div>
-              <a href="/seller" class="nav__logo">
+              <a class="nav__logo">
                 <i class="bx bx-layer nav__logo-icon"></i>
                 <span class="nav__logo-name">Stand Management</span>
               </a>

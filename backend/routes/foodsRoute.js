@@ -21,6 +21,12 @@ router.post("/createFood", isSeller, async (req, res) => {
   const { name, price, image } = req.body;
   const { standID } = req.user;
 
+  // check if name price image empty send error
+  if (!name || !price || !image) {
+    return res.status(400).json({ message: "please fill all the fields" });
+  }
+  
+
   try {
     const result = await cloudinary.uploader.upload(image, {
       folder: "products",
@@ -36,7 +42,9 @@ router.post("/createFood", isSeller, async (req, res) => {
     });
     newFood.save();
     res.status(200).json({ message: "food has been added" });
-  } catch (error) {}
+  } catch (error) {
+    return res.status(400).json({ message: error });
+  }
 });
 
 // Read all food inside stand
@@ -44,7 +52,7 @@ router.get("/getstandfood", isSeller, async (req, res) => {
   const { standID } = req.user;
 
   try {
-    const standFood = await Food.find({ standID: standID });
+    const standFood = await Food.find({ standID: standID }).sort({ createdAt: "desc" });
     res.status(200).json(standFood);
   } catch (error) {
     res.status(400).json(error);
@@ -57,6 +65,10 @@ router.put("/:id/updatefood", isSeller, async (req, res) => {
   const food = await Food.findById(req.params.id);
   if (!food) {
     return res.status(404).json({ message: "food not found" });
+  }
+  // check if name price image empty send error
+  if (!name || !price || !image) {
+    return res.status(400).json({ message: "please fill all the fields" });
   }
   try {
     const result = await cloudinary.uploader.upload(image, {

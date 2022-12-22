@@ -28,6 +28,10 @@ function Admin() {
 
   const dispatch = useDispatch();
 
+  const createStandState = useSelector((state) => state.createStand);
+  const updateStandState = useSelector((state) => state.updateStand);
+  const deleteStandState = useSelector((state) => state.deleteStand);
+
   const handleClick = () => {
     // 👇️ toggle isActive state on click
     setIsActive((current) => !current);
@@ -36,14 +40,23 @@ function Admin() {
     // 👇️ toggle isActive state on click
     setIsEdit((current) => !current);
   };
-  const onHideModalEdit = () => {
+  const onHideModalEdit = async () => {
     handleEdit();
     setModalData(null);
+    await dispatch(getStandAdmin());
   };
 
   useEffect(() => {
     dispatch(getStandAdmin());
   }, []);
+
+  useEffect(() => {
+    dispatch(getStandAdmin());
+  }, [
+    createStandState.success,
+    updateStandState.success,
+    deleteStandState.success,
+  ]);
 
   const getStand = useSelector((state) => state.getStandAdmin);
   const { stand } = getStand;
@@ -107,7 +120,10 @@ function Admin() {
                     </button>
                     <button
                       className="btn"
-                      onClick={() => dispatch(deleteStand(item._id))}
+                      onClick={async () => {
+                        dispatch(deleteStand(item._id));
+                        await dispatch(getStandAdmin());
+                      }}
                     >
                       <i className="mx-2 uil uil-trash-alt" />
                     </button>
@@ -196,9 +212,10 @@ function Admin() {
             </Button>
             <Button
               variant="primary"
-              onClick={() =>
-                dispatch(createStand(nama, email, password, standID))
-              }
+              onClick={async () => {
+                await dispatch(createStand(nama, email, password, standID));
+                await dispatch(getStandAdmin());
+              }}
             >
               Save Changes
             </Button>
@@ -268,7 +285,7 @@ function Admin() {
             </Button>
             <Button
               variant="primary"
-              onClick={() =>
+              onClick={async () => {
                 dispatch(
                   editStand(
                     updateNama,
@@ -276,8 +293,9 @@ function Admin() {
                     updatePassword,
                     modalData._id
                   )
-                )
-              }
+                );
+                await dispatch(getStandAdmin());
+              }}
             >
               Save Changes
             </Button>
