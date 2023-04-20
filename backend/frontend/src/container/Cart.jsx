@@ -25,12 +25,13 @@ const Cart = () => {
   }, []);
 
   // let subTotal = cartItems.reduce((x, item) => x + item.prices, 0);
+  let subTotal = 0;
 
   // if user not login
   if (!currentUser) {
-    let subTotal = 0;
+    subTotal = 0;
   } else {
-    let subTotal = cartItems.reduce((x, item) => x + item.prices, 0);
+    subTotal = cartItems.reduce((x, item) => x + item.prices, 0);
   }
 
   const formatRupiah = (money) => {
