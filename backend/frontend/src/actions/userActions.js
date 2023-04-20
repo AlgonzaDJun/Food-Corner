@@ -5,7 +5,7 @@ export const registerUser = (user) => async (dispatch) => {
 
   try {
     const response = await axios.post(
-      "http://localhost:5000/api/users/register",
+      "/api/users/register",
       user
     );
     console.log(response);
@@ -22,7 +22,7 @@ export const loginUser = (user) => async (dispatch) => {
 
   try {
     const response = await axios.post(
-      "http://localhost:5000/api/users/login",
+      "/api/users/login",
       user,
       {
         withCredentials: true,

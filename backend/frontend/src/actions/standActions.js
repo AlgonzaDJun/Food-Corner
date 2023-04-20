@@ -15,7 +15,7 @@ export const getAllStands = () => async (dispatch) => {
 
   try {
     const response = await axios.get(
-      "http://localhost:5000/api/stands/getallstands"
+      "/api/stands/getallstands"
     );
     // console.log(response);
     dispatch({
@@ -37,7 +37,7 @@ export const getOrders = () => async (dispatch) => {
 
   try {
     const response = await instance.get(
-      "http://localhost:5000/api/orders/getstandorder"
+      "/api/orders/getstandorder"
     );
     // console.log(response);
     dispatch({
@@ -59,7 +59,7 @@ export const getFoodStand = () => async (dispatch) => {
 
   try {
     const response = await instance.get(
-      "http://localhost:5000/api/foods/getstandfood"
+      "/api/foods/getstandfood"
     );
     // console.log(response);
     dispatch({
@@ -81,7 +81,7 @@ export const getStandAdmin = () => async (dispatch) => {
 
   try {
     const response = await instance.get(
-      "http://localhost:5000/api/stands/getstands"
+      "/api/stands/getstands"
     );
     // console.log(response);
     dispatch({
@@ -104,7 +104,7 @@ export const createStand =
 
     try {
       const response = await instance.post(
-        "http://localhost:5000/api/stands/createstand",
+        "/api/stands/createstand",
         {
           name,
           email,
@@ -133,7 +133,7 @@ export const editStand =
 
     try {
       const response = await instance.put(
-        `http://localhost:5000/api/stands/${idStand}/updatestand`,
+        `/api/stands/${idStand}/updatestand`,
         {
           name,
           email,
@@ -160,7 +160,7 @@ export const deleteStand = (idStand) => async (dispatch) => {
 
   try {
     const response = await instance.delete(
-      `http://localhost:5000/api/stands/${idStand}/deletestand`
+      `/api/stands/${idStand}/deletestand`
     );
     // console.log(response);
     dispatch({

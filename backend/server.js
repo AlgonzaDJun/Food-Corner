@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 // const Food = require("./models/foodModel");
 const bodyParser = require("body-parser");
 require("dotenv").config();
+const path = require("path");
 
 // middleware
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
@@ -37,6 +38,16 @@ app.use("/api/foods/", foodsRoute);
 app.use("/api/users/", userRoute);
 app.use("/api/stands/", standsRoute);
 app.use("/api/orders/", orderRoute);
+
+app.use(express.static(path.join(__dirname, "./frontend/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./frontend/build/index.html"), (err) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
 
 app.get("/", (req, res) => {
   res.send("Server Working... ");

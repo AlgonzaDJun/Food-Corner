@@ -15,7 +15,7 @@ export const getAllFoods = () => async (dispatch) => {
 
   try {
     const response = await axios.get(
-      "http://localhost:5000/api/foods/getallfoods"
+      "/api/foods/getallfoods"
     );
     console.log(response);
     dispatch({
@@ -37,7 +37,7 @@ export const addNewFood = (name, price, image) => async (dispatch) => {
 
   try {
     const response = await instance.post(
-      "http://localhost:5000/api/foods/createfood",
+      "/api/foods/createfood",
       {
         name,
         price,
@@ -63,7 +63,7 @@ export const updateFood = (name, price, image, idFood) => async (dispatch) => {
 
   try {
     const response = await instance.put(
-      `http://localhost:5000/api/foods/${idFood}/updatefood`,
+      `/api/foods/${idFood}/updatefood`,
       {
         name,
         price,
@@ -89,7 +89,7 @@ export const deleteFood = (idFood) => async (dispatch) => {
 
   try {
     const response = await instance.delete(
-      `http://localhost:5000/api/foods/${idFood}/deletefood`
+      `/api/foods/${idFood}/deletefood`
     );
     dispatch({
       type: "DELETE_FOOD_SUCCESS",

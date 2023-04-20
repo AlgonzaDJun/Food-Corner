@@ -27,7 +27,7 @@ export const addToCart = (menu, quantity) => async (dispatch) => {
   dispatch({ type: "ADD_TO_CART_REQUEST", payload: cartItem });
   try {
     const response = await instance.post(
-      "http://localhost:5000/api/users/addcart",
+      "/api/users/addcart",
       cartItem
     );
     console.log(response);
@@ -57,7 +57,7 @@ export const incrementCart = (menu, quantity) => async (dispatch) => {
   dispatch({ type: "INCREMENT_CART_REQUEST", payload: cartItem });
   try {
     const response = await instance.post(
-      "http://localhost:5000/api/users/incrementcart",
+      "/api/users/incrementcart",
       cartItem
     );
     // console.log(response);
@@ -74,7 +74,7 @@ export const deleteFromcart = (cartItem) => async (dispatch) => {
 
   try {
     const response = await instance.delete(
-      "http://localhost:5000/api/users/removecart",
+      "/api/users/removecart",
       { data: cartItem }
     );
     // console.log(response);
@@ -89,7 +89,7 @@ export const getCart = () => async (dispatch) => {
   dispatch({ type: "GET_CART_REQUEST" });
   try {
     const response = await instance.get(
-      "http://localhost:5000/api/users/getcart"
+      "/api/users/getcart"
     );
     dispatch({ type: "GET_CART_SUCCESS", payload: response.data });
   } catch (error) {

@@ -19,7 +19,7 @@ import stand from "../assets/images/title-shape.svg";
 // import { FreeMode } from "swiper";
 import "swiper/css";
 import "./css/swiper-bundle.min.css";
-import Swiper from "https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.esm.browser.min.js";
+// import Swiper from "https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.esm.browser.min.js";
 import Recommendation from "./Recommendation";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllStands } from "../actions/standActions";
@@ -31,7 +31,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getAllStands());
-    const swiper = new Swiper(".slide-content", {
+    const swiper = new window.Swiper(".slide-content", {
       slidesPerView: 3,
       spaceBetween: 25,
       loop: true,

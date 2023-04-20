@@ -23,7 +23,7 @@ export const placeOrder =
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/orders/placeorders",
+        "/api/orders/placeorders",
         {
           totalPrice,
           currentUser,
@@ -50,7 +50,7 @@ export const getOrder = () => async (dispatch) => {
   dispatch({ type: "GET_ORDER_REQUEST" });
   try {
     const response = await instance.get(
-      "http://localhost:5000/api/orders/getuserorder"
+      "/api/orders/getuserorder"
     );
     dispatch({ type: "GET_ORDER_SUCCESS", payload: response.data });
   } catch (error) {
@@ -62,7 +62,7 @@ export const orderPaid = (idOrder, idItem) => async (dispatch) => {
   dispatch({ type: "PAID_ORDER_REQUEST" });
   try {
     const response = await instance.put(
-      `http://localhost:5000/api/orders/${idOrder}/${idItem}/pay`
+      `/api/orders/${idOrder}/${idItem}/pay`
     );
     dispatch({ type: "PAID_ORDER_SUCCESS", payload: response.data });
   } catch (error) {
@@ -74,7 +74,7 @@ export const orderDelivered = (idOrder, idItem) => async (dispatch) => {
   dispatch({ type: "DELIVER_ORDER_REQUEST" });
   try {
     const response = await instance.put(
-      `http://localhost:5000/api/orders/${idOrder}/${idItem}/deliver`
+      `/api/orders/${idOrder}/${idItem}/deliver`
     );
     dispatch({ type: "DELIVER_ORDER_SUCCESS", payload: response.data });
   } catch (error) {
