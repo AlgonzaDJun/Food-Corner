@@ -66,7 +66,7 @@ router.get("/getuser", isAuth, async (req, res) => {
 });
 
 // tambah ke keranjang
-router.post("/addcart", isAuth, async (req, res) => {
+router.post("/addcart", async (req, res) => {
   const cartItem = req.body;
   try {
     const user = await User.findById(req.user._id);
