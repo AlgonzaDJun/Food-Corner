@@ -66,7 +66,7 @@ router.get("/getuser", isAuth, async (req, res) => {
 });
 
 // tambah ke keranjang
-router.post("/addcart", async (req, res) => {
+router.post("/addcart", isAuth, async (req, res) => {
   const cartItem = req.body;
   try {
     const user = await User.findById(req.user._id);
@@ -112,7 +112,7 @@ router.post("/addcart", async (req, res) => {
 });
 
 // mengambil data cart
-router.get("/getcart", isAuth, async (req, res) => {
+router.get("/getcart", async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
     if (!user) return res.status(400).json({ message: "User not found" });
