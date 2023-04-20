@@ -112,7 +112,7 @@ router.post("/addcart", isAuth, async (req, res) => {
 });
 
 // mengambil data cart
-router.get("/getcart", async (req, res) => {
+router.get("/getcart", isAuth, async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
     if (!user) return res.status(400).json({ message: "User not found" });
