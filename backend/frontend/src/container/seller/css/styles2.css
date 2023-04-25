@@ -106,7 +106,7 @@ a {
 
 .nav__logo {
   margin-bottom: 2rem;
-  text-decoration : none;
+  text-decoration: none;
 }
 
 .nav__logo-icon {
@@ -117,7 +117,7 @@ a {
 .nav__logo-name {
   color: var(--white-color);
   font-weight: 700;
-  text-decoration : none;
+  text-decoration: none;
 }
 
 .nav__link {
@@ -148,6 +148,7 @@ a .log-out {
 /*Add padding body movil*/
 .body-pd {
   padding-left: calc(var(--nav-width) + 1rem);
+  overflow: auto;
 }
 
 /*Active links*/
@@ -162,6 +163,11 @@ a .log-out {
   width: 2px;
   height: 32px;
   background-color: var(--white-color);
+}
+
+.l-navbar {
+  left: 0;
+  padding: 1rem 1rem 0 0;
 }
 
 /* ===== MEDIA QUERIES=====*/
@@ -185,11 +191,6 @@ a .log-out {
     width: 45px;
   }
 
-  .l-navbar {
-    left: 0;
-    padding: 1rem 1rem 0 0;
-  }
-
   /*Show navbar desktop*/
   .showa {
     width: calc(var(--nav-width) + 156px);
@@ -198,5 +199,6 @@ a .log-out {
   /*Add padding body desktop*/
   .body-pd {
     padding-left: calc(var(--nav-width) + 188px);
+    overflow: auto;
   }
 }

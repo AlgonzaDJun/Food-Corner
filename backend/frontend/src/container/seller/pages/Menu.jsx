@@ -237,7 +237,7 @@ const Menu = () => {
 
               <div class="col-md-8">
                 <div class="card">
-                  <div class="card-body">
+                  <div class="card-body overflow-auto">
                     <table class="table table-bordered table-hover mb-0">
                       <thead style={{ backgroundColor: "rgb(208, 156, 250)" }}>
                         <tr>
