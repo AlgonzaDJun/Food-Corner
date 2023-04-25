@@ -33,6 +33,7 @@
   font-family: var(--body-font);
   font-size: var(--normal-font-size);
   transition: 0.5s;
+  overflow: auto;
 }
 
 a {
@@ -171,7 +172,7 @@ a .log-out {
 }
 
 /* ===== MEDIA QUERIES=====*/
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 0px) {
   .body {
     margin: calc(var(--header-height) + 1rem) 0 0 0;
     padding-left: calc(var(--nav-width) + 2rem);
@@ -191,6 +192,11 @@ a .log-out {
     width: 45px;
   }
 
+  .l-navbar {
+    left: 0;
+    padding: 1rem 1rem 0 0;
+  }
+
   /*Show navbar desktop*/
   .showa {
     width: calc(var(--nav-width) + 156px);
@@ -199,6 +205,5 @@ a .log-out {
   /*Add padding body desktop*/
   .body-pd {
     padding-left: calc(var(--nav-width) + 188px);
-    overflow: auto;
   }
 }

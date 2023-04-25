@@ -64,7 +64,7 @@ function Admin() {
   console.log(stand);
 
   return (
-    <div className="overflow-auto" style={{ marginTop: "130px" }}>
+    <div className="overflow-auto" style={{ marginTop: "130px", overflow: 'auto' }}>
       <div class="container mt-3">
         <h2 className="text-center mb-4">Table Stand</h2>
         <table className=" w-100 mb-1">
