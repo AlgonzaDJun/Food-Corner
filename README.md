@@ -1,5 +1,3 @@
-# UAS_WEB
-
 # Food Corner Website
 
 website E-Canteen yang dikembangkan menggunakan MERN stack (MongoDB, Express.js, React, dan Node.js). Website ini memungkinkan pengguna untuk melakukan pemesanan makanan atau minuman secara online dengan mudah dan efisien.
